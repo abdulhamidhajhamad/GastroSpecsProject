@@ -12,7 +12,7 @@ export default function ProductFeature() {
           {/* Left Image */}
           <div className="relative bg-gastro-white">
             <Image
-              src="/assets/modular_equipment_hd.png"
+              src="/assets/modular_equipment_range.png"
               alt="Vulcan Master Series modular cooking equipment"
               width={600}
               height={400}
