@@ -1,58 +1,64 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
 
 const tags = ["Dual Burner", "Modular Design", "Cast Iron"]
 
 export default function ProductFeature() {
   return (
-    <section className="py-20 bg-gastro-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Image */}
-          <div className="relative bg-gastro-white">
+    <section className="py-0 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2">
+
+          {/* Left: Equipment image — white bg, contained */}
+          <div className="bg-white flex items-center justify-center py-12 px-8 lg:py-16 lg:px-12">
             <Image
-              src="/assets/modular_equipment_range.png"
-              alt="Vulcan Master Series modular cooking equipment"
-              width={600}
-              height={400}
-              className="object-contain w-full"
+              src="/assets/vulcan_master_series.png"
+              alt="Vulcan Master Series — modular stainless steel commercial kitchen equipment suite"
+              width={680}
+              height={420}
+              className="w-full h-auto object-contain"
+              priority={false}
             />
           </div>
 
-          {/* Right Content */}
-          <div className="lg:pl-8">
-            {/* Category Label */}
-            <p className="text-xs text-gray-500 tracking-widest uppercase mb-3">
+          {/* Right: Product details */}
+          <div className="bg-white flex flex-col justify-center py-12 px-8 lg:py-16 lg:px-16 border-l border-gray-100">
+            {/* Category label */}
+            <p className="font-sans text-[10px] tracking-[0.25em] text-gray-400 uppercase mb-3">
               Heavy Cooking
             </p>
 
-            {/* Product Title */}
-            <h3 className="font-serif text-3xl md:text-4xl text-gastro-black mb-6">
+            {/* Product name */}
+            <h3 className="font-serif text-3xl md:text-4xl text-black mb-7 text-balance">
               Vulcan Master Series
             </h3>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-3 mb-6">
-              {tags.map((tag, index) => (
+            <div className="flex flex-wrap gap-2.5 mb-8">
+              {tags.map((tag) => (
                 <span
-                  key={index}
-                  className="border border-gray-300 text-sm text-gastro-black px-4 py-1.5"
+                  key={tag}
+                  className="font-sans text-xs text-black border border-gray-300 px-3.5 py-1.5 tracking-wide"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            {/* CTA Link */}
+            {/* Spec link */}
             <Link
               href="/catalog/vulcan-master-series"
-              className="inline-flex items-center gap-2 text-sm font-medium text-gastro-black underline underline-offset-4 hover:text-gray-600 transition-colors"
+              className="inline-flex items-center gap-2 font-sans text-sm font-medium text-black group"
             >
-              View Specifications
-              <ArrowRight className="w-4 h-4" />
+              <span className="border-b border-black pb-px group-hover:border-gray-500 group-hover:text-gray-500 transition-colors">
+                View Specifications
+              </span>
+              <span className="text-base leading-none group-hover:translate-x-0.5 transition-transform">
+                &rarr;
+              </span>
             </Link>
           </div>
+
         </div>
       </div>
     </section>

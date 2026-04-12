@@ -3,60 +3,63 @@ import Link from "next/link"
 
 export default function Hero() {
   return (
-    <section className="bg-gastro-white">
+    <section className="bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 min-h-[600px]">
-          {/* Left Content */}
-          <div className="flex flex-col justify-center px-6 py-12 lg:py-20 lg:pr-12">
+        <div className="grid lg:grid-cols-[1fr_1fr] min-h-[580px]">
+
+          {/* Left: Text */}
+          <div className="flex flex-col justify-center px-6 py-16 lg:py-20 lg:pr-16 xl:pr-24">
             {/* Badge */}
-            <div className="mb-8">
-              <span className="inline-block bg-gastro-black text-gastro-white text-xs font-medium px-3 py-1.5 tracking-wide">
-                HEAVY DUTY MADE
+            <div className="mb-7">
+              <span className="inline-block border border-black text-black font-sans text-[10px] font-medium tracking-[0.2em] uppercase px-2.5 py-1">
+                Heavy Site M&amp;R
               </span>
             </div>
 
             {/* Heading */}
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
+            <h1 className="font-serif text-[2.6rem] md:text-5xl lg:text-[3.2rem] leading-[1.1] tracking-tight text-black mb-5 text-balance">
               Engineering{" "}
-              <em className="not-italic font-serif italic">Excellence</em> in
+              <em className="italic">Excellence</em> in
               <br />
-              Every <span className="font-bold">Kitchen</span>.
+              Every <strong className="font-bold not-italic">Kitchen.</strong>
             </h1>
 
-            {/* Subtext */}
-            <p className="text-gray-600 text-base mb-8 max-w-md">
+            {/* Body */}
+            <p className="font-sans text-sm text-gray-500 leading-relaxed mb-9 max-w-xs">
               Global leaders in commercial kitchen
               <br />
               procurement and engineering services.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/catalog"
-                className="bg-gastro-black text-gastro-white text-sm font-medium px-8 py-3 text-center hover:bg-gray-800 transition-colors"
+                className="bg-black text-white font-sans text-xs font-medium tracking-wide px-7 py-3 text-center hover:bg-gray-800 transition-colors"
               >
                 Browse Catalog
               </Link>
               <Link
                 href="/services"
-                className="border border-gastro-black text-gastro-black text-sm font-medium px-8 py-3 text-center hover:bg-gray-50 transition-colors"
+                className="border border-black text-black font-sans text-xs font-medium tracking-wide px-7 py-3 text-center hover:bg-gray-50 transition-colors"
               >
                 Our Services
               </Link>
             </div>
           </div>
 
-          {/* Right Image */}
-          <div className="relative bg-gastro-grey min-h-[400px] lg:min-h-full">
+          {/* Right: Full-bleed image */}
+          <div className="relative bg-gray-100 min-h-[380px] lg:min-h-full">
             <Image
               src="/assets/hero_kitchen_pano.png"
-              alt="Professional commercial kitchen with stainless steel equipment"
+              alt="Professional commercial kitchen interior with stainless steel equipment"
               fill
-              className="object-cover"
+              className="object-cover object-center"
               priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
+
         </div>
       </div>
     </section>

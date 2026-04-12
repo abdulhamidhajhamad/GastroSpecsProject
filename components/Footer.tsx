@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Facebook, Twitter, Instagram } from "lucide-react"
 
 const catalogLinks = [
   { label: "Heavy Cooking", href: "/catalog/heavy-cooking" },
@@ -15,47 +14,83 @@ const servicesLinks = [
   { label: "After Sales", href: "/services/after-sales" },
 ]
 
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "#",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
+      </svg>
+    ),
+  },
+  {
+    label: "X (Twitter)",
+    href: "#",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Instagram",
+    href: "#",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+      </svg>
+    ),
+  },
+]
+
 export default function Footer() {
   return (
-    <footer className="bg-gastro-black text-gastro-white">
+    <footer className="bg-black text-white">
+
+      {/* Main footer grid */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-4 gap-12">
-          {/* Brand Column */}
+
+          {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-6 h-6 border-2 border-gastro-white rounded-sm flex items-center justify-center">
-                <div className="w-3 h-3 bg-gastro-white rounded-full" />
-              </div>
-              <span className="font-semibold text-sm tracking-tight">GASTROSPECS</span>
+            <div className="flex items-center gap-2 mb-5">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <rect x="1" y="1" width="18" height="18" rx="2" stroke="#fff" strokeWidth="2" />
+                <path d="M6 10h8M10 6v8" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              <span className="font-sans font-semibold text-xs tracking-[0.15em] uppercase text-white">
+                Gastrospecs
+              </span>
             </div>
-            <p className="text-sm text-gray-400 mb-6">
-              Global leaders in commercial kitchen
-              procurement and engineering services.
+            <p className="font-sans text-xs text-gray-400 leading-relaxed mb-7 max-w-[180px]">
+              Global leaders in commercial kitchen procurement and engineering services.
             </p>
             <div className="flex items-center gap-4">
-              <Link href="#" className="text-gray-400 hover:text-gastro-white transition-colors">
-                <Facebook className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-gastro-white transition-colors">
-                <Twitter className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-gastro-white transition-colors">
-                <Instagram className="w-5 h-5" />
-              </Link>
+              {socialLinks.map(({ label, href, icon }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="text-gray-500 hover:text-white transition-colors"
+                >
+                  {icon}
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Catalog Column */}
+          {/* Catalog */}
           <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase mb-6">
+            <h4 className="font-sans text-[10px] font-semibold tracking-[0.2em] uppercase text-white mb-6">
               Catalog
             </h4>
-            <ul className="space-y-3">
-              {catalogLinks.map((link, index) => (
-                <li key={index}>
+            <ul className="flex flex-col gap-3">
+              {catalogLinks.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-gastro-white transition-colors"
+                    className="font-sans text-xs text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -64,17 +99,17 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services Column */}
+          {/* Services */}
           <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase mb-6">
+            <h4 className="font-sans text-[10px] font-semibold tracking-[0.2em] uppercase text-white mb-6">
               Services
             </h4>
-            <ul className="space-y-3">
-              {servicesLinks.map((link, index) => (
-                <li key={index}>
+            <ul className="flex flex-col gap-3">
+              {servicesLinks.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-gastro-white transition-colors"
+                    className="font-sans text-xs text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -83,52 +118,55 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter Column */}
+          {/* Newsletter */}
           <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase mb-6">
+            <h4 className="font-sans text-[10px] font-semibold tracking-[0.2em] uppercase text-white mb-6">
               Newsletter
             </h4>
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="font-sans text-xs text-gray-400 mb-4 leading-relaxed">
               Stay updated with industry trends.
             </p>
-            <form className="flex">
+            <form className="flex" onSubmit={(e) => e.preventDefault()}>
+              <label htmlFor="newsletter-email" className="sr-only">Email Address</label>
               <input
+                id="newsletter-email"
                 type="email"
                 placeholder="Email Address"
-                className="flex-1 bg-transparent border border-gray-600 text-sm px-4 py-2 text-gastro-white placeholder-gray-500 focus:outline-none focus:border-gray-400"
+                className="flex-1 min-w-0 bg-transparent border border-gray-700 font-sans text-xs text-white placeholder-gray-600 px-3 py-2.5 focus:outline-none focus:border-gray-400 transition-colors"
               />
               <button
                 type="submit"
-                className="bg-gastro-white text-gastro-black px-4 py-2 text-sm font-medium hover:bg-gray-200 transition-colors"
+                aria-label="Subscribe"
+                className="bg-white text-black px-3.5 py-2.5 font-sans text-sm font-medium hover:bg-gray-200 transition-colors shrink-0"
               >
-                →
+                &rarr;
               </button>
             </form>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="font-sans text-[10px] text-gray-600 tracking-wide">
+            &copy; 2024 GASTROSPECS. WORLDWIDE ORIGINAL.
+          </p>
+          <div className="flex items-center gap-6">
+            {["Privacy Policy", "Terms of Service", "Contact Sales"].map((item) => (
+              <Link
+                key={item}
+                href="#"
+                className="font-sans text-[10px] text-gray-600 tracking-wide hover:text-gray-400 transition-colors uppercase"
+              >
+                {item}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-gray-500">
-              © 2024 GASTROSPECS. WORLDWIDE ORIGINAL.
-            </p>
-            <div className="flex items-center gap-6">
-              <Link href="/privacy" className="text-xs text-gray-500 hover:text-gray-400 transition-colors">
-                PRIVACY POLICY
-              </Link>
-              <Link href="/terms" className="text-xs text-gray-500 hover:text-gray-400 transition-colors">
-                TERMS OF SERVICE
-              </Link>
-              <Link href="/contact" className="text-xs text-gray-500 hover:text-gray-400 transition-colors">
-                CONTACT SALES
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
     </footer>
   )
 }
