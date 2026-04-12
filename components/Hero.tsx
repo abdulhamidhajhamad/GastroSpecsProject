@@ -51,7 +51,7 @@ export default function Hero() {
           {/* Right: Full-bleed image */}
           <div className="relative bg-gray-100 min-h-[380px] lg:min-h-full">
             <Image
-              src="/assets/hero_kitchen_pano.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-FN79zgeGLZB2DXrC6afDZEzKk02SY4.png"
               alt="Professional commercial kitchen interior with stainless steel equipment"
               fill
               className="object-cover object-center"

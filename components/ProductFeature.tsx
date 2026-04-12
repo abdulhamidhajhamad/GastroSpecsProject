@@ -12,7 +12,7 @@ export default function ProductFeature() {
           {/* Left: Equipment image — white bg, contained */}
           <div className="bg-white flex items-center justify-center py-12 px-8 lg:py-16 lg:px-12">
             <Image
-              src="/assets/vulcan_master_series.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-WV39fEVymwsuGLVHW1reHROlk5K7qi.png"
               alt="Vulcan Master Series — modular stainless steel commercial kitchen equipment suite"
               width={680}
               height={420}
