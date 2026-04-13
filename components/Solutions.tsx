@@ -1,3 +1,5 @@
+import { solutions, type SolutionIcon } from '@/lib/home-data'
+
 const GlobeIcon = () => (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
     <circle cx="9" cy="9" r="8" stroke="#000" strokeWidth="1.4" />
@@ -23,29 +25,18 @@ const WrenchIcon = () => (
   </svg>
 )
 
-const solutions = [
-  {
-    Icon: GlobeIcon,
-    number: "01",
-    title: "GLOBAL SOURCING",
-    description:
-      "Global leaders in commercial kitchen procurement and engineering services.",
-  },
-  {
-    Icon: TruckIcon,
-    number: "02",
-    title: "DDP LOGISTICS",
-    description:
-      "Turnkey and door-paid shipping directly to anywhere in the world.",
-  },
-  {
-    Icon: WrenchIcon,
-    number: "03",
-    title: "KITCHEN ENGINEERING",
-    description:
-      "Kitchen and pure engineering directly to our engineering services.",
-  },
-]
+function renderSolutionIcon(icon: SolutionIcon) {
+  switch (icon) {
+    case 'sourcing':
+      return <GlobeIcon />
+    case 'logistics':
+      return <TruckIcon />
+    case 'engineering':
+      return <WrenchIcon />
+    default:
+      return null
+  }
+}
 
 export default function Solutions() {
   return (
@@ -62,18 +53,18 @@ export default function Solutions() {
 
         {/* Cards */}
         <div className="grid md:grid-cols-3 gap-5">
-          {solutions.map(({ Icon, number, title, description }, index) => (
-            <div key={index} className="bg-[#F5F5F5] p-8">
+          {solutions.map((solution) => (
+            <div key={solution.number} className="bg-[#F5F5F5] p-8">
               {/* Card header row */}
               <div className="flex items-center gap-2.5 mb-4">
-                <Icon />
+                {renderSolutionIcon(solution.icon)}
                 <span className="font-sans text-[11px] font-semibold tracking-[0.12em] text-black uppercase">
-                  {number} | {title}
+                  {solution.number} | {solution.title}
                 </span>
               </div>
               {/* Description */}
               <p className="font-sans text-sm text-gray-500 leading-relaxed">
-                {description}
+                {solution.description}
               </p>
             </div>
           ))}

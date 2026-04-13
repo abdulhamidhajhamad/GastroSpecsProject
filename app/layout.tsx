@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+
+import { siteConfig } from '@/lib/home-data'
 import './globals.css'
 
 const inter = Inter({ 
@@ -14,9 +16,8 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'GastroSpecs | Commercial Kitchen Engineering',
-  description: 'Global leaders in commercial kitchen procurement and engineering services.',
-  generator: 'v0.app',
+  title: `${siteConfig.name} | Commercial Kitchen Engineering`,
+  description: siteConfig.description,
   icons: {
     icon: [
       {

@@ -1,26 +1,7 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image'
+import Link from 'next/link'
 
-const projects = [
-  {
-    image: "/assets/project_obsidian_grill.png",
-    category: "PROJECTS",
-    title: "The Obsidian Grill",
-    href: "/projects/obsidian-grill",
-  },
-  {
-    image: "/assets/project_global_tech_hq.png",
-    category: "PROJECT",
-    title: "Global Tech HQ",
-    href: "/projects/global-tech-hq",
-  },
-  {
-    image: "/assets/hero_kitchen_pano.png",
-    category: "PROJECTS",
-    title: "Global Tech HQ",
-    href: "/projects/global-tech-hq-2",
-  },
-]
+import { projects } from '@/lib/home-data'
 
 export default function Projects() {
   return (
@@ -36,10 +17,10 @@ export default function Projects() {
 
         {/* Grid */}
         <div className="grid md:grid-cols-3 gap-5">
-          {projects.map((project, index) => (
-            <Link href={project.href} key={index} className="group block">
+          {projects.map((project) => (
+            <Link href={project.href} key={project.href} className="group block">
               {/* Image container — fixed aspect ratio, clipped */}
-              <div className="relative w-full overflow-hidden bg-gray-100" style={{ aspectRatio: "4/3" }}>
+              <div className="relative w-full overflow-hidden bg-gray-100 aspect-[4/3]">
                 <Image
                   src={project.image}
                   alt={project.title}
