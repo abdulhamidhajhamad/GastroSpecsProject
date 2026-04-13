@@ -49,14 +49,14 @@ export default function Hero() {
           </div>
 
           {/* Right: Full-bleed image */}
-          <div className="relative bg-gray-100 min-h-[380px] lg:min-h-full">
+          <div className="relative bg-[#e8e8e8] min-h-[380px] lg:min-h-full flex items-center justify-center">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-FN79zgeGLZB2DXrC6afDZEzKk02SY4.png"
-              alt="Professional commercial kitchen interior with stainless steel equipment"
-              fill
-              className="object-cover object-center"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-WV39fEVymwsuGLVHW1reHROlk5K7qi.png"
+              alt="Vulcan Master Series modular commercial kitchen equipment"
+              width={640}
+              height={400}
+              className="object-contain w-full h-auto p-4"
               priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
 
