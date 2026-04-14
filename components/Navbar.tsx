@@ -48,7 +48,7 @@ export default function Navbar() {
             <span className="tracking-wide">{siteConfig.localeLabel}</span>
           </button>
           <Link
-            href="/login"
+            href="/portal/login"
             className="hidden md:block text-xs text-black hover:text-gray-500 transition-colors"
           >
             Staff Login

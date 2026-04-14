@@ -1,0 +1,301 @@
+export type Product = {
+  slug: string
+  brand: string
+  name: string
+  category: string
+  tags: string[]
+  image: string
+  price: string
+  priceHigh?: string
+  description: string
+  specs: { label: string; value: string }[]
+  certifications: string[]
+  leadTime: string
+  inStock: boolean
+  related?: string[]
+}
+
+export const categories = [
+  { id: 'all', label: 'ALL EQUIPMENT' },
+  { id: 'cooking', label: 'COOKING' },
+  { id: 'refrigeration', label: 'REFRIGERATION' },
+  { id: 'food-prep', label: 'FOOD PREP' },
+  { id: 'dishwashing', label: 'DISHWASHING' },
+  { id: 'storage', label: 'STORAGE' },
+]
+
+export const products: Product[] = [
+  {
+    slug: 'icombi-pro-10-grid',
+    brand: 'RATIONAL',
+    name: 'iCombi Pro 10-Grid',
+    category: 'cooking',
+    tags: ['ELECTRIC', '10 × 1/1 GN', 'INTELLIGENT COOKING'],
+    image: '/assets/vulcan_master_series.png',
+    price: '$14,200',
+    priceHigh: '$16,500',
+    description:
+      'The iCombi Pro is the world\'s most intelligent combi steamer. Precision milled steam chamber with duet-vent atmospheric burners ensures thermal consistency unparalleled in high-volume production.',
+    specs: [
+      { label: 'Configuration', value: '10 × 1/1 GN' },
+      { label: 'BTU Output', value: '210,000 BTU Total' },
+      { label: 'Material', value: '304 Grade Stainless Steel' },
+      { label: 'Dimensions', value: '36"W × 40"D × 36"H' },
+      { label: 'Voltage', value: '110V / 3-Phase' },
+      { label: 'Certifications', value: 'CE, ETL, NSF' },
+    ],
+    certifications: ['CE', 'ETL', 'NSF'],
+    leadTime: '8–12 weeks',
+    inStock: true,
+    related: ['vulcan-master-series', 'ecopro-g5-cabinet', 'evolution-series-range'],
+  },
+  {
+    slug: 'primus-flight-type-dishwasher',
+    brand: 'HOBART',
+    name: 'Primus Flight-Type Dishwasher',
+    category: 'dishwashing',
+    tags: ['HIGH VOLUME', 'SERVOTRONICS CONTROL'],
+    image: '/assets/project_obsidian_grill.png',
+    price: '$28,000',
+    priceHigh: '$34,000',
+    description:
+      'The Primus Flight-Type is engineered for the highest-volume operations. Its patented peg conveyor system gently but firmly holds all ware types for perfect wash results every cycle.',
+    specs: [
+      { label: 'Capacity', value: '9,000 pieces/hour' },
+      { label: 'Tank Volume', value: '45L wash / 18L rinse' },
+      { label: 'Power', value: '400V / 3-phase' },
+      { label: 'Material', value: '316 Stainless Steel' },
+      { label: 'Control', value: 'Servotronics digital' },
+      { label: 'Certifications', value: 'CE, NSF' },
+    ],
+    certifications: ['CE', 'NSF'],
+    leadTime: '10–14 weeks',
+    inStock: true,
+    related: ['icombi-pro-10-grid', 'star-90-solid-top'],
+  },
+  {
+    slug: 'chefstep-mindbig',
+    brand: 'UNIK',
+    name: 'ChefStep MindBig',
+    category: 'cooking',
+    tags: ['GAS/ELEC', 'CLIMATER TECH'],
+    image: '/assets/project_global_tech_hq.png',
+    price: '$8,900',
+    description:
+      'Next-generation combi unit blending sous-vide precision with convection steam intelligence. Ideal for pastry, fish, and delicate proteins.',
+    specs: [
+      { label: 'Capacity', value: '6 × 1/1 GN' },
+      { label: 'Modes', value: 'Steam / Convection / Combi' },
+      { label: 'Control', value: 'CLIMATER TECH touchscreen' },
+      { label: 'Power', value: '220V / Single-phase' },
+      { label: 'Certifications', value: 'CE, SASO' },
+    ],
+    certifications: ['CE', 'SASO'],
+    leadTime: '6–8 weeks',
+    inStock: true,
+  },
+  {
+    slug: 'opal-g5-refrigerated-counter',
+    brand: 'WILLIAMS',
+    name: 'Opal G5 Refrigerated Counter',
+    category: 'refrigeration',
+    tags: ['R290 GAS', '2-DOOR'],
+    image: '/assets/hero_kitchen_pano.png',
+    price: '$4,100',
+    priceHigh: '$5,200',
+    description:
+      'Hydrocarbon R290 refrigerant counter with dual-zone independent temperature management. NSF-7 certified for full GN tray compatibility.',
+    specs: [
+      { label: 'Refrigerant', value: 'R290 (eco-friendly)' },
+      { label: 'Capacity', value: '620L total' },
+      { label: 'Temperature', value: '-2°C to +8°C' },
+      { label: 'Doors', value: '2 solid doors' },
+      { label: 'Certifications', value: 'CE, NSF-7' },
+    ],
+    certifications: ['CE', 'NSF-7'],
+    leadTime: '4–6 weeks',
+    inStock: true,
+  },
+  {
+    slug: 'ev0900-gas-boiling-top',
+    brand: 'ZANUSSI',
+    name: 'EV0900 Gas Boiling Top',
+    category: 'cooking',
+    tags: ['GAS POWERED', '6 BURNERS'],
+    image: '/assets/vulcan_master_series.png',
+    price: '$3,200',
+    description:
+      'Heavy-duty six-burner gas top designed for continuous high-output kitchen environments. Full stainless steel construction with cast iron grates.',
+    specs: [
+      { label: 'Burners', value: '6 × 6kW' },
+      { label: 'BTU Total', value: '123,000 BTU' },
+      { label: 'Construction', value: '304 Stainless / Cast Iron' },
+      { label: 'Connection', value: 'Natural Gas / LPG' },
+      { label: 'Certifications', value: 'CE, SASO' },
+    ],
+    certifications: ['CE', 'SASO'],
+    leadTime: '3–5 weeks',
+    inStock: true,
+  },
+  {
+    slug: 'ecopro-g5-cabinet',
+    brand: 'FOSTER',
+    name: 'EcoPro G5 Cabinet',
+    category: 'refrigeration',
+    tags: ['STAINLESS STEEL', 'LOW ENERGY'],
+    image: '/assets/project_obsidian_grill.png',
+    price: '$2,800',
+    description:
+      'The EcoPro G5 upright refrigeration cabinet is engineered for efficiency and durability. Features hydrocarbon refrigerant and superior insulation.',
+    specs: [
+      { label: 'Capacity', value: '400L' },
+      { label: 'Refrigerant', value: 'R290 hydrocarbon' },
+      { label: 'Temperature', value: '+1°C to +4°C' },
+      { label: 'Energy', value: 'A+ rated' },
+      { label: 'Certifications', value: 'CE, NSF' },
+    ],
+    certifications: ['CE', 'NSF'],
+    leadTime: '3–4 weeks',
+    inStock: true,
+  },
+  {
+    slug: 'evolution-series-range',
+    brand: 'BLUE SEAL',
+    name: 'Evolution Series Range',
+    category: 'cooking',
+    tags: ['ROBAN WIDTH', 'GAS OVEN'],
+    image: '/assets/project_global_tech_hq.png',
+    price: '$6,500',
+    priceHigh: '$9,000',
+    description:
+      'The Evolution Series is a complete modular heavy-duty range system. Mix and match cooking modules for your exact requirements.',
+    specs: [
+      { label: 'Width', value: 'Modular 300/600/900mm' },
+      { label: 'Oven', value: 'Full gas oven with grill' },
+      { label: 'Top', value: '4–6 burner options' },
+      { label: 'Construction', value: '304 Stainless' },
+      { label: 'Certifications', value: 'CE, ETL, AGA' },
+    ],
+    certifications: ['CE', 'ETL', 'AGA'],
+    leadTime: '6–10 weeks',
+    inStock: false,
+  },
+  {
+    slug: 'star-90-solid-top',
+    brand: 'MARENO',
+    name: 'Star 90 Solid Top',
+    category: 'cooking',
+    tags: ['HEAVY DUTY', '4-ZONE'],
+    image: '/assets/hero_kitchen_pano.png',
+    price: '$4,400',
+    description:
+      'Solid carbon steel top with 4 independent heat zones. The preferred choice for teppanyaki-style operations and high-volume sauté stations.',
+    specs: [
+      { label: 'Top', value: 'Carbon steel, 14mm thick' },
+      { label: 'Zones', value: '4 independent' },
+      { label: 'Power', value: '400V / 3-phase' },
+      { label: 'Control', value: 'Individual thermostat per zone' },
+      { label: 'Certifications', value: 'CE, TÜV' },
+    ],
+    certifications: ['CE', 'TÜV'],
+    leadTime: '5–7 weeks',
+    inStock: true,
+  },
+  {
+    slug: 'vulcan-master-series',
+    brand: 'VULCAN-HART PROFESSIONAL',
+    name: 'V-Series 36" Heavy-Duty Modular Range',
+    category: 'cooking',
+    tags: ['GAS', 'MODULAR', 'HEAVY DUTY'],
+    image: '/assets/vulcan_master_series.png',
+    price: '$11,800',
+    priceHigh: '$14,200',
+    description:
+      'The V-Series modular range is engineered for the most demanding commercial environments. Precision-milled steel plating combined with duet-vent atmospheric burners ensures thermal consistency unparalleled in high-volume production.',
+    specs: [
+      { label: 'Configuration', value: '6-Burner / Single Oven Base' },
+      { label: 'BTU Output', value: '210,000 BTU Total (35k/Burner)' },
+      { label: 'Material', value: '304 Grade Stainless Steel' },
+      { label: 'Dimensions', value: '36"W × 40"D × 36"H' },
+      { label: 'Voltage', value: '110V Ignition (Optional)' },
+      { label: 'Gas Connection', value: '3-3/4" Rear NPT' },
+      { label: 'Certifications', value: 'NSF, CSA, ETL Star' },
+    ],
+    certifications: ['NSF', 'CSA', 'ETL Star'],
+    leadTime: '12–14 weeks',
+    inStock: true,
+    related: ['icombi-pro-10-grid', 'ev0900-gas-boiling-top', 'ecopro-g5-cabinet'],
+  },
+  {
+    slug: 'blast-chiller-freezer',
+    brand: 'IRINOX',
+    name: 'Blast Chiller / Freezer 10-Tray',
+    category: 'refrigeration',
+    tags: ['BLAST CHILL', 'SHOCK FREEZE'],
+    image: '/assets/project_obsidian_grill.png',
+    price: '$9,200',
+    description:
+      'Professional blast chiller and shock freezer for HACCP compliance. Rapidly reduces food temperature to safe levels, preserving quality and texture.',
+    specs: [
+      { label: 'Capacity', value: '10 × 1/1 GN trays' },
+      { label: 'Chilling', value: '+90°C to +3°C in 90 min' },
+      { label: 'Freezing', value: '+90°C to -18°C in 240 min' },
+      { label: 'Refrigerant', value: 'R452A' },
+      { label: 'Certifications', value: 'CE, NSF, HACCP' },
+    ],
+    certifications: ['CE', 'NSF', 'HACCP'],
+    leadTime: '7–9 weeks',
+    inStock: true,
+  },
+  {
+    slug: 'induction-power-griddle',
+    brand: 'ADVENTYS',
+    name: 'Induction Power Griddle',
+    category: 'cooking',
+    tags: ['INDUCTION', 'HIGH EFFICIENCY'],
+    image: '/assets/hero_kitchen_pano.png',
+    price: '$5,600',
+    description:
+      'Professional induction griddle with uniform heating across the entire cooking surface. 40% energy savings over conventional gas griddles.',
+    specs: [
+      { label: 'Power', value: '9kW induction' },
+      { label: 'Surface', value: 'Chrome steel, 8mm' },
+      { label: 'Zones', value: '3 independent' },
+      { label: 'Voltage', value: '400V / 3-phase' },
+      { label: 'Certifications', value: 'CE, NF' },
+    ],
+    certifications: ['CE', 'NF'],
+    leadTime: '4–6 weeks',
+    inStock: true,
+  },
+  {
+    slug: 'low-temp-undercounter-dishwasher',
+    brand: 'WINTERHALTER',
+    name: 'Low-Temp Under-Counter Dishwasher',
+    category: 'dishwashing',
+    tags: ['LOW TEMP', 'CHEMICAL SANITIZE'],
+    image: '/assets/project_global_tech_hq.png',
+    price: '$3,800',
+    description:
+      'Compact chemical sanitizing undercounter dishwasher for bars, cafés, and small operations. Quiet operation, easy to service.',
+    specs: [
+      { label: 'Cycles per hour', value: '30' },
+      { label: 'Water consumption', value: '2.6L/cycle' },
+      { label: 'Power', value: '220V / 15A' },
+      { label: 'Sanitation', value: 'Chemical (low temp)' },
+      { label: 'Certifications', value: 'CE, ENERGY STAR, NSF' },
+    ],
+    certifications: ['CE', 'ENERGY STAR', 'NSF'],
+    leadTime: '2–4 weeks',
+    inStock: true,
+  },
+]
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug)
+}
+
+export function getProductsByCategory(category: string): Product[] {
+  if (category === 'all') return products
+  return products.filter((p) => p.category === category)
+}
