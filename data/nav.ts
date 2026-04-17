@@ -1,9 +1,20 @@
-export type LinkItem = {
+export interface NavItem {
   label: string
   href: string
 }
 
-export const siteConfig = {
+export interface FooterGroup {
+  title: string
+  links: NavItem[]
+}
+
+export interface SocialLink {
+  label: string
+  href: string
+  platform: 'facebook' | 'x' | 'instagram'
+}
+
+export const SITE_CONFIG = {
   name: 'GastroSpecs',
   description:
     'Global leaders in commercial kitchen procurement and engineering services.',
@@ -14,27 +25,54 @@ export const siteConfig = {
   },
 } as const
 
-export const mainNavigation: LinkItem[] = [
+export const NAV_ITEMS: NavItem[] = [
   { label: 'Catalog', href: '/catalog' },
   { label: 'Services', href: '/services' },
   { label: 'Projects', href: '/projects' },
   { label: 'About', href: '/about' },
 ]
 
-export const heroContent = {
+export const FOOTER_GROUPS: FooterGroup[] = [
+  {
+    title: 'Catalog',
+    links: [
+      { label: 'Heavy Cooking', href: '/catalog/heavy-cooking' },
+      { label: 'Refrigeration', href: '/catalog/refrigeration' },
+      { label: 'Food Prep', href: '/catalog/food-prep' },
+      { label: 'Dishwashing', href: '/catalog/dishwashing' },
+    ],
+  },
+  {
+    title: 'Services',
+    links: [
+      { label: 'Kitchen Design', href: '/services/kitchen-design' },
+      { label: 'Sourcing', href: '/services/sourcing' },
+      { label: 'DDP Logistics', href: '/services/ddp-logistics' },
+      { label: 'After Sales', href: '/services/after-sales' },
+    ],
+  },
+]
+
+export const FOOTER_LEGAL_LINKS: NavItem[] = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms of Service', href: '/terms' },
+  { label: 'Contact Sales', href: '/contact' },
+]
+
+export const SOCIAL_LINKS: SocialLink[] = [
+  { label: 'Facebook', href: '#', platform: 'facebook' },
+  { label: 'X (Twitter)', href: '#', platform: 'x' },
+  { label: 'Instagram', href: '#', platform: 'instagram' },
+]
+
+export const HOME_HERO = {
   badge: 'Heavy Site M&R',
   headingPrefix: 'Engineering',
   headingEmphasis: 'Excellence',
   headingSuffix: 'in Every Kitchen.',
-  description: siteConfig.description,
-  primaryCta: {
-    label: 'Browse Catalog',
-    href: '/catalog',
-  },
-  secondaryCta: {
-    label: 'Our Services',
-    href: '/services',
-  },
+  description: SITE_CONFIG.description,
+  primaryCta: { label: 'Browse Catalog', href: '/catalog' },
+  secondaryCta: { label: 'Our Services', href: '/services' },
   image: {
     src: '/images/vulcan_master_series.png',
     alt: 'Vulcan Master Series modular commercial kitchen equipment',
@@ -43,42 +81,13 @@ export const heroContent = {
   },
 } as const
 
-export type StatIcon = 'coverage' | 'awards' | 'items'
+export const HOME_STATS = [
+  { icon: 'coverage', value: '45+', label: 'Countries Covered' },
+  { icon: 'awards', value: '12', label: 'Design Awards' },
+  { icon: 'items', value: '10k+', label: 'Items Sourced' },
+] as const
 
-export type StatItem = {
-  icon: StatIcon
-  value: string
-  label: string
-}
-
-export const stats: StatItem[] = [
-  {
-    icon: 'coverage',
-    value: '45+',
-    label: 'Countries Covered',
-  },
-  {
-    icon: 'awards',
-    value: '12',
-    label: 'Design Awards',
-  },
-  {
-    icon: 'items',
-    value: '10k+',
-    label: 'Items Sourced',
-  },
-]
-
-export type SolutionIcon = 'sourcing' | 'logistics' | 'engineering'
-
-export type SolutionItem = {
-  icon: SolutionIcon
-  number: string
-  title: string
-  description: string
-}
-
-export const solutions: SolutionItem[] = [
+export const HOME_SOLUTIONS = [
   {
     icon: 'sourcing',
     number: '01',
@@ -100,9 +109,9 @@ export const solutions: SolutionItem[] = [
     description:
       'From technical plans to execution support across complex kitchen builds.',
   },
-]
+] as const
 
-export const featuredProduct = {
+export const HOME_FEATURED_PRODUCT = {
   category: 'Heavy Cooking',
   title: 'Vulcan Master Series',
   tags: ['Dual Burner', 'Modular Design', 'Cast Iron'],
@@ -116,14 +125,7 @@ export const featuredProduct = {
   },
 } as const
 
-export type ProjectItem = {
-  image: string
-  category: string
-  title: string
-  href: string
-}
-
-export const projects: ProjectItem[] = [
+export const HOME_PROJECTS = [
   {
     image: '/images/project_obsidian_grill.png',
     category: 'Project',
@@ -142,9 +144,9 @@ export const projects: ProjectItem[] = [
     title: 'Skyline Culinary Lab',
     href: '/projects/culinary-academy-innovation-lab',
   },
-]
+] as const
 
-export const ctaSection = {
+export const HOME_CTA = {
   title: 'Ready to start your next project?',
   description: 'Our engineering team is standing by to provide a custom quote.',
   primaryCta: {
@@ -153,49 +155,3 @@ export const ctaSection = {
   },
   whatsappHref: 'https://wa.me/1234567890',
 } as const
-
-export type SocialPlatform = 'facebook' | 'x' | 'instagram'
-
-export type SocialLinkItem = {
-  label: string
-  href: string
-  platform: SocialPlatform
-}
-
-export const socialLinks: SocialLinkItem[] = [
-  {
-    label: 'Facebook',
-    href: '#',
-    platform: 'facebook',
-  },
-  {
-    label: 'X (Twitter)',
-    href: '#',
-    platform: 'x',
-  },
-  {
-    label: 'Instagram',
-    href: '#',
-    platform: 'instagram',
-  },
-]
-
-export const footerCatalogLinks: LinkItem[] = [
-  { label: 'Heavy Cooking', href: '/catalog/heavy-cooking' },
-  { label: 'Refrigeration', href: '/catalog/refrigeration' },
-  { label: 'Food Prep', href: '/catalog/food-prep' },
-  { label: 'Dishwashing', href: '/catalog/dishwashing' },
-]
-
-export const footerServicesLinks: LinkItem[] = [
-  { label: 'Kitchen Design', href: '/services/kitchen-design' },
-  { label: 'Sourcing', href: '/services/sourcing' },
-  { label: 'DDP Logistics', href: '/services/ddp-logistics' },
-  { label: 'After Sales', href: '/services/after-sales' },
-]
-
-export const footerLegalLinks: LinkItem[] = [
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms of Service', href: '/terms' },
-  { label: 'Contact Sales', href: '/contact' },
-]

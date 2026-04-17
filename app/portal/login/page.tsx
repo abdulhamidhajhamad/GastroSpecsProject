@@ -5,7 +5,34 @@ export const metadata: Metadata = {
   title: 'Staff Login | GastroSpecs Portal',
 }
 
-export default function PortalLoginPage() {
+type PageProps = {
+  searchParams: Promise<{ error?: string; next?: string }>
+}
+
+function getLoginErrorMessage(errorCode?: string) {
+  if (errorCode === 'invalid-input') {
+    return 'Please provide a valid staff email and password.'
+  }
+
+  if (errorCode === 'invalid-credentials') {
+    return 'Authentication failed. Please verify your credentials.'
+  }
+
+  if (errorCode === 'server-error') {
+    return 'An unexpected error occurred. Please try again.'
+  }
+
+  return null
+}
+
+export default async function PortalLoginPage({ searchParams }: PageProps) {
+  const { error, next } = await searchParams
+  const errorMessage = getLoginErrorMessage(error)
+  const safeNextPath =
+    typeof next === 'string' && next.startsWith('/portal/') && next !== '/portal/login'
+      ? next
+      : '/portal/dashboard'
+
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <div className="flex items-center justify-end px-8 py-5">
@@ -44,7 +71,8 @@ export default function PortalLoginPage() {
               </div>
             </div>
 
-            <form action="/portal/dashboard" method="GET" className="space-y-5">
+            <form action="/api/portal/login" method="POST" className="space-y-5">
+              <input type="hidden" name="next" value={safeNextPath} />
               <div>
                 <label className="block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2">Staff Email</label>
                 <div className="relative">
@@ -56,7 +84,9 @@ export default function PortalLoginPage() {
                   </div>
                   <input
                     type="email"
+                    name="email"
                     placeholder="name@gastrospecs.com"
+                    required
                     className="w-full border border-gray-200 font-sans text-xs text-black placeholder-gray-300 pl-10 pr-4 py-3 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -76,11 +106,16 @@ export default function PortalLoginPage() {
                   </div>
                   <input
                     type="password"
-                    defaultValue="••••••••••"
+                    name="password"
+                    required
                     className="w-full border border-gray-200 font-sans text-xs text-black pl-10 pr-4 py-3 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
               </div>
+
+              {errorMessage && (
+                <p className="font-sans text-[10px] text-red-600">{errorMessage}</p>
+              )}
 
               <button
                 type="submit"

@@ -1,11 +1,4 @@
-export type Service = {
-  id: string
-  number: string
-  title: string
-  subtitle: string
-  description: string
-  features: string[]
-}
+import type { ProcessStep, Service } from '@/types'
 
 export const services: Service[] = [
   {
@@ -66,7 +59,7 @@ export const services: Service[] = [
   },
 ]
 
-export const processSteps = [
+export const processSteps: ProcessStep[] = [
   { number: '01', label: 'BRIEF & SURVEY' },
   { number: '02', label: 'TECHNICAL ANALYSIS' },
   { number: '03', label: 'GLOBAL SOURCING' },

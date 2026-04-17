@@ -1,17 +1,6 @@
-export type CaseStudy = {
-  slug: string
-  category: string
-  location: string
-  title: string
-  description: string
-  image: string
-  tags: string[]
-  budget: string
-  scope: string
-  year: string
-}
+import type { Project } from '@/types'
 
-export const caseStudies: CaseStudy[] = [
+export const projects: Project[] = [
   {
     slug: 'obsidian-grill-fine-dining',
     category: 'FINE DINING',
@@ -19,7 +8,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'The Obsidian Grill — Fine Dining Concept',
     description:
       'Full kitchen consultancy and equipment procurement for a 220-cover fine-dining restaurant. Designed around an open theater kitchen concept with live fire cooking stations.',
-    image: '/assets/project_obsidian_grill.png',
+    image: '/images/project_obsidian_grill.png',
     tags: ['Kitchen Design', 'Sourcing', 'DDP'],
     budget: '$280,000',
     scope: 'Full Turnkey',
@@ -32,7 +21,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Grand Horizon Hotel Banquet Facility',
     description:
       'Banquet kitchen for a 1,800-cover convention center. Included 12 combi ovens, 3 hot holding lines, and a full cold production room.',
-    image: '/assets/project_global_tech_hq.png',
+    image: '/images/project_global_tech_hq.png',
     tags: ['Banquet', 'Cold Room', 'DDP Logistics'],
     budget: '$1,200,000',
     scope: 'Full Turnkey',
@@ -45,7 +34,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Global Tech HQ — Exclusive Dining',
     description:
       'Corporate executive dining kitchen serving 340 covers daily. Designed for efficiency with a focus on health-forward cooking techniques.',
-    image: '/assets/hero_kitchen_pano.png',
+    image: '/images/hero_kitchen_pano.png',
     tags: ['Corporate', 'Kitchen Design', 'Sourcing'],
     budget: '$145,000',
     scope: 'Equipment + Design',
@@ -58,7 +47,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Culinary Academy Innovation Lab',
     description:
       'State-of-the-art culinary training facility with 24 individual training stations plus a full demonstration theater kitchen.',
-    image: '/assets/project_obsidian_grill.png',
+    image: '/images/project_obsidian_grill.png',
     tags: ['Education', 'Multi-Station', 'DDP'],
     budget: '$380,000',
     scope: 'Full Turnkey',
@@ -71,7 +60,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Azure Marine Yacht Club',
     description:
       'Compact high-output kitchen for a premium marina dining venue. Space-optimized layout handling 280 covers from 48 square meters of kitchen space.',
-    image: '/assets/project_global_tech_hq.png',
+    image: '/images/project_global_tech_hq.png',
     tags: ['Space Optimization', 'Sourcing'],
     budget: '$92,000',
     scope: 'Equipment + Design',
@@ -84,10 +73,16 @@ export const caseStudies: CaseStudy[] = [
     title: 'Heritage Brasserie Expansion',
     description:
       'Kitchen expansion and equipment upgrade for a heritage brasserie group scaling to three additional locations across Cairo.',
-    image: '/assets/hero_kitchen_pano.png',
+    image: '/images/hero_kitchen_pano.png',
     tags: ['Multi-Site', 'Sourcing', 'After-Sales'],
     budget: '$210,000',
     scope: 'Multi-Site Rollout',
     year: '2022',
   },
 ]
+
+export const caseStudies = projects
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((project) => project.slug === slug)
+}

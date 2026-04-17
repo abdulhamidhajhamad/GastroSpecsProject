@@ -1,0 +1,1023 @@
+# GastroSpecs Audit Report (Part 0)
+
+- Read coverage: 113 text/config files read sequentially.
+- Total inventory: 146 files across 32 directories.
+- Excluded from static read: node_modules, .git, .next.
+
+## Current Directory Inventory
+- [.canvas](.canvas)
+- [.canvas/assets](.canvas/assets)
+- [app](app)
+- [app/about](app/about)
+- [app/api](app/api)
+- [app/api/contact](app/api/contact)
+- [app/ar](app/ar)
+- [app/catalog](app/catalog)
+- [app/catalog/[slug]](app/catalog/%5Bslug%5D)
+- [app/contact](app/contact)
+- [app/portal](app/portal)
+- [app/portal/dashboard](app/portal/dashboard)
+- [app/portal/inventory](app/portal/inventory)
+- [app/portal/invoices](app/portal/invoices)
+- [app/portal/leads](app/portal/leads)
+- [app/portal/login](app/portal/login)
+- [app/portal/orders](app/portal/orders)
+- [app/portal/procurement](app/portal/procurement)
+- [app/portal/projects](app/portal/projects)
+- [app/portal/settings](app/portal/settings)
+- [app/portal/support](app/portal/support)
+- [app/projects](app/projects)
+- [app/services](app/services)
+- [attached_assets](attached_assets)
+- [components](components)
+- [components/portal](components/portal)
+- [components/ui](components/ui)
+- [data](data)
+- [hooks](hooks)
+- [lib](lib)
+- [public](public)
+- [public/assets](public/assets)
+
+## Current File Inventory (One-line Purpose)
+- [.canvas/assets/asset_1862945222.png](.canvas/assets/asset_1862945222.png) ? Canvas artifact.
+- [.gitignore](.gitignore) ? Git ignore rules.
+- [.replit](.replit) ? Replit run configuration.
+- [README.md](README.md) ? Primary project documentation.
+- [app/about/page.tsx](app/about/page.tsx) ? Route page component.
+- [app/api/contact/route.ts](app/api/contact/route.ts) ? API route handler.
+- [app/ar/layout.tsx](app/ar/layout.tsx) ? Route layout component.
+- [app/ar/page.tsx](app/ar/page.tsx) ? Route page component.
+- [app/catalog/[slug]/page.tsx](app/catalog/%5Bslug%5D/page.tsx) ? Route page component.
+- [app/catalog/page.tsx](app/catalog/page.tsx) ? Route page component.
+- [app/contact/page.tsx](app/contact/page.tsx) ? Route page component.
+- [app/globals.css](app/globals.css) ? Global CSS and design tokens.
+- [app/layout.tsx](app/layout.tsx) ? Route layout component.
+- [app/page.tsx](app/page.tsx) ? Route page component.
+- [app/portal/dashboard/page.tsx](app/portal/dashboard/page.tsx) ? Route page component.
+- [app/portal/inventory/page.tsx](app/portal/inventory/page.tsx) ? Route page component.
+- [app/portal/invoices/page.tsx](app/portal/invoices/page.tsx) ? Route page component.
+- [app/portal/layout.tsx](app/portal/layout.tsx) ? Route layout component.
+- [app/portal/leads/page.tsx](app/portal/leads/page.tsx) ? Route page component.
+- [app/portal/login/page.tsx](app/portal/login/page.tsx) ? Route page component.
+- [app/portal/orders/page.tsx](app/portal/orders/page.tsx) ? Route page component.
+- [app/portal/procurement/page.tsx](app/portal/procurement/page.tsx) ? Route page component.
+- [app/portal/projects/page.tsx](app/portal/projects/page.tsx) ? Route page component.
+- [app/portal/settings/page.tsx](app/portal/settings/page.tsx) ? Route page component.
+- [app/portal/support/page.tsx](app/portal/support/page.tsx) ? Route page component.
+- [app/projects/page.tsx](app/projects/page.tsx) ? Route page component.
+- [app/robots.ts](app/robots.ts) ? Dynamic robots metadata route.
+- [app/services/page.tsx](app/services/page.tsx) ? Route page component.
+- [app/sitemap.ts](app/sitemap.ts) ? Dynamic sitemap metadata route.
+- [attached_assets/Pasted--GastroSpecs-Complete-Replit-Project-Prompt-Senior-Next_1776180908941.txt](attached_assets/Pasted--GastroSpecs-Complete-Replit-Project-Prompt-Senior-Next_1776180908941.txt) ? Design reference asset.
+- [attached_assets/visily-public-contact-request-quote-(desktop)_1776180940384.jpg](attached_assets/visily-public-contact-request-quote-%28desktop%29_1776180940384.jpg) ? Design reference asset.
+- [attached_assets/visily-public-home-hero-(arabic-rtl-desktop)_1776180940386.jpg](attached_assets/visily-public-home-hero-%28arabic-rtl-desktop%29_1776180940386.jpg) ? Design reference asset.
+- [attached_assets/visily-public-home-hero-(mobile)_1776180940388.jpg](attached_assets/visily-public-home-hero-%28mobile%29_1776180940388.jpg) ? Design reference asset.
+- [attached_assets/visily-public-product-detail-(desktop)_1776180940389.jpg](attached_assets/visily-public-product-detail-%28desktop%29_1776180940389.jpg) ? Design reference asset.
+- [attached_assets/visily-public-products-catalog-(desktop)_1776180948490.jpg](attached_assets/visily-public-products-catalog-%28desktop%29_1776180948490.jpg) ? Design reference asset.
+- [attached_assets/visily-public-products-catalog-(mobile)_1776180940390.jpg](attached_assets/visily-public-products-catalog-%28mobile%29_1776180940390.jpg) ? Design reference asset.
+- [attached_assets/visily-public-projects-case-studies-(desktop)_1776180940391.jpg](attached_assets/visily-public-projects-case-studies-%28desktop%29_1776180940391.jpg) ? Design reference asset.
+- [attached_assets/visily-public-services-(desktop)_1776180948491.jpg](attached_assets/visily-public-services-%28desktop%29_1776180948491.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-dashboard-(desktop)_1776180940393.jpg](attached_assets/visily-staff-dashboard-%28desktop%29_1776180940393.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-inventory-&-certificates-(desktop)_1776180940395.jpg](attached_assets/visily-staff-inventory-%26-certificates-%28desktop%29_1776180940395.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-invoicing-&-payments-(desktop)_1776180948492.jpg](attached_assets/visily-staff-invoicing-%26-payments-%28desktop%29_1776180948492.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-leads-crm-(desktop)_1776180940396.jpg](attached_assets/visily-staff-leads-crm-%28desktop%29_1776180940396.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-login-(desktop)_1776180940398.jpg](attached_assets/visily-staff-login-%28desktop%29_1776180940398.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-orders-&-shipments-(desktop)_1776180948492.jpg](attached_assets/visily-staff-orders-%26-shipments-%28desktop%29_1776180948492.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-procurement-rfqs-(desktop)_1776180940399.jpg](attached_assets/visily-staff-procurement-rfqs-%28desktop%29_1776180940399.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-projects-(desktop)_1776180940400.jpg](attached_assets/visily-staff-projects-%28desktop%29_1776180940400.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-settings-&-users-(desktop)_1776180948493.jpg](attached_assets/visily-staff-settings-%26-users-%28desktop%29_1776180948493.jpg) ? Design reference asset.
+- [attached_assets/visily-staff-support-tickets-(desktop)_1776180940379.jpg](attached_assets/visily-staff-support-tickets-%28desktop%29_1776180940379.jpg) ? Design reference asset.
+- [components.json](components.json) ? Shadcn generator config.
+- [components/CTA.tsx](components/CTA.tsx) ? Shared site component.
+- [components/Footer.tsx](components/Footer.tsx) ? Shared site component.
+- [components/Hero.tsx](components/Hero.tsx) ? Shared site component.
+- [components/Navbar.tsx](components/Navbar.tsx) ? Shared site component.
+- [components/ProductFeature.tsx](components/ProductFeature.tsx) ? Shared site component.
+- [components/Projects.tsx](components/Projects.tsx) ? Shared site component.
+- [components/Solutions.tsx](components/Solutions.tsx) ? Shared site component.
+- [components/Stats.tsx](components/Stats.tsx) ? Shared site component.
+- [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx) ? Portal shared component.
+- [components/portal/PortalSidebar.tsx](components/portal/PortalSidebar.tsx) ? Portal shared component.
+- [components/portal/StatCard.tsx](components/portal/StatCard.tsx) ? Portal shared component.
+- [components/theme-provider.tsx](components/theme-provider.tsx) ? Shared site component.
+- [components/ui/accordion.tsx](components/ui/accordion.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/alert-dialog.tsx](components/ui/alert-dialog.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/alert.tsx](components/ui/alert.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/aspect-ratio.tsx](components/ui/aspect-ratio.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/avatar.tsx](components/ui/avatar.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/badge.tsx](components/ui/badge.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/breadcrumb.tsx](components/ui/breadcrumb.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/button-group.tsx](components/ui/button-group.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/button.tsx](components/ui/button.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/calendar.tsx](components/ui/calendar.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/card.tsx](components/ui/card.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/carousel.tsx](components/ui/carousel.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/chart.tsx](components/ui/chart.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/checkbox.tsx](components/ui/checkbox.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/collapsible.tsx](components/ui/collapsible.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/command.tsx](components/ui/command.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/context-menu.tsx](components/ui/context-menu.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/dialog.tsx](components/ui/dialog.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/drawer.tsx](components/ui/drawer.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/dropdown-menu.tsx](components/ui/dropdown-menu.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/empty.tsx](components/ui/empty.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/field.tsx](components/ui/field.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/form.tsx](components/ui/form.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/hover-card.tsx](components/ui/hover-card.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/input-group.tsx](components/ui/input-group.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/input-otp.tsx](components/ui/input-otp.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/input.tsx](components/ui/input.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/item.tsx](components/ui/item.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/kbd.tsx](components/ui/kbd.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/label.tsx](components/ui/label.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/menubar.tsx](components/ui/menubar.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/navigation-menu.tsx](components/ui/navigation-menu.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/pagination.tsx](components/ui/pagination.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/popover.tsx](components/ui/popover.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/progress.tsx](components/ui/progress.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/radio-group.tsx](components/ui/radio-group.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/resizable.tsx](components/ui/resizable.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/scroll-area.tsx](components/ui/scroll-area.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/select.tsx](components/ui/select.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/separator.tsx](components/ui/separator.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/sheet.tsx](components/ui/sheet.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/sidebar.tsx](components/ui/sidebar.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/skeleton.tsx](components/ui/skeleton.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/slider.tsx](components/ui/slider.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/sonner.tsx](components/ui/sonner.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/spinner.tsx](components/ui/spinner.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/switch.tsx](components/ui/switch.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/table.tsx](components/ui/table.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/tabs.tsx](components/ui/tabs.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/textarea.tsx](components/ui/textarea.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/toast.tsx](components/ui/toast.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/toaster.tsx](components/ui/toaster.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/toggle-group.tsx](components/ui/toggle-group.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/toggle.tsx](components/ui/toggle.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/tooltip.tsx](components/ui/tooltip.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/use-mobile.tsx](components/ui/use-mobile.tsx) ? Reusable UI primitive/wrapper.
+- [components/ui/use-toast.ts](components/ui/use-toast.ts) ? Project file.
+- [data/products.ts](data/products.ts) ? Static data module.
+- [data/projects.ts](data/projects.ts) ? Static data module.
+- [data/services.ts](data/services.ts) ? Static data module.
+- [hooks/use-mobile.ts](hooks/use-mobile.ts) ? Custom hook.
+- [hooks/use-toast.ts](hooks/use-toast.ts) ? Custom hook.
+- [lib/home-data.ts](lib/home-data.ts) ? Library utility/data module.
+- [lib/utils.ts](lib/utils.ts) ? Library utility/data module.
+- [next-env.d.ts](next-env.d.ts) ? Next ambient types.
+- [next.config.mjs](next.config.mjs) ? Next.js config.
+- [package.json](package.json) ? Scripts and dependencies manifest.
+- [pnpm-lock.yaml](pnpm-lock.yaml) ? Lockfile.
+- [postcss.config.mjs](postcss.config.mjs) ? PostCSS config.
+- [public/apple-icon.png](public/apple-icon.png) ? Static asset.
+- [public/assets/hero_kitchen_pano.png](public/assets/hero_kitchen_pano.png) ? Static asset.
+- [public/assets/modular_equipment_range.png](public/assets/modular_equipment_range.png) ? Static asset.
+- [public/assets/project_global_tech_hq.png](public/assets/project_global_tech_hq.png) ? Static asset.
+- [public/assets/project_obsidian_grill.png](public/assets/project_obsidian_grill.png) ? Static asset.
+- [public/assets/vulcan_master_series.png](public/assets/vulcan_master_series.png) ? Static asset.
+- [public/icon-dark-32x32.png](public/icon-dark-32x32.png) ? Static asset.
+- [public/icon-light-32x32.png](public/icon-light-32x32.png) ? Static asset.
+- [public/icon.svg](public/icon.svg) ? Static asset.
+- [public/placeholder-logo.png](public/placeholder-logo.png) ? Static asset.
+- [public/placeholder-logo.svg](public/placeholder-logo.svg) ? Static asset.
+- [public/placeholder-user.jpg](public/placeholder-user.jpg) ? Static asset.
+- [public/placeholder.jpg](public/placeholder.jpg) ? Static asset.
+- [public/placeholder.svg](public/placeholder.svg) ? Static asset.
+- [replit.md](replit.md) ? Replit architecture notes.
+- [tsconfig.json](tsconfig.json) ? TypeScript config.
+
+## Step C Answers
+1. Page composition map:
+- [app/about/page.tsx](app/about/page.tsx) uses [components/Navbar.tsx](components/Navbar.tsx), [components/Footer.tsx](components/Footer.tsx).
+- [app/ar/page.tsx](app/ar/page.tsx) uses no local component imports.
+- [app/catalog/[slug]/page.tsx](app/catalog/%5Bslug%5D/page.tsx) uses [components/Navbar.tsx](components/Navbar.tsx), [components/Footer.tsx](components/Footer.tsx).
+- [app/catalog/page.tsx](app/catalog/page.tsx) uses [components/Navbar.tsx](components/Navbar.tsx), [components/Footer.tsx](components/Footer.tsx).
+- [app/contact/page.tsx](app/contact/page.tsx) uses [components/Navbar.tsx](components/Navbar.tsx), [components/Footer.tsx](components/Footer.tsx).
+- [app/page.tsx](app/page.tsx) uses [components/Navbar.tsx](components/Navbar.tsx), [components/Hero.tsx](components/Hero.tsx), [components/Stats.tsx](components/Stats.tsx), [components/Solutions.tsx](components/Solutions.tsx), [components/ProductFeature.tsx](components/ProductFeature.tsx), [components/Projects.tsx](components/Projects.tsx), [components/CTA.tsx](components/CTA.tsx), [components/Footer.tsx](components/Footer.tsx).
+- [app/portal/dashboard/page.tsx](app/portal/dashboard/page.tsx) uses [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx).
+- [app/portal/inventory/page.tsx](app/portal/inventory/page.tsx) uses [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx).
+- [app/portal/invoices/page.tsx](app/portal/invoices/page.tsx) uses [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx).
+- [app/portal/leads/page.tsx](app/portal/leads/page.tsx) uses [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx).
+- [app/portal/login/page.tsx](app/portal/login/page.tsx) uses no local component imports.
+- [app/portal/orders/page.tsx](app/portal/orders/page.tsx) uses [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx).
+- [app/portal/procurement/page.tsx](app/portal/procurement/page.tsx) uses [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx).
+- [app/portal/projects/page.tsx](app/portal/projects/page.tsx) uses [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx).
+- [app/portal/settings/page.tsx](app/portal/settings/page.tsx) uses [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx).
+- [app/portal/support/page.tsx](app/portal/support/page.tsx) uses [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx).
+- [app/projects/page.tsx](app/projects/page.tsx) uses [components/Navbar.tsx](components/Navbar.tsx), [components/Footer.tsx](components/Footer.tsx).
+- [app/services/page.tsx](app/services/page.tsx) uses [components/Navbar.tsx](components/Navbar.tsx), [components/Footer.tsx](components/Footer.tsx).
+2. CSS/styles source locations:
+- Global CSS variables and base styles live in [app/globals.css](app/globals.css).
+- Tailwind v4 is enabled through [postcss.config.mjs](postcss.config.mjs) and @import statements in [app/globals.css](app/globals.css).
+- Most visual styling is inline Tailwind className strings in route/component TSX files under [app](app) and [components](components).
+3. Data locations:
+- Route/domain data lives in [data/products.ts](data/products.ts), [data/projects.ts](data/projects.ts), [data/services.ts](data/services.ts).
+- Homepage and navigation content lives in [lib/home-data.ts](lib/home-data.ts).
+4. Used vs dead components:
+- Used component files (18): [components/CTA.tsx](components/CTA.tsx), [components/Footer.tsx](components/Footer.tsx), [components/Hero.tsx](components/Hero.tsx), [components/Navbar.tsx](components/Navbar.tsx), [components/ProductFeature.tsx](components/ProductFeature.tsx), [components/Projects.tsx](components/Projects.tsx), [components/Solutions.tsx](components/Solutions.tsx), [components/Stats.tsx](components/Stats.tsx), [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx), [components/portal/PortalSidebar.tsx](components/portal/PortalSidebar.tsx), [components/ui/button.tsx](components/ui/button.tsx), [components/ui/input.tsx](components/ui/input.tsx), [components/ui/label.tsx](components/ui/label.tsx), [components/ui/separator.tsx](components/ui/separator.tsx), [components/ui/skeleton.tsx](components/ui/skeleton.tsx), [components/ui/textarea.tsx](components/ui/textarea.tsx), [components/ui/toast.tsx](components/ui/toast.tsx), [components/ui/toggle.tsx](components/ui/toggle.tsx).
+- Unused component file candidates (50): [components/portal/StatCard.tsx](components/portal/StatCard.tsx), [components/theme-provider.tsx](components/theme-provider.tsx), [components/ui/accordion.tsx](components/ui/accordion.tsx), [components/ui/alert-dialog.tsx](components/ui/alert-dialog.tsx), [components/ui/alert.tsx](components/ui/alert.tsx), [components/ui/aspect-ratio.tsx](components/ui/aspect-ratio.tsx), [components/ui/avatar.tsx](components/ui/avatar.tsx), [components/ui/badge.tsx](components/ui/badge.tsx), [components/ui/breadcrumb.tsx](components/ui/breadcrumb.tsx), [components/ui/button-group.tsx](components/ui/button-group.tsx), [components/ui/calendar.tsx](components/ui/calendar.tsx), [components/ui/card.tsx](components/ui/card.tsx), [components/ui/carousel.tsx](components/ui/carousel.tsx), [components/ui/chart.tsx](components/ui/chart.tsx), [components/ui/checkbox.tsx](components/ui/checkbox.tsx), [components/ui/collapsible.tsx](components/ui/collapsible.tsx), [components/ui/command.tsx](components/ui/command.tsx), [components/ui/context-menu.tsx](components/ui/context-menu.tsx), [components/ui/dialog.tsx](components/ui/dialog.tsx), [components/ui/drawer.tsx](components/ui/drawer.tsx), [components/ui/dropdown-menu.tsx](components/ui/dropdown-menu.tsx), [components/ui/empty.tsx](components/ui/empty.tsx), [components/ui/field.tsx](components/ui/field.tsx), [components/ui/form.tsx](components/ui/form.tsx), [components/ui/hover-card.tsx](components/ui/hover-card.tsx), [components/ui/input-group.tsx](components/ui/input-group.tsx), [components/ui/input-otp.tsx](components/ui/input-otp.tsx), [components/ui/item.tsx](components/ui/item.tsx), [components/ui/kbd.tsx](components/ui/kbd.tsx), [components/ui/menubar.tsx](components/ui/menubar.tsx), [components/ui/navigation-menu.tsx](components/ui/navigation-menu.tsx), [components/ui/pagination.tsx](components/ui/pagination.tsx), [components/ui/popover.tsx](components/ui/popover.tsx), [components/ui/progress.tsx](components/ui/progress.tsx), [components/ui/radio-group.tsx](components/ui/radio-group.tsx), [components/ui/resizable.tsx](components/ui/resizable.tsx), [components/ui/scroll-area.tsx](components/ui/scroll-area.tsx), [components/ui/select.tsx](components/ui/select.tsx), [components/ui/sheet.tsx](components/ui/sheet.tsx), [components/ui/sidebar.tsx](components/ui/sidebar.tsx), [components/ui/slider.tsx](components/ui/slider.tsx), [components/ui/sonner.tsx](components/ui/sonner.tsx), [components/ui/spinner.tsx](components/ui/spinner.tsx), [components/ui/switch.tsx](components/ui/switch.tsx), [components/ui/table.tsx](components/ui/table.tsx), [components/ui/tabs.tsx](components/ui/tabs.tsx), [components/ui/toaster.tsx](components/ui/toaster.tsx), [components/ui/toggle-group.tsx](components/ui/toggle-group.tsx), [components/ui/tooltip.tsx](components/ui/tooltip.tsx), [components/ui/use-mobile.tsx](components/ui/use-mobile.tsx).
+5. Imports per file: See dependency graph section below (resolved local imports file-by-file).
+6. Circular dependencies: none detected.
+7. use client files: listed in dedicated section below with rationale.
+8. Fonts/colors/spacing/radius: listed in design tokens section.
+9. Safe deletion candidates: listed in dead code section (file-level, confirmed zero importers in static graph).
+10. Tailwind config state: no tailwind.config.ts/js file; Tailwind v4 configured via PostCSS plugin and app/globals.css tokens.
+
+## use client Inventory (and why)
+- [app/portal/invoices/page.tsx](app/portal/invoices/page.tsx) ? Portal interactive route with client state/event handlers.
+- [app/portal/leads/page.tsx](app/portal/leads/page.tsx) ? Portal interactive route with client state/event handlers.
+- [app/portal/projects/page.tsx](app/portal/projects/page.tsx) ? Portal interactive route with client state/event handlers.
+- [app/portal/support/page.tsx](app/portal/support/page.tsx) ? Portal interactive route with client state/event handlers.
+- [components/portal/PortalSidebar.tsx](components/portal/PortalSidebar.tsx) ? Portal interactive route with client state/event handlers.
+- [components/theme-provider.tsx](components/theme-provider.tsx) ? Portal interactive route with client state/event handlers.
+- [components/ui/accordion.tsx](components/ui/accordion.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/alert-dialog.tsx](components/ui/alert-dialog.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/aspect-ratio.tsx](components/ui/aspect-ratio.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/avatar.tsx](components/ui/avatar.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/calendar.tsx](components/ui/calendar.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/carousel.tsx](components/ui/carousel.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/chart.tsx](components/ui/chart.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/checkbox.tsx](components/ui/checkbox.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/collapsible.tsx](components/ui/collapsible.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/command.tsx](components/ui/command.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/context-menu.tsx](components/ui/context-menu.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/dialog.tsx](components/ui/dialog.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/drawer.tsx](components/ui/drawer.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/dropdown-menu.tsx](components/ui/dropdown-menu.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/field.tsx](components/ui/field.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/form.tsx](components/ui/form.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/hover-card.tsx](components/ui/hover-card.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/input-group.tsx](components/ui/input-group.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/input-otp.tsx](components/ui/input-otp.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/label.tsx](components/ui/label.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/menubar.tsx](components/ui/menubar.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/popover.tsx](components/ui/popover.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/progress.tsx](components/ui/progress.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/radio-group.tsx](components/ui/radio-group.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/resizable.tsx](components/ui/resizable.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/scroll-area.tsx](components/ui/scroll-area.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/select.tsx](components/ui/select.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/separator.tsx](components/ui/separator.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/sheet.tsx](components/ui/sheet.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/sidebar.tsx](components/ui/sidebar.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/slider.tsx](components/ui/slider.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/sonner.tsx](components/ui/sonner.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/switch.tsx](components/ui/switch.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/table.tsx](components/ui/table.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/tabs.tsx](components/ui/tabs.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/toast.tsx](components/ui/toast.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/toaster.tsx](components/ui/toaster.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/toggle-group.tsx](components/ui/toggle-group.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/toggle.tsx](components/ui/toggle.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/tooltip.tsx](components/ui/tooltip.tsx) ? Radix/interactive primitive requiring client runtime.
+- [components/ui/use-toast.ts](components/ui/use-toast.ts) ? Uses React/browser state hooks.
+- [hooks/use-toast.ts](hooks/use-toast.ts) ? Uses React/browser state hooks.
+
+## Dead Code (File-level, Zero Importers)
+- Confirmed by static import graph among local project files.
+- [.replit](.replit)
+- [attached_assets/Pasted--GastroSpecs-Complete-Replit-Project-Prompt-Senior-Next_1776180908941.txt](attached_assets/Pasted--GastroSpecs-Complete-Replit-Project-Prompt-Senior-Next_1776180908941.txt)
+- [components/portal/StatCard.tsx](components/portal/StatCard.tsx)
+- [components/theme-provider.tsx](components/theme-provider.tsx)
+- [components/ui/accordion.tsx](components/ui/accordion.tsx)
+- [components/ui/alert-dialog.tsx](components/ui/alert-dialog.tsx)
+- [components/ui/alert.tsx](components/ui/alert.tsx)
+- [components/ui/aspect-ratio.tsx](components/ui/aspect-ratio.tsx)
+- [components/ui/avatar.tsx](components/ui/avatar.tsx)
+- [components/ui/badge.tsx](components/ui/badge.tsx)
+- [components/ui/breadcrumb.tsx](components/ui/breadcrumb.tsx)
+- [components/ui/button-group.tsx](components/ui/button-group.tsx)
+- [components/ui/calendar.tsx](components/ui/calendar.tsx)
+- [components/ui/card.tsx](components/ui/card.tsx)
+- [components/ui/carousel.tsx](components/ui/carousel.tsx)
+- [components/ui/chart.tsx](components/ui/chart.tsx)
+- [components/ui/checkbox.tsx](components/ui/checkbox.tsx)
+- [components/ui/collapsible.tsx](components/ui/collapsible.tsx)
+- [components/ui/command.tsx](components/ui/command.tsx)
+- [components/ui/context-menu.tsx](components/ui/context-menu.tsx)
+- [components/ui/dialog.tsx](components/ui/dialog.tsx)
+- [components/ui/drawer.tsx](components/ui/drawer.tsx)
+- [components/ui/dropdown-menu.tsx](components/ui/dropdown-menu.tsx)
+- [components/ui/empty.tsx](components/ui/empty.tsx)
+- [components/ui/field.tsx](components/ui/field.tsx)
+- [components/ui/form.tsx](components/ui/form.tsx)
+- [components/ui/hover-card.tsx](components/ui/hover-card.tsx)
+- [components/ui/input-group.tsx](components/ui/input-group.tsx)
+- [components/ui/input-otp.tsx](components/ui/input-otp.tsx)
+- [components/ui/item.tsx](components/ui/item.tsx)
+- [components/ui/kbd.tsx](components/ui/kbd.tsx)
+- [components/ui/menubar.tsx](components/ui/menubar.tsx)
+- [components/ui/navigation-menu.tsx](components/ui/navigation-menu.tsx)
+- [components/ui/pagination.tsx](components/ui/pagination.tsx)
+- [components/ui/popover.tsx](components/ui/popover.tsx)
+- [components/ui/progress.tsx](components/ui/progress.tsx)
+- [components/ui/radio-group.tsx](components/ui/radio-group.tsx)
+- [components/ui/resizable.tsx](components/ui/resizable.tsx)
+- [components/ui/scroll-area.tsx](components/ui/scroll-area.tsx)
+- [components/ui/select.tsx](components/ui/select.tsx)
+- [components/ui/sheet.tsx](components/ui/sheet.tsx)
+- [components/ui/sidebar.tsx](components/ui/sidebar.tsx)
+- [components/ui/slider.tsx](components/ui/slider.tsx)
+- [components/ui/sonner.tsx](components/ui/sonner.tsx)
+- [components/ui/spinner.tsx](components/ui/spinner.tsx)
+- [components/ui/switch.tsx](components/ui/switch.tsx)
+- [components/ui/table.tsx](components/ui/table.tsx)
+- [components/ui/tabs.tsx](components/ui/tabs.tsx)
+- [components/ui/toaster.tsx](components/ui/toaster.tsx)
+- [components/ui/toggle-group.tsx](components/ui/toggle-group.tsx)
+- [components/ui/tooltip.tsx](components/ui/tooltip.tsx)
+- [components/ui/use-mobile.tsx](components/ui/use-mobile.tsx)
+- [components/ui/use-toast.ts](components/ui/use-toast.ts)
+- [pnpm-lock.yaml](pnpm-lock.yaml)
+
+## Dead Exports (Cautious)
+- Export-level analysis is less reliable in framework entrypoints; only safe assumption is: all exports inside zero-importer files are currently unused.
+- No automatic export deletion is recommended without targeted grep validation per export symbol.
+
+## Design Tokens Found
+### colors
+- #000
+- #000000
+- #0a0a0a
+- #111
+- #111111
+- #1a1a1a
+- #20bd5a
+- #22C55E
+- #25D366
+- #4492
+- #6B6B6B
+- #8812
+- #9B9B9B
+- #E5E5E5
+- #EF4444
+- #F5F5F5
+- #F8F8F8
+- #F9F9F9
+- #FFFFFF
+- #ccc
+- #e8e8e8
+- #f0f0f0
+- #f5f5f5
+- #fff
+- bg-[#0a0a0a]
+- bg-[#111]
+- bg-[#1a1a1a]
+- bg-[#25D366]
+- bg-[#F5F5F5]
+- bg-[#e8e8e8]
+- bg-[#f0f0f0]
+- bg-[#f5f5f5]
+- bg-background
+- bg-black
+- bg-black/50
+- bg-black/60
+- bg-border
+- bg-current
+- bg-foreground
+- bg-gradient-to-b
+- bg-gradient-to-br
+- bg-gray-100
+- bg-gray-200
+- bg-gray-300
+- bg-gray-400
+- bg-gray-50
+- bg-gray-600
+- bg-gray-700
+- bg-green-50
+- bg-green-500
+- bg-muted
+- bg-primary
+- bg-sidebar
+- bg-transparent
+- bg-white
+- bg-white/90
+- border-2
+- border-b
+- border-b-2
+- border-black
+- border-dashed
+- border-gray-100
+- border-gray-200
+- border-gray-300
+- border-gray-600
+- border-gray-700
+- border-gray-800
+- border-l
+- border-l-2
+- border-primary
+- border-r
+- border-t
+- border-t-2
+- border-white
+- border-y
+- from-gray-700
+- from-gray-800
+- from-transparent
+- oklch(0.145 0 0)
+- oklch(0.205 0 0)
+- oklch(0.269 0 0)
+- oklch(0.396 0.141 25.723)
+- oklch(0.398 0.07 227.392)
+- oklch(0.439 0 0)
+- oklch(0.488 0.243 264.376)
+- oklch(0.556 0 0)
+- oklch(0.577 0.245 27.325)
+- oklch(0.6 0.118 184.704)
+- oklch(0.627 0.265 303.9)
+- oklch(0.637 0.237 25.331)
+- oklch(0.645 0.246 16.439)
+- oklch(0.646 0.222 41.116)
+- oklch(0.696 0.17 162.48)
+- oklch(0.708 0 0)
+- oklch(0.769 0.188 70.08)
+- oklch(0.828 0.189 84.429)
+- oklch(0.922 0 0)
+- oklch(0.97 0 0)
+- oklch(0.985 0 0)
+- oklch(1 0 0)
+- ring-0
+- ring-offset-background
+- ring-ring/50
+- shadow-md
+- shadow-sm
+- text-2xl
+- text-3xl
+- text-4xl
+- text-5xl
+- text-6xl
+- text-[10px]
+- text-[11px]
+- text-[2.6rem]
+- text-[8px]
+- text-[9px]
+- text-balance
+- text-base
+- text-black
+- text-black/10
+- text-blue-600
+- text-center
+- text-current
+- text-foreground
+- text-gray-200
+- text-gray-300
+- text-gray-400
+- text-gray-500
+- text-gray-600
+- text-green-700
+- text-left
+- text-lg
+- text-muted-foreground
+- text-right
+- text-sidebar-foreground
+- text-sm
+- text-white
+- text-white/20
+- text-xl
+- text-xs
+- to-black
+- to-black/70
+- to-gray-900
+### fonts
+- font-bold
+- font-medium
+- font-mono
+- font-normal
+- font-sans
+- font-semibold
+- font-serif
+### spacing
+- gap-0
+- gap-1
+- gap-1.5
+- gap-10
+- gap-12
+- gap-16
+- gap-2
+- gap-2.5
+- gap-3
+- gap-4
+- gap-5
+- gap-6
+- gap-7
+- gap-8
+- gap-px
+- mb-0.5
+- mb-1
+- mb-10
+- mb-12
+- mb-2
+- mb-3
+- mb-4
+- mb-5
+- mb-6
+- mb-7
+- mb-8
+- mb-9
+- ml-0
+- ml-1
+- ml-4
+- ml-6
+- ml-auto
+- mr-auto
+- mt-0.5
+- mt-1
+- mt-1.5
+- mt-12
+- mt-16
+- mt-2
+- mt-3
+- mt-4
+- mt-6
+- mt-8
+- mt-auto
+- mx-auto
+- p-0
+- p-12
+- p-2.5
+- p-3
+- p-4
+- p-5
+- p-6
+- p-8
+- pb-1
+- pb-16
+- pb-2
+- pb-3
+- pb-4
+- pb-5
+- pb-px
+- pl-10
+- pl-4
+- pl-5
+- pr-4
+- pt-2
+- pt-3
+- pt-4
+- pt-6
+- px-1.5
+- px-2
+- px-2.5
+- px-3
+- px-3.5
+- px-4
+- px-5
+- px-6
+- px-7
+- px-8
+- py-0
+- py-0.5
+- py-1
+- py-1.5
+- py-10
+- py-12
+- py-16
+- py-2
+- py-2.5
+- py-20
+- py-3
+- py-3.5
+- py-4
+- py-5
+- py-6
+- py-7
+- py-8
+- space-y-0
+- space-y-1.5
+- space-y-10
+- space-y-2
+- space-y-2.5
+- space-y-3
+- space-y-4
+- space-y-5
+- space-y-6
+### radius
+- rounded
+- rounded-[2px]
+- rounded-[inherit]
+- rounded-full
+- rounded-md
+- rounded-tl-sm
+- rounded-xs
+### sizes
+- 0.08em
+- 0.12em
+- 0.15em
+- 0.18em
+- 0.1em
+- 0.25em
+- 0.2em
+- 0.35rem
+- 0.45rem
+- 0.4rem
+- 0.625rem
+- 0.8rem
+- 1.15rem
+- 1.5px
+- 100px
+- 100vw
+- 1024px
+- 10px
+- 11px
+- 1280px
+- 12rem
+- 16rem
+- 180px
+- 18rem
+- 190px
+- 1px
+- 2.2rem
+- 2.6rem
+- 200px
+- 240px
+- 24px
+- 2px
+- 2rem
+- 3.2rem
+- 300px
+- 33vw
+- 375px
+- 380px
+- 3px
+- 3rem
+- 400px
+- 420px
+- 4px
+- 50%
+- 50vw
+- 580px
+- 5px
+- 768px
+- 80vh
+- 8px
+- 8rem
+- 9px
+- h-1
+- h-1.5
+- h-10
+- h-12
+- h-14
+- h-2
+- h-2/3
+- h-3
+- h-3/4
+- h-4
+- h-48
+- h-5
+- h-6
+- h-7
+- h-8
+- h-9
+- h-auto
+- h-full
+- h-px
+- max-w-(--skeleton-width)
+- max-w-7xl
+- max-w-[180px]
+- max-w-[420px]
+- max-w-lg
+- max-w-md
+- max-w-sm
+- max-w-xl
+- min-h-64
+- min-h-[380px]
+- min-h-[580px]
+- min-h-screen
+- min-w-0
+- text-2xl
+- text-3xl
+- text-4xl
+- text-5xl
+- text-6xl
+- text-[10px]
+- text-[11px]
+- text-[2.6rem]
+- text-[8px]
+- text-[9px]
+- text-balance
+- text-base
+- text-black
+- text-black/10
+- text-blue-600
+- text-center
+- text-current
+- text-foreground
+- text-gray-200
+- text-gray-300
+- text-gray-400
+- text-gray-500
+- text-gray-600
+- text-green-700
+- text-left
+- text-lg
+- text-muted-foreground
+- text-right
+- text-sidebar-foreground
+- text-sm
+- text-white
+- text-white/20
+- text-xl
+- text-xs
+- w-(--sidebar-width)
+- w-1
+- w-1.5
+- w-10
+- w-12
+- w-14
+- w-2
+- w-2/3
+- w-3
+- w-3/4
+- w-36
+- w-4
+- w-44
+- w-48
+- w-5
+- w-52
+- w-56
+- w-6
+- w-7
+- w-8
+- w-[100px]
+- w-[190px]
+- w-[240px]
+- w-fit
+- w-full
+- w-px
+
+## Component Map
+- [components/CTA.tsx](components/CTA.tsx) ? props: none declared; renders: Link; data: @/lib/home-data; class samples: bg-black py-20 | max-w-7xl mx-auto px-6 text-center | font-serif text-3xl md:text-4xl text-white mb-3 text-balance
+- [components/Footer.tsx](components/Footer.tsx) ? props: none declared; renders: Link; data: @/lib/home-data; class samples: bg-black text-white | max-w-7xl mx-auto px-6 py-16 | grid md:grid-cols-4 gap-12
+- [components/Hero.tsx](components/Hero.tsx) ? props: none declared; renders: Image, Link; data: @/lib/home-data; class samples: bg-white overflow-hidden | max-w-7xl mx-auto | grid lg:grid-cols-[1fr_1fr] min-h-[580px]
+- [components/Navbar.tsx](components/Navbar.tsx) ? props: none declared; renders: GlobeIcon, Link; data: @/lib/home-data; class samples: sticky top-0 z-50 bg-white border-b border-gray-200 | max-w-7xl mx-auto px-6 h-14 flex items-center justify-between | flex items-center gap-2 shrink-0
+- [components/ProductFeature.tsx](components/ProductFeature.tsx) ? props: none declared; renders: Image, Link; data: @/lib/home-data; class samples: py-0 bg-white | max-w-7xl mx-auto | grid lg:grid-cols-2
+- [components/Projects.tsx](components/Projects.tsx) ? props: none declared; renders: Image, Link; data: @/lib/home-data; class samples: py-20 bg-white | max-w-7xl mx-auto px-6 | mb-10
+- [components/Solutions.tsx](components/Solutions.tsx) ? props: none declared; renders: GlobeIcon, TruckIcon, WrenchIcon; data: @/lib/home-data; class samples: py-20 bg-white | max-w-7xl mx-auto px-6 | text-center mb-12
+- [components/Stats.tsx](components/Stats.tsx) ? props: none declared; renders: none; data: @/lib/home-data; class samples: border-y border-gray-200 bg-white | max-w-7xl mx-auto | grid grid-cols-3 divide-x divide-gray-200
+- [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx) ? props: none declared; renders: none; data: none; class samples: h-12 border-b border-gray-200 bg-white flex items-center justify-between px-6 shrink-0 | flex items-center gap-2 | flex items-center gap-1 text-xs text-gray-500 hover:text-black transition-colors
+- [components/portal/PortalSidebar.tsx](components/portal/PortalSidebar.tsx) ? props: none declared; renders: Link; data: none; class samples: w-[190px] shrink-0 bg-white border-r border-gray-200 flex flex-col min-h-screen | px-5 py-5 border-b border-gray-200 | flex items-center gap-2
+- [components/portal/StatCard.tsx](components/portal/StatCard.tsx) ? props: none declared; renders: none; data: none; class samples: border border-gray-200 bg-white p-5 | flex items-start justify-between mb-4 | text-gray-400
+- [components/theme-provider.tsx](components/theme-provider.tsx) ? props: none declared; renders: NextThemesProvider; data: none; class samples: none
+- [components/ui/accordion.tsx](components/ui/accordion.tsx) ? props: none declared; renders: AccordionPrimitive, ChevronDownIcon; data: none; class samples: flex | text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 | data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm
+- [components/ui/alert-dialog.tsx](components/ui/alert-dialog.tsx) ? props: none declared; renders: AlertDialogOverlay, AlertDialogPortal, AlertDialogPrimitive; data: none; class samples: none
+- [components/ui/alert.tsx](components/ui/alert.tsx) ? props: none declared; renders: none; data: none; class samples: none
+- [components/ui/aspect-ratio.tsx](components/ui/aspect-ratio.tsx) ? props: none declared; renders: AspectRatioPrimitive; data: none; class samples: none
+- [components/ui/avatar.tsx](components/ui/avatar.tsx) ? props: none declared; renders: AvatarPrimitive; data: none; class samples: none
+- [components/ui/badge.tsx](components/ui/badge.tsx) ? props: none declared; renders: Comp; data: none; class samples: none
+- [components/ui/breadcrumb.tsx](components/ui/breadcrumb.tsx) ? props: none declared; renders: ChevronRight, Comp, MoreHorizontal; data: none; class samples: size-4 | sr-only
+- [components/ui/button-group.tsx](components/ui/button-group.tsx) ? props: none declared; renders: Comp, Separator; data: none; class samples: none
+- [components/ui/button.tsx](components/ui/button.tsx) ? props: none declared; renders: Comp; data: none; class samples: none
+- [components/ui/calendar.tsx](components/ui/calendar.tsx) ? props: none declared; renders: Button, ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, DayPicker, HTMLButtonElement; data: none; class samples: flex size-(--cell-size) items-center justify-center text-center
+- [components/ui/card.tsx](components/ui/card.tsx) ? props: none declared; renders: none; data: none; class samples: none
+- [components/ui/carousel.tsx](components/ui/carousel.tsx) ? props: none declared; renders: ArrowLeft, ArrowRight, Button, Carousel, CarouselContext, CarouselContextProps, HTMLDivElement; data: none; class samples: overflow-hidden | sr-only | sr-only
+- [components/ui/chart.tsx](components/ui/chart.tsx) ? props: none declared; renders: ChartContainer, ChartContext, ChartContextProps, ChartStyle, RechartsPrimitive; data: none; class samples: grid gap-1.5 | grid gap-1.5 | text-muted-foreground
+- [components/ui/checkbox.tsx](components/ui/checkbox.tsx) ? props: none declared; renders: CheckIcon, CheckboxPrimitive; data: none; class samples: flex items-center justify-center text-current transition-none | size-3.5
+- [components/ui/collapsible.tsx](components/ui/collapsible.tsx) ? props: none declared; renders: CollapsiblePrimitive; data: none; class samples: none
+- [components/ui/command.tsx](components/ui/command.tsx) ? props: none declared; renders: Command, CommandPrimitive, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, SearchIcon; data: none; class samples: sr-only | [&_[cmdk-group-heading]]:text-muted-foreground **:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5 | flex h-9 items-center gap-2 border-b px-3
+- [components/ui/context-menu.tsx](components/ui/context-menu.tsx) ? props: none declared; renders: CheckIcon, ChevronRightIcon, CircleIcon, ContextMenuPrimitive; data: none; class samples: ml-auto | pointer-events-none absolute left-2 flex size-3.5 items-center justify-center | size-4
+- [components/ui/dialog.tsx](components/ui/dialog.tsx) ? props: none declared; renders: DialogOverlay, DialogPortal, DialogPrimitive, XIcon; data: none; class samples: ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 | sr-only
+- [components/ui/drawer.tsx](components/ui/drawer.tsx) ? props: none declared; renders: DrawerOverlay, DrawerPortal, DrawerPrimitive; data: none; class samples: bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block
+- [components/ui/dropdown-menu.tsx](components/ui/dropdown-menu.tsx) ? props: none declared; renders: CheckIcon, ChevronRightIcon, CircleIcon, DropdownMenuPrimitive; data: none; class samples: pointer-events-none absolute left-2 flex size-3.5 items-center justify-center | size-4 | pointer-events-none absolute left-2 flex size-3.5 items-center justify-center
+- [components/ui/empty.tsx](components/ui/empty.tsx) ? props: none declared; renders: none; data: none; class samples: none
+- [components/ui/field.tsx](components/ui/field.tsx) ? props: none declared; renders: Label, Separator; data: none; class samples: absolute inset-0 top-1/2 | bg-background text-muted-foreground relative mx-auto block w-fit px-2 | ml-4 flex list-disc flex-col gap-1
+- [components/ui/form.tsx](components/ui/form.tsx) ? props: none declared; renders: Controller, FormField, FormFieldContext, FormFieldContextValue, FormItemContext, FormItemContextValue, Label, Slot, TFieldValues; data: none; class samples: none
+- [components/ui/hover-card.tsx](components/ui/hover-card.tsx) ? props: none declared; renders: HoverCardPrimitive; data: none; class samples: none
+- [components/ui/input-group.tsx](components/ui/input-group.tsx) ? props: none declared; renders: Button, Input, React, Textarea; data: none; class samples: none
+- [components/ui/input-otp.tsx](components/ui/input-otp.tsx) ? props: none declared; renders: MinusIcon, OTPInput; data: none; class samples: pointer-events-none absolute inset-0 flex items-center justify-center | animate-caret-blink bg-foreground h-4 w-px duration-1000
+- [components/ui/input.tsx](components/ui/input.tsx) ? props: none declared; renders: none; data: none; class samples: none
+- [components/ui/item.tsx](components/ui/item.tsx) ? props: none declared; renders: Comp, Separator; data: none; class samples: none
+- [components/ui/kbd.tsx](components/ui/kbd.tsx) ? props: none declared; renders: none; data: none; class samples: none
+- [components/ui/label.tsx](components/ui/label.tsx) ? props: none declared; renders: LabelPrimitive; data: none; class samples: none
+- [components/ui/menubar.tsx](components/ui/menubar.tsx) ? props: none declared; renders: CheckIcon, ChevronRightIcon, CircleIcon, MenubarPortal, MenubarPrimitive; data: none; class samples: pointer-events-none absolute left-2 flex size-3.5 items-center justify-center | size-4 | pointer-events-none absolute left-2 flex size-3.5 items-center justify-center
+- [components/ui/navigation-menu.tsx](components/ui/navigation-menu.tsx) ? props: none declared; renders: ChevronDownIcon, NavigationMenuPrimitive, NavigationMenuViewport; data: none; class samples: relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180 | absolute top-full left-0 isolate z-50 flex justify-center | bg-border relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm shadow-md
+- [components/ui/pagination.tsx](components/ui/pagination.tsx) ? props: none declared; renders: ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon, PaginationLink, React; data: none; class samples: hidden sm:block | hidden sm:block | size-4
+- [components/ui/popover.tsx](components/ui/popover.tsx) ? props: none declared; renders: PopoverPrimitive; data: none; class samples: none
+- [components/ui/progress.tsx](components/ui/progress.tsx) ? props: none declared; renders: ProgressPrimitive; data: none; class samples: bg-primary h-full w-full flex-1 transition-all
+- [components/ui/radio-group.tsx](components/ui/radio-group.tsx) ? props: none declared; renders: CircleIcon, RadioGroupPrimitive; data: none; class samples: relative flex items-center justify-center | fill-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2
+- [components/ui/resizable.tsx](components/ui/resizable.tsx) ? props: none declared; renders: GripVerticalIcon, ResizablePrimitive; data: none; class samples: bg-border z-10 flex h-4 w-3 items-center justify-center rounded-xs border | size-2.5
+- [components/ui/scroll-area.tsx](components/ui/scroll-area.tsx) ? props: none declared; renders: ScrollAreaPrimitive, ScrollBar; data: none; class samples: focus-visible:ring-ring/50 size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:outline-1 | bg-border relative flex-1 rounded-full
+- [components/ui/select.tsx](components/ui/select.tsx) ? props: none declared; renders: CheckIcon, ChevronDownIcon, ChevronUpIcon, SelectPrimitive, SelectScrollDownButton, SelectScrollUpButton; data: none; class samples: size-4 opacity-50 | absolute right-2 flex size-3.5 items-center justify-center | size-4
+- [components/ui/separator.tsx](components/ui/separator.tsx) ? props: none declared; renders: SeparatorPrimitive; data: none; class samples: none
+- [components/ui/sheet.tsx](components/ui/sheet.tsx) ? props: none declared; renders: SheetOverlay, SheetPortal, SheetPrimitive, XIcon; data: none; class samples: ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none | size-4 | sr-only
+- [components/ui/sidebar.tsx](components/ui/sidebar.tsx) ? props: none declared; renders: Button, Comp, Input, PanelLeftIcon, Separator, Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle; data: none; class samples: bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden | sr-only | flex h-full w-full flex-col
+- [components/ui/skeleton.tsx](components/ui/skeleton.tsx) ? props: none declared; renders: none; data: none; class samples: none
+- [components/ui/slider.tsx](components/ui/slider.tsx) ? props: none declared; renders: SliderPrimitive; data: none; class samples: bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5 | bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full | border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50
+- [components/ui/sonner.tsx](components/ui/sonner.tsx) ? props: none declared; renders: Sonner; data: none; class samples: toaster group
+- [components/ui/spinner.tsx](components/ui/spinner.tsx) ? props: none declared; renders: Loader2Icon; data: none; class samples: none
+- [components/ui/switch.tsx](components/ui/switch.tsx) ? props: none declared; renders: SwitchPrimitive; data: none; class samples: bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none block size-4 rounded-full ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0
+- [components/ui/table.tsx](components/ui/table.tsx) ? props: none declared; renders: none; data: none; class samples: relative w-full overflow-x-auto
+- [components/ui/tabs.tsx](components/ui/tabs.tsx) ? props: none declared; renders: TabsPrimitive; data: none; class samples: none
+- [components/ui/textarea.tsx](components/ui/textarea.tsx) ? props: none declared; renders: none; data: none; class samples: none
+- [components/ui/toast.tsx](components/ui/toast.tsx) ? props: none declared; renders: ToastPrimitives, X; data: none; class samples: h-4 w-4
+- [components/ui/toaster.tsx](components/ui/toaster.tsx) ? props: none declared; renders: Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport; data: none; class samples: grid gap-1
+- [components/ui/toggle-group.tsx](components/ui/toggle-group.tsx) ? props: none declared; renders: ToggleGroupContext, ToggleGroupPrimitive; data: none; class samples: none
+- [components/ui/toggle.tsx](components/ui/toggle.tsx) ? props: none declared; renders: TogglePrimitive; data: none; class samples: none
+- [components/ui/tooltip.tsx](components/ui/tooltip.tsx) ? props: none declared; renders: TooltipPrimitive, TooltipProvider; data: none; class samples: bg-foreground fill-foreground z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]
+- [components/ui/use-mobile.tsx](components/ui/use-mobile.tsx) ? props: none declared; renders: none; data: none; class samples: none
+
+## Dependency Graph (Resolved Local Imports)
+- [app/about/page.tsx](app/about/page.tsx) imports:
+  - [components/Footer.tsx](components/Footer.tsx)
+  - [components/Navbar.tsx](components/Navbar.tsx)
+- [app/catalog/[slug]/page.tsx](app/catalog/%5Bslug%5D/page.tsx) imports:
+  - [components/Footer.tsx](components/Footer.tsx)
+  - [components/Navbar.tsx](components/Navbar.tsx)
+  - [data/products.ts](data/products.ts)
+- [app/catalog/page.tsx](app/catalog/page.tsx) imports:
+  - [components/Footer.tsx](components/Footer.tsx)
+  - [components/Navbar.tsx](components/Navbar.tsx)
+  - [data/products.ts](data/products.ts)
+- [app/contact/page.tsx](app/contact/page.tsx) imports:
+  - [components/Footer.tsx](components/Footer.tsx)
+  - [components/Navbar.tsx](components/Navbar.tsx)
+- [app/layout.tsx](app/layout.tsx) imports:
+  - [lib/home-data.ts](lib/home-data.ts)
+- [app/page.tsx](app/page.tsx) imports:
+  - [components/CTA.tsx](components/CTA.tsx)
+  - [components/Footer.tsx](components/Footer.tsx)
+  - [components/Hero.tsx](components/Hero.tsx)
+  - [components/Navbar.tsx](components/Navbar.tsx)
+  - [components/ProductFeature.tsx](components/ProductFeature.tsx)
+  - [components/Projects.tsx](components/Projects.tsx)
+  - [components/Solutions.tsx](components/Solutions.tsx)
+  - [components/Stats.tsx](components/Stats.tsx)
+- [app/portal/dashboard/page.tsx](app/portal/dashboard/page.tsx) imports:
+  - [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx)
+- [app/portal/inventory/page.tsx](app/portal/inventory/page.tsx) imports:
+  - [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx)
+- [app/portal/invoices/page.tsx](app/portal/invoices/page.tsx) imports:
+  - [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx)
+- [app/portal/layout.tsx](app/portal/layout.tsx) imports:
+  - [components/portal/PortalSidebar.tsx](components/portal/PortalSidebar.tsx)
+- [app/portal/leads/page.tsx](app/portal/leads/page.tsx) imports:
+  - [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx)
+- [app/portal/orders/page.tsx](app/portal/orders/page.tsx) imports:
+  - [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx)
+- [app/portal/procurement/page.tsx](app/portal/procurement/page.tsx) imports:
+  - [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx)
+- [app/portal/projects/page.tsx](app/portal/projects/page.tsx) imports:
+  - [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx)
+- [app/portal/settings/page.tsx](app/portal/settings/page.tsx) imports:
+  - [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx)
+- [app/portal/support/page.tsx](app/portal/support/page.tsx) imports:
+  - [components/portal/PortalHeader.tsx](components/portal/PortalHeader.tsx)
+- [app/projects/page.tsx](app/projects/page.tsx) imports:
+  - [components/Footer.tsx](components/Footer.tsx)
+  - [components/Navbar.tsx](components/Navbar.tsx)
+  - [data/projects.ts](data/projects.ts)
+- [app/services/page.tsx](app/services/page.tsx) imports:
+  - [components/Footer.tsx](components/Footer.tsx)
+  - [components/Navbar.tsx](components/Navbar.tsx)
+  - [data/services.ts](data/services.ts)
+- [app/sitemap.ts](app/sitemap.ts) imports:
+  - [data/products.ts](data/products.ts)
+  - [data/projects.ts](data/projects.ts)
+- [components/CTA.tsx](components/CTA.tsx) imports:
+  - [lib/home-data.ts](lib/home-data.ts)
+- [components/Hero.tsx](components/Hero.tsx) imports:
+  - [lib/home-data.ts](lib/home-data.ts)
+- [components/Navbar.tsx](components/Navbar.tsx) imports:
+  - [lib/home-data.ts](lib/home-data.ts)
+- [components/ProductFeature.tsx](components/ProductFeature.tsx) imports:
+  - [lib/home-data.ts](lib/home-data.ts)
+- [components/Projects.tsx](components/Projects.tsx) imports:
+  - [lib/home-data.ts](lib/home-data.ts)
+- [components/Solutions.tsx](components/Solutions.tsx) imports:
+  - [lib/home-data.ts](lib/home-data.ts)
+- [components/Stats.tsx](components/Stats.tsx) imports:
+  - [lib/home-data.ts](lib/home-data.ts)
+- [components/ui/accordion.tsx](components/ui/accordion.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/alert-dialog.tsx](components/ui/alert-dialog.tsx) imports:
+  - [components/ui/button.tsx](components/ui/button.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/alert.tsx](components/ui/alert.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/avatar.tsx](components/ui/avatar.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/badge.tsx](components/ui/badge.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/breadcrumb.tsx](components/ui/breadcrumb.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/button-group.tsx](components/ui/button-group.tsx) imports:
+  - [components/ui/separator.tsx](components/ui/separator.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/button.tsx](components/ui/button.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/calendar.tsx](components/ui/calendar.tsx) imports:
+  - [components/ui/button.tsx](components/ui/button.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/card.tsx](components/ui/card.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/carousel.tsx](components/ui/carousel.tsx) imports:
+  - [components/ui/button.tsx](components/ui/button.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/chart.tsx](components/ui/chart.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/checkbox.tsx](components/ui/checkbox.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/command.tsx](components/ui/command.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/context-menu.tsx](components/ui/context-menu.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/dialog.tsx](components/ui/dialog.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/drawer.tsx](components/ui/drawer.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/dropdown-menu.tsx](components/ui/dropdown-menu.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/empty.tsx](components/ui/empty.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/field.tsx](components/ui/field.tsx) imports:
+  - [components/ui/label.tsx](components/ui/label.tsx)
+  - [components/ui/separator.tsx](components/ui/separator.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/form.tsx](components/ui/form.tsx) imports:
+  - [components/ui/label.tsx](components/ui/label.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/hover-card.tsx](components/ui/hover-card.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/input-group.tsx](components/ui/input-group.tsx) imports:
+  - [components/ui/button.tsx](components/ui/button.tsx)
+  - [components/ui/input.tsx](components/ui/input.tsx)
+  - [components/ui/textarea.tsx](components/ui/textarea.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/input-otp.tsx](components/ui/input-otp.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/input.tsx](components/ui/input.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/item.tsx](components/ui/item.tsx) imports:
+  - [components/ui/separator.tsx](components/ui/separator.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/kbd.tsx](components/ui/kbd.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/label.tsx](components/ui/label.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/menubar.tsx](components/ui/menubar.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/navigation-menu.tsx](components/ui/navigation-menu.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/pagination.tsx](components/ui/pagination.tsx) imports:
+  - [components/ui/button.tsx](components/ui/button.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/popover.tsx](components/ui/popover.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/progress.tsx](components/ui/progress.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/radio-group.tsx](components/ui/radio-group.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/resizable.tsx](components/ui/resizable.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/scroll-area.tsx](components/ui/scroll-area.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/select.tsx](components/ui/select.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/separator.tsx](components/ui/separator.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/sheet.tsx](components/ui/sheet.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/sidebar.tsx](components/ui/sidebar.tsx) imports:
+  - [components/ui/button.tsx](components/ui/button.tsx)
+  - [components/ui/input.tsx](components/ui/input.tsx)
+  - [components/ui/separator.tsx](components/ui/separator.tsx)
+  - [components/ui/skeleton.tsx](components/ui/skeleton.tsx)
+  - [hooks/use-mobile.ts](hooks/use-mobile.ts)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/skeleton.tsx](components/ui/skeleton.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/slider.tsx](components/ui/slider.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/spinner.tsx](components/ui/spinner.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/switch.tsx](components/ui/switch.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/table.tsx](components/ui/table.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/tabs.tsx](components/ui/tabs.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/textarea.tsx](components/ui/textarea.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/toast.tsx](components/ui/toast.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/toaster.tsx](components/ui/toaster.tsx) imports:
+  - [hooks/use-toast.ts](hooks/use-toast.ts)
+- [components/ui/toggle-group.tsx](components/ui/toggle-group.tsx) imports:
+  - [components/ui/toggle.tsx](components/ui/toggle.tsx)
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/toggle.tsx](components/ui/toggle.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/tooltip.tsx](components/ui/tooltip.tsx) imports:
+  - [lib/utils.ts](lib/utils.ts)
+- [components/ui/use-toast.ts](components/ui/use-toast.ts) imports:
+  - [components/ui/toast.tsx](components/ui/toast.tsx)
+- [hooks/use-toast.ts](hooks/use-toast.ts) imports:
+  - [components/ui/toast.tsx](components/ui/toast.tsx)
+
+## Risks
+- Global style coupling risk: [app/globals.css](app/globals.css) defines broad tokens and base selectors that affect all routes.
+- Hidden usage risk for UI primitives: many [components/ui](components/ui) files are unused now but may be intended for near-term routes.
+- Metadata route behavior risk: replacing [app/robots.ts](app/robots.ts) and [app/sitemap.ts](app/sitemap.ts) with static files changes generation behavior and base URL logic.
+- Portal route contraction risk: collapsing existing [app/portal](app/portal) sub-routes into a single placeholder changes available URL surface and UX.
+- Data duplication risk: homepage content split between [lib/home-data.ts](lib/home-data.ts) and route datasets in [data](data) may drift if refactored without central contracts.
+- z-index/positioning fragility: sticky headers and layered overlays are defined via inline className strings across [components/Navbar.tsx](components/Navbar.tsx) and portal pages.
+- Type ownership risk: current project mixes inferred and explicit interfaces; moving files without preserving import paths can break path alias resolution from [tsconfig.json](tsconfig.json).

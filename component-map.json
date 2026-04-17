@@ -1,0 +1,3647 @@
+{
+  "app/about/page.tsx": {
+    "componentName": "AboutPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      },
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "Navbar",
+        "from": "@/components/Navbar"
+      },
+      {
+        "what": "Footer",
+        "from": "@/components/Footer"
+      }
+    ],
+    "renders": [
+      "Footer",
+      "Link",
+      "Navbar"
+    ],
+    "classNames": [
+      "min-h-screen bg-white",
+      "border-b border-gray-200",
+      "max-w-7xl mx-auto px-6 py-16",
+      "grid md:grid-cols-2 gap-16 items-center",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-5",
+      "font-serif text-5xl md:text-6xl text-black italic leading-tight mb-6",
+      "font-sans text-sm text-gray-500 leading-relaxed max-w-md",
+      "bg-[#f5f5f5] aspect-video flex items-center justify-center",
+      "text-center",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400",
+      "font-serif text-6xl text-black/10 font-bold mt-2",
+      "border-b border-gray-200",
+      "max-w-7xl mx-auto px-6",
+      "grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-200",
+      "py-10 px-8 first:pl-0",
+      "font-serif text-4xl font-bold text-black mb-2",
+      "font-sans text-[10px] tracking-[0.15em] uppercase text-gray-400",
+      "max-w-7xl mx-auto px-6 py-16",
+      "grid md:grid-cols-2 gap-16",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-6",
+      "font-serif text-3xl text-black italic mb-6 leading-tight",
+      "space-y-6",
+      "border-l-2 border-black pl-5",
+      "font-sans font-semibold text-sm text-black mb-1",
+      "font-sans text-xs text-gray-500 leading-relaxed",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-6",
+      "font-serif text-3xl text-black italic mb-6 leading-tight",
+      "grid grid-cols-2 gap-3",
+      "flex items-center gap-2 py-2 border-b border-gray-100",
+      "w-1 h-1 bg-black rounded-full",
+      "font-sans text-xs text-gray-600",
+      "bg-gray-50 border-t border-b border-gray-200 py-16",
+      "max-w-7xl mx-auto px-6",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-10",
+      "grid md:grid-cols-2 lg:grid-cols-4 gap-8",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-300 mb-3",
+      "font-sans font-semibold text-sm text-black mb-3",
+      "font-sans text-xs text-gray-500 leading-relaxed",
+      "max-w-7xl mx-auto px-6 py-16",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-10",
+      "grid grid-cols-2 md:grid-cols-4 gap-8",
+      "bg-gray-100 aspect-square mb-4 flex items-center justify-center",
+      "font-serif text-3xl text-gray-300",
+      "font-sans font-semibold text-sm text-black",
+      "font-sans text-xs text-gray-400 mt-0.5",
+      "font-sans text-[10px] text-gray-300 mt-1 tracking-wide",
+      "bg-black",
+      "max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between gap-6",
+      "font-serif text-3xl text-white italic",
+      "font-sans text-sm text-gray-400 mt-3 max-w-sm leading-relaxed",
+      "flex flex-col sm:flex-row items-center gap-4 shrink-0",
+      "bg-white text-black font-sans text-xs tracking-[0.15em] uppercase px-8 py-3 hover:bg-gray-100 transition-colors",
+      "border border-gray-600 text-gray-400 font-sans text-xs tracking-[0.15em] uppercase px-8 py-3 hover:border-white hover:text-white transition-colors"
+    ]
+  },
+  "app/ar/layout.tsx": {
+    "componentName": "ArabicLayout",
+    "params": "{ children }: { children: React.ReactNode }",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      }
+    ],
+    "renders": [],
+    "classNames": [
+      "font-sans"
+    ]
+  },
+  "app/ar/page.tsx": {
+    "componentName": "ArabicHomePage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "Link",
+        "from": "next/link"
+      }
+    ],
+    "renders": [
+      "Link"
+    ],
+    "classNames": [
+      "min-h-screen bg-white",
+      "sticky top-0 z-50 bg-white border-b border-gray-200",
+      "max-w-7xl mx-auto px-6 h-14 flex items-center justify-between",
+      "flex items-center gap-2 shrink-0",
+      "font-sans font-semibold text-xs tracking-[0.15em] text-black uppercase",
+      "hidden md:flex items-center gap-7",
+      "font-sans text-xs text-black hover:text-gray-500 transition-colors",
+      "flex items-center gap-5",
+      "flex items-center gap-1 text-xs text-black hover:text-gray-500 transition-colors",
+      "hidden md:block text-xs text-black hover:text-gray-500 transition-colors",
+      "bg-black text-white font-sans text-xs font-medium px-4 py-2 tracking-wide hover:bg-gray-800 transition-colors",
+      "bg-white overflow-hidden",
+      "max-w-7xl mx-auto",
+      "grid lg:grid-cols-[1fr_1fr] min-h-[580px]",
+      "relative bg-[#e8e8e8] min-h-[380px] lg:min-h-full flex items-center justify-center order-2 lg:order-1",
+      "w-3/4 h-3/4 bg-gray-400 rounded opacity-40",
+      "flex flex-col justify-center px-6 py-16 lg:py-20 lg:pl-16 xl:pl-24 order-1 lg:order-2 text-right",
+      "mb-7",
+      "inline-block border border-black text-black font-sans text-[10px] font-medium tracking-[0.2em] uppercase px-2.5 py-1",
+      "font-serif text-[2.6rem] md:text-5xl lg:text-[3.2rem] leading-[1.2] text-black mb-5",
+      "italic text-gray-400",
+      "font-sans text-sm text-gray-500 leading-relaxed mb-9 max-w-sm mr-auto ml-0",
+      "flex flex-col sm:flex-row gap-3 justify-end",
+      "bg-black text-white font-sans text-xs font-medium tracking-wide px-7 py-3 text-center hover:bg-gray-800 transition-colors",
+      "border border-black text-black font-sans text-xs font-medium tracking-wide px-7 py-3 text-center hover:bg-gray-50 transition-colors",
+      "border-t border-b border-gray-200",
+      "max-w-7xl mx-auto px-6",
+      "grid grid-cols-3 divide-x divide-gray-200",
+      "py-8 px-8 text-center",
+      "font-serif text-3xl font-bold text-black mb-1",
+      "font-sans text-[10px] tracking-[0.15em] uppercase text-gray-400",
+      "max-w-7xl mx-auto px-6 py-16",
+      "text-center mb-12",
+      "font-serif text-3xl text-black italic mb-3",
+      "font-sans text-sm text-gray-500 max-w-lg mx-auto leading-relaxed",
+      "grid md:grid-cols-3 gap-8",
+      "border-t-2 border-black pt-6",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-300 mb-3",
+      "font-sans font-semibold text-sm text-black mb-3",
+      "font-sans text-xs text-gray-500 leading-relaxed mb-5",
+      "font-sans text-[10px] tracking-[0.1em] uppercase text-gray-400 hover:text-black transition-colors flex items-center gap-1 justify-end",
+      "bg-black",
+      "max-w-7xl mx-auto px-6 py-16 text-center",
+      "font-serif text-3xl md:text-4xl text-white italic mb-4",
+      "font-sans text-sm text-gray-400 mb-8 max-w-md mx-auto leading-relaxed",
+      "flex flex-col sm:flex-row items-center justify-center gap-4",
+      "border border-white text-white font-sans text-xs tracking-[0.15em] uppercase px-8 py-3 hover:bg-white hover:text-black transition-colors",
+      "w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center hover:bg-green-500 transition-colors",
+      "bg-black text-white border-t border-gray-800",
+      "max-w-7xl mx-auto px-6 py-12",
+      "grid md:grid-cols-4 gap-10",
+      "flex items-center gap-2 mb-4 justify-end",
+      "font-sans font-semibold text-xs tracking-[0.15em] uppercase",
+      "font-sans text-xs text-gray-400 leading-relaxed text-right",
+      "text-right",
+      "font-sans text-[10px] font-semibold tracking-[0.2em] uppercase text-white mb-5",
+      "space-y-3",
+      "font-sans text-xs text-gray-400 hover:text-white transition-colors",
+      "font-sans text-xs text-gray-400 mb-3 leading-relaxed",
+      "flex flex-row-reverse",
+      "flex-1 bg-transparent border border-gray-700 font-sans text-xs text-white placeholder-gray-600 px-3 py-2.5 focus:outline-none",
+      "bg-white text-black px-3.5 py-2.5 font-sans text-sm font-medium hover:bg-gray-200 transition-colors",
+      "border-t border-gray-800",
+      "max-w-7xl mx-auto px-6 py-4 flex items-center justify-between",
+      "font-sans text-[10px] text-gray-600 tracking-wide",
+      "flex items-center gap-5",
+      "font-sans text-[10px] text-gray-600 hover:text-gray-400 transition-colors"
+    ]
+  },
+  "app/catalog/[slug]/page.tsx": {
+    "componentName": "generateStaticParams",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      },
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "{ notFound }",
+        "from": "next/navigation"
+      },
+      {
+        "what": "Navbar",
+        "from": "@/components/Navbar"
+      },
+      {
+        "what": "Footer",
+        "from": "@/components/Footer"
+      },
+      {
+        "what": "{ getProductBySlug, products }",
+        "from": "@/data/products"
+      }
+    ],
+    "renders": [
+      "Footer",
+      "Link",
+      "Metadata",
+      "Navbar"
+    ],
+    "classNames": [
+      "min-h-screen bg-white",
+      "max-w-7xl mx-auto px-6 py-4",
+      "font-sans text-[10px] tracking-wide text-gray-400 uppercase flex items-center gap-2",
+      "hover:text-black transition-colors",
+      "hover:text-black transition-colors",
+      "text-black",
+      "max-w-7xl mx-auto px-6 pb-16",
+      "grid lg:grid-cols-2 gap-12",
+      "bg-[#f0f0f0] aspect-square flex items-center justify-center mb-4 relative",
+      "w-3/4 h-3/4 bg-gray-300 rounded flex items-center justify-center",
+      "font-sans text-xs text-gray-500 uppercase tracking-wide",
+      "grid grid-cols-3 gap-2",
+      "bg-[#f0f0f0] aspect-square flex items-center justify-center",
+      "w-2/3 h-2/3 bg-gray-300 rounded",
+      "grid grid-cols-2 gap-px mt-4 bg-gray-200",
+      "bg-white p-4 flex items-start gap-3",
+      "text-gray-400 mt-0.5 shrink-0",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans text-[10px] text-gray-600",
+      "bg-white p-4 flex items-start gap-3",
+      "text-gray-400 mt-0.5 shrink-0",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans text-[10px] text-gray-600",
+      "pt-2",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-3",
+      "font-serif text-3xl md:text-4xl text-black leading-tight mb-4 italic",
+      "font-sans text-sm text-gray-500 leading-relaxed mb-6",
+      "flex items-center gap-8 py-5 border-t border-b border-gray-200 mb-6",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans font-bold text-sm text-black",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans font-bold text-sm text-black",
+      "mb-6",
+      "flex items-center justify-between mb-4",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400",
+      "font-sans text-[10px] tracking-wide px-2 py-1",
+      "border-t border-gray-100",
+      "flex justify-between py-2.5 border-b border-gray-100",
+      "font-sans text-[10px] tracking-[0.1em] uppercase text-gray-400",
+      "font-sans text-xs text-black font-medium text-right",
+      "block w-full bg-black text-white font-sans text-xs tracking-[0.15em] uppercase text-center py-4 hover:bg-gray-800 transition-colors mb-3",
+      "grid grid-cols-2 gap-2 mb-6",
+      "border border-gray-200 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-500 py-2.5 hover:border-black hover:text-black transition-colors flex items-center justify-center gap-2",
+      "border border-gray-200 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-500 py-2.5 hover:border-black hover:text-black transition-colors flex items-center justify-center gap-2",
+      "font-sans text-[10px] text-gray-400 tracking-wide mb-4",
+      "flex items-start gap-3 bg-gray-50 p-4",
+      "text-gray-400 mt-0.5 shrink-0",
+      "font-sans text-[10px] text-gray-500 leading-relaxed",
+      "font-semibold text-black uppercase tracking-wide",
+      "border-t border-gray-200 py-16",
+      "max-w-7xl mx-auto px-6",
+      "flex items-center justify-between mb-8",
+      "font-serif text-xl text-black italic",
+      "font-sans text-xs text-gray-400 hover:text-black transition-colors flex items-center gap-1",
+      "grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-200",
+      "bg-white group block",
+      "bg-[#1a1a1a] aspect-video flex items-center justify-center",
+      "w-2/3 h-2/3 bg-gray-600 rounded opacity-50",
+      "p-4",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans text-sm text-black font-medium group-hover:underline"
+    ]
+  },
+  "app/catalog/page.tsx": {
+    "componentName": "CatalogPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      },
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "Navbar",
+        "from": "@/components/Navbar"
+      },
+      {
+        "what": "Footer",
+        "from": "@/components/Footer"
+      },
+      {
+        "what": "{ products, categories }",
+        "from": "@/data/products"
+      }
+    ],
+    "renders": [
+      "Footer",
+      "Link",
+      "Navbar"
+    ],
+    "classNames": [
+      "min-h-screen bg-white",
+      "border-b border-gray-200",
+      "max-w-7xl mx-auto px-6 py-12",
+      "flex flex-col md:flex-row md:items-end justify-between gap-4",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-4",
+      "font-sans font-bold text-5xl md:text-6xl tracking-tight text-black uppercase mb-4",
+      "font-sans text-sm text-gray-500 leading-relaxed max-w-lg",
+      "text-right shrink-0",
+      "font-sans text-xs tracking-[0.15em] text-gray-400 uppercase",
+      "font-semibold text-black",
+      "font-semibold text-black",
+      "sticky top-14 z-40 bg-white border-b border-gray-200",
+      "max-w-7xl mx-auto px-6",
+      "flex items-center justify-between",
+      "flex items-center gap-0 overflow-x-auto",
+      "font-sans text-[10px] tracking-[0.15em] uppercase px-5 py-4 transition-colors whitespace-nowrap border-b-2",
+      "hidden md:flex items-center gap-3 shrink-0 ml-6",
+      "font-sans text-[10px] tracking-wide placeholder-gray-400 text-black border-l border-gray-200 px-4 py-4 focus:outline-none w-44",
+      "font-sans text-[10px] tracking-[0.15em] uppercase text-gray-500 hover:text-black transition-colors px-2",
+      "font-sans text-[10px] tracking-wide text-gray-500 border border-gray-200 px-3 py-1.5 focus:outline-none bg-white",
+      "max-w-7xl mx-auto px-6 py-12",
+      "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200",
+      "bg-white p-0 group",
+      "relative bg-[#1a1a1a] aspect-square overflow-hidden",
+      "absolute inset-0 flex items-center justify-center p-8",
+      "w-full h-full bg-gray-700 opacity-30 rounded",
+      "absolute bottom-0 left-0 right-0 p-4",
+      "flex flex-wrap gap-1",
+      "font-sans text-[9px] tracking-[0.1em] uppercase text-gray-400 bg-black/50 px-1.5 py-0.5",
+      "p-4",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans text-sm font-medium text-black mb-3 leading-tight",
+      "flex flex-wrap gap-1 mb-4",
+      "font-sans text-[9px] tracking-wide uppercase text-gray-400 flex items-center gap-1",
+      "w-1 h-1 bg-gray-300 rounded-full inline-block",
+      "block w-full border border-black text-black font-sans text-[10px] tracking-[0.15em] uppercase text-center py-2.5 hover:bg-black hover:text-white transition-colors",
+      "flex items-center justify-center gap-2 mt-12",
+      "w-8 h-8 font-sans text-xs flex items-center justify-center transition-colors",
+      "text-gray-400 font-sans text-xs",
+      "mt-16 border border-gray-200 p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6",
+      "font-sans font-semibold text-sm text-black mb-1",
+      "font-sans text-xs text-gray-500 leading-relaxed max-w-sm",
+      "flex items-center gap-3 shrink-0",
+      "border border-black text-black font-sans text-xs tracking-wide px-6 py-2.5 hover:bg-gray-50 transition-colors",
+      "bg-black text-white font-sans text-xs tracking-wide px-6 py-2.5 hover:bg-gray-800 transition-colors"
+    ]
+  },
+  "app/contact/page.tsx": {
+    "componentName": "ContactPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      },
+      {
+        "what": "Navbar",
+        "from": "@/components/Navbar"
+      },
+      {
+        "what": "Footer",
+        "from": "@/components/Footer"
+      }
+    ],
+    "renders": [
+      "Footer",
+      "Navbar"
+    ],
+    "classNames": [
+      "min-h-screen bg-white",
+      "max-w-7xl mx-auto px-6 py-16",
+      "grid md:grid-cols-[280px_1fr] gap-16",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-5",
+      "font-serif text-4xl md:text-5xl text-black italic leading-tight mb-6",
+      "font-sans text-xs text-gray-500 leading-relaxed mb-10",
+      "space-y-5 mb-10",
+      "flex items-start gap-3",
+      "w-8 h-8 border border-gray-200 flex items-center justify-center shrink-0",
+      "font-sans text-[10px] tracking-[0.15em] uppercase font-semibold text-black mb-0.5",
+      "font-sans text-[10px] text-gray-500 leading-relaxed",
+      "flex items-start gap-3",
+      "w-8 h-8 border border-gray-200 flex items-center justify-center shrink-0",
+      "font-sans text-[10px] tracking-[0.15em] uppercase font-semibold text-black mb-0.5",
+      "font-sans text-[10px] text-gray-500 leading-relaxed",
+      "border-l-2 border-gray-200 pl-4",
+      "font-serif text-xs text-gray-500 italic leading-relaxed mb-2",
+      "font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400",
+      "space-y-10",
+      "flex items-center justify-between mb-6",
+      "font-sans font-semibold text-sm tracking-[0.1em] uppercase text-black",
+      "font-sans text-[10px] tracking-[0.15em] uppercase text-gray-300",
+      "grid md:grid-cols-2 gap-4",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs text-black placeholder-gray-300 px-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs text-black placeholder-gray-300 px-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs text-black placeholder-gray-300 px-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs text-black placeholder-gray-300 px-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "flex items-center justify-between mb-6",
+      "font-sans font-semibold text-sm tracking-[0.1em] uppercase text-black",
+      "font-sans text-[10px] tracking-[0.15em] uppercase text-gray-300",
+      "mb-5",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-3",
+      "flex flex-wrap gap-4",
+      "flex items-center gap-2 cursor-pointer",
+      "accent-black w-3 h-3",
+      "font-sans text-[10px] tracking-[0.1em] uppercase text-gray-600",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs text-black placeholder-gray-300 px-4 py-3 focus:outline-none focus:border-black transition-colors resize-none",
+      "flex items-center justify-between mb-6",
+      "font-sans font-semibold text-sm tracking-[0.1em] uppercase text-black",
+      "font-sans text-[10px] tracking-[0.15em] uppercase text-gray-300",
+      "border-2 border-dashed border-gray-200 p-12 flex flex-col items-center justify-center text-center hover:border-gray-400 transition-colors",
+      "w-10 h-10 border border-gray-200 flex items-center justify-center mb-4",
+      "font-sans text-[10px] tracking-[0.15em] uppercase text-black font-semibold mb-1",
+      "font-sans text-[10px] text-gray-400 mb-4",
+      "border border-gray-200 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-500 px-5 py-2 hover:border-black hover:text-black transition-colors cursor-pointer",
+      "sr-only",
+      "flex items-start gap-3 cursor-pointer mb-6",
+      "mt-0.5 accent-black",
+      "font-sans text-[10px] text-gray-500 leading-relaxed",
+      "underline hover:text-black",
+      "w-full bg-black text-white font-sans text-xs tracking-[0.2em] uppercase py-4 hover:bg-gray-800 transition-colors flex items-center justify-center gap-3"
+    ]
+  },
+  "app/layout.tsx": {
+    "componentName": "RootLayout",
+    "params": "{ children, }: Readonly<{ children: React.ReactNode }>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      },
+      {
+        "what": "{ Inter, Playfair_Display }",
+        "from": "next/font/google"
+      },
+      {
+        "what": "{ Analytics }",
+        "from": "@vercel/analytics/next"
+      },
+      {
+        "what": "{ siteConfig }",
+        "from": "@/lib/home-data"
+      }
+    ],
+    "renders": [
+      "Analytics"
+    ],
+    "classNames": [
+      "font-sans antialiased"
+    ]
+  },
+  "app/page.tsx": {
+    "componentName": "Home",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "Navbar",
+        "from": "@/components/Navbar"
+      },
+      {
+        "what": "Hero",
+        "from": "@/components/Hero"
+      },
+      {
+        "what": "Stats",
+        "from": "@/components/Stats"
+      },
+      {
+        "what": "Solutions",
+        "from": "@/components/Solutions"
+      },
+      {
+        "what": "ProductFeature",
+        "from": "@/components/ProductFeature"
+      },
+      {
+        "what": "Projects",
+        "from": "@/components/Projects"
+      },
+      {
+        "what": "CTA",
+        "from": "@/components/CTA"
+      },
+      {
+        "what": "Footer",
+        "from": "@/components/Footer"
+      }
+    ],
+    "renders": [
+      "CTA",
+      "Footer",
+      "Hero",
+      "Navbar",
+      "ProductFeature",
+      "Projects",
+      "Solutions",
+      "Stats"
+    ],
+    "classNames": [
+      "min-h-screen"
+    ]
+  },
+  "app/portal/dashboard/page.tsx": {
+    "componentName": "DashboardPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "PortalHeader",
+        "from": "@/components/portal/PortalHeader"
+      }
+    ],
+    "renders": [
+      "PortalHeader"
+    ],
+    "classNames": [
+      "flex-1 flex flex-col min-h-screen",
+      "flex-1 p-8 bg-white",
+      "flex items-start justify-between mb-6",
+      "font-sans font-bold text-xl tracking-[0.08em] uppercase text-black",
+      "font-sans text-xs text-gray-400 mt-1",
+      "flex items-center gap-3",
+      "border border-gray-200 font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors flex items-center gap-2",
+      "bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors flex items-center gap-2",
+      "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-gray-200 mb-8",
+      "bg-white p-5",
+      "flex items-start justify-between mb-3",
+      "w-5 h-5 text-gray-300",
+      "w-full h-full",
+      "font-sans text-[9px] tracking-wide",
+      "font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-1",
+      "font-serif text-3xl font-bold text-black",
+      "grid lg:grid-cols-[1fr_320px] gap-6",
+      "border border-gray-200",
+      "flex items-center justify-between px-6 py-4 border-b border-gray-200",
+      "flex items-center gap-2",
+      "text-gray-400",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold",
+      "font-sans text-[10px] text-gray-400 hover:text-black transition-colors",
+      "w-full",
+      "border-b border-gray-100",
+      "px-6 py-3 text-left font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-normal",
+      "border-b border-gray-100 hover:bg-gray-50",
+      "px-6 py-4 font-sans text-xs text-gray-400",
+      "px-6 py-4",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-400 mt-0.5",
+      "px-6 py-4",
+      "font-sans text-[10px] tracking-[0.1em] uppercase font-medium",
+      "px-6 py-4 font-sans text-xs text-black font-medium",
+      "border border-gray-200",
+      "flex items-center gap-2 px-5 py-4 border-b border-gray-200",
+      "text-gray-400",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold",
+      "p-5 space-y-5",
+      "flex gap-3",
+      "w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center shrink-0",
+      "font-sans text-[8px] font-bold text-gray-500",
+      "flex items-center gap-2 mb-0.5",
+      "font-sans text-[10px] font-semibold text-black uppercase tracking-wide",
+      "font-sans text-[9px] text-gray-300",
+      "font-sans text-[10px] text-gray-500 leading-relaxed",
+      "px-5 pb-5",
+      "w-full border border-gray-200 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-400 py-2.5 hover:border-black hover:text-black transition-colors",
+      "mt-6 border border-gray-200 p-6 flex flex-col md:flex-row items-center justify-between gap-4",
+      "flex items-center gap-4",
+      "flex -space-x-2",
+      "w-8 h-8 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center",
+      "font-sans text-[9px] font-bold text-gray-600",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-[10px] text-gray-400 uppercase tracking-wide",
+      "text-right",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans font-bold text-sm text-black mb-2",
+      "w-48 bg-gray-200 h-1",
+      "bg-black h-1",
+      "px-8 py-3 border-t border-gray-200 bg-white flex items-center justify-between",
+      "flex items-center gap-2",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "flex items-center gap-6",
+      "font-sans text-[9px] text-gray-400",
+      "font-sans text-[9px] text-gray-400 hover:text-black transition-colors uppercase tracking-wide"
+    ]
+  },
+  "app/portal/inventory/page.tsx": {
+    "componentName": "InventoryPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "PortalHeader",
+        "from": "@/components/portal/PortalHeader"
+      }
+    ],
+    "renders": [
+      "PortalHeader"
+    ],
+    "classNames": [
+      "flex-1 flex flex-col min-h-screen",
+      "flex-1 p-8 bg-white",
+      "flex items-start justify-between mb-6",
+      "font-serif text-3xl text-black italic",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mt-1 max-w-sm",
+      "flex items-center gap-3",
+      "border border-gray-200 font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors flex items-center gap-2",
+      "bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors flex items-center gap-2",
+      "grid grid-cols-4 gap-px bg-gray-200 mb-6",
+      "bg-white px-6 py-5",
+      "flex items-start justify-between mb-2",
+      "text-gray-300 text-lg",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-serif text-3xl font-bold text-black",
+      "font-sans text-[9px] mt-1",
+      "border border-gray-200 overflow-hidden mb-6",
+      "flex items-center justify-between px-5 py-3 border-b border-gray-200",
+      "flex items-center gap-6",
+      "font-sans text-[10px] tracking-[0.1em] uppercase pb-2 border-b-2",
+      "flex items-center gap-3",
+      "flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5",
+      "bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-36",
+      "text-gray-400 hover:text-black transition-colors",
+      "w-full",
+      "border-b border-gray-100 bg-gray-50",
+      "px-5 py-3 text-left font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-normal",
+      "border-b border-gray-100 hover:bg-gray-50 transition-colors",
+      "px-5 py-4 font-sans text-xs text-gray-400",
+      "px-5 py-4 font-sans text-xs font-semibold text-black",
+      "px-5 py-4 font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "px-5 py-4 font-sans text-xs font-medium text-black",
+      "px-5 py-4",
+      "font-sans text-[9px] tracking-[0.1em] uppercase border border-gray-200 px-2 py-0.5 text-gray-600",
+      "px-5 py-4",
+      "font-sans text-[10px] font-semibold flex items-center gap-1.5",
+      "w-1.5 h-1.5 rounded-full bg-current",
+      "px-5 py-3 border-t border-gray-100 flex items-center justify-between",
+      "font-sans text-[10px] text-gray-400",
+      "flex items-center gap-2",
+      "font-sans text-[10px] text-gray-400 border border-gray-200 px-3 py-1",
+      "font-sans text-[10px] bg-black text-white px-3 py-1",
+      "font-sans text-[10px] text-gray-400 border border-gray-200 px-3 py-1",
+      "font-sans text-[10px] text-gray-400 border border-gray-200 px-3 py-1",
+      "grid md:grid-cols-2 gap-6",
+      "border border-gray-200 p-5",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold mb-4",
+      "space-y-3",
+      "flex items-start gap-3 border-b border-gray-100 pb-3 last:border-0 last:pb-0",
+      "w-6 h-6 border border-gray-200 flex items-center justify-center shrink-0 mt-0.5",
+      "flex-1",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-[9px] uppercase tracking-wide text-gray-400",
+      "font-sans text-[9px] text-gray-300 shrink-0",
+      "border border-gray-200 p-5",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold mb-4",
+      "space-y-3",
+      "flex items-center gap-3 border border-gray-100 p-3",
+      "w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center shrink-0",
+      "font-sans text-[9px] font-bold text-gray-600",
+      "flex-1",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-[9px] uppercase tracking-wide text-gray-400",
+      "font-sans text-[9px] tracking-[0.1em] uppercase px-2 py-1 font-semibold",
+      "px-8 py-3 border-t border-gray-200 flex items-center justify-between",
+      "flex items-center gap-2",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "font-sans text-[9px] text-gray-400"
+    ]
+  },
+  "app/portal/invoices/page.tsx": {
+    "componentName": "InvoicesPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "{ useState }",
+        "from": "react"
+      },
+      {
+        "what": "PortalHeader",
+        "from": "@/components/portal/PortalHeader"
+      }
+    ],
+    "renders": [
+      "PortalHeader"
+    ],
+    "classNames": [
+      "flex-1 flex flex-col min-h-screen",
+      "flex-1 p-8 bg-white",
+      "flex items-start justify-between mb-6",
+      "font-serif text-3xl text-black italic",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mt-1",
+      "flex items-center gap-3",
+      "border border-gray-200 font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors flex items-center gap-2",
+      "bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors flex items-center gap-2",
+      "grid grid-cols-3 gap-px bg-gray-200 mb-6",
+      "bg-white px-6 py-5 flex items-start justify-between",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-serif text-3xl font-bold",
+      "font-sans text-[8px] tracking-[0.1em] uppercase",
+      "grid lg:grid-cols-[1fr_300px] gap-6",
+      "border border-gray-200 overflow-hidden",
+      "w-full",
+      "border-b border-gray-200 bg-gray-50",
+      "px-5 py-3 text-left font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-normal",
+      "border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer",
+      "px-5 py-4 font-sans text-xs font-semibold text-black",
+      "px-5 py-4 font-sans text-xs text-black",
+      "px-5 py-4",
+      "font-sans text-[9px] tracking-[0.1em] uppercase px-2 py-1 font-semibold",
+      "px-5 py-4 font-sans text-xs font-medium text-black",
+      "px-5 py-4 font-sans text-xs text-gray-400",
+      "px-5 py-4",
+      "font-sans text-[9px] tracking-[0.1em] uppercase px-2 py-1 font-semibold",
+      "px-5 py-3 border-t border-gray-100 flex items-center justify-between",
+      "font-sans text-[10px] text-gray-400",
+      "flex items-center gap-2",
+      "font-sans text-[10px] text-gray-400 border border-gray-200 px-3 py-1",
+      "font-sans text-[10px] bg-black text-white px-3 py-1",
+      "font-sans text-[10px] text-gray-400 border border-gray-200 px-3 py-1",
+      "font-sans text-[10px] text-gray-400 border border-gray-200 px-3 py-1",
+      "border border-gray-200 p-5",
+      "flex items-center justify-between mb-4",
+      "font-sans text-[10px] tracking-[0.2em] uppercase font-semibold text-black",
+      "flex items-center gap-2",
+      "text-gray-400 hover:text-black transition-colors",
+      "text-gray-400 hover:text-black transition-colors",
+      "space-y-3 mb-5",
+      "flex justify-between",
+      "font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400",
+      "font-sans text-xs font-medium text-black",
+      "border-t border-gray-200 pt-4 mb-4",
+      "font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-1",
+      "font-sans text-xs font-bold text-black uppercase",
+      "font-sans text-[10px] text-gray-500",
+      "border-t border-gray-200 pt-4 mb-4",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-3",
+      "space-y-2.5",
+      "flex justify-between",
+      "font-sans text-[10px] text-gray-600",
+      "font-sans text-xs font-medium text-black",
+      "border-t border-gray-200 pt-3 space-y-1.5",
+      "flex justify-between",
+      "font-sans text-xs text-gray-500",
+      "font-sans text-xs font-medium text-black",
+      "flex justify-between",
+      "font-sans text-xs text-gray-500",
+      "font-sans text-xs font-medium text-black",
+      "fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4",
+      "bg-white w-full max-w-lg",
+      "bg-black px-8 py-6",
+      "font-serif text-xl text-white italic",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mt-1",
+      "p-8 space-y-5",
+      "grid grid-cols-2 gap-4",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs px-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs px-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs px-4 py-3 focus:outline-none focus:border-black transition-colors resize-none",
+      "grid grid-cols-3 gap-4",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs px-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs px-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "w-full border border-gray-200 font-sans text-xs px-4 py-3 focus:outline-none focus:border-black transition-colors bg-white",
+      "flex items-center justify-end gap-3 pt-2",
+      "font-sans text-xs text-gray-500 hover:text-black transition-colors px-5 py-2.5",
+      "bg-black text-white font-sans text-xs tracking-[0.15em] uppercase px-6 py-2.5 hover:bg-gray-800 transition-colors",
+      "px-8 py-3 border-t border-gray-200 flex items-center justify-between",
+      "flex items-center gap-2",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "font-sans text-[9px] text-gray-400"
+    ]
+  },
+  "app/portal/layout.tsx": {
+    "componentName": "PortalLayout",
+    "params": "{ children }: { children: React.ReactNode }",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      },
+      {
+        "what": "PortalSidebar",
+        "from": "@/components/portal/PortalSidebar"
+      }
+    ],
+    "renders": [
+      "PortalSidebar"
+    ],
+    "classNames": [
+      "flex min-h-screen bg-white",
+      "flex-1 flex flex-col min-h-screen overflow-hidden"
+    ]
+  },
+  "app/portal/leads/page.tsx": {
+    "componentName": "LeadsPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "{ useState }",
+        "from": "react"
+      },
+      {
+        "what": "PortalHeader",
+        "from": "@/components/portal/PortalHeader"
+      }
+    ],
+    "renders": [
+      "PortalHeader"
+    ],
+    "classNames": [
+      "flex-1 flex flex-col min-h-screen",
+      "flex-1 p-8 bg-white",
+      "mb-6",
+      "font-serif text-3xl text-black italic",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mt-1",
+      "grid grid-cols-3 gap-px bg-gray-200 mb-6",
+      "bg-white px-6 py-5",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-serif text-3xl font-bold text-black",
+      "border border-gray-200 overflow-hidden",
+      "flex items-center justify-between px-5 py-3 border-b border-gray-200",
+      "flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 w-56",
+      "bg-transparent font-sans text-xs text-black placeholder-gray-400 focus:outline-none w-full",
+      "flex items-center gap-4",
+      "font-sans text-[10px] tracking-[0.1em] uppercase pb-1 border-b",
+      "w-full",
+      "border-b border-gray-100 bg-gray-50",
+      "px-5 py-3 text-left font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-normal",
+      "border-b border-gray-100 cursor-pointer transition-colors",
+      "px-5 py-3.5 font-sans text-xs text-gray-400",
+      "px-5 py-3.5",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-[10px] text-gray-400",
+      "px-5 py-3.5 font-sans text-[10px] tracking-wide uppercase text-gray-400",
+      "px-5 py-3.5 font-sans text-[10px] text-gray-400 flex items-center gap-1.5",
+      "px-5 py-3.5",
+      "font-sans text-[9px] tracking-[0.1em] uppercase px-2 py-1 font-semibold",
+      "px-5 py-3 border-t border-gray-100",
+      "font-sans text-[10px] text-gray-400 uppercase tracking-wide",
+      "fixed inset-0 bg-black/50 z-50 flex items-center justify-end",
+      "bg-white w-full max-w-sm h-full overflow-y-auto",
+      "p-6",
+      "flex items-start justify-between mb-5",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-serif text-2xl text-black italic",
+      "font-sans text-xs text-gray-400 mt-1",
+      "text-gray-400 hover:text-black",
+      "inline-block font-sans text-[9px] tracking-[0.15em] uppercase px-2.5 py-1 font-semibold mb-5",
+      "flex gap-2 mb-6",
+      "flex-1 bg-black text-white font-sans text-[10px] tracking-[0.15em] uppercase py-2.5 hover:bg-gray-800 transition-colors",
+      "flex-1 border border-gray-200 text-black font-sans text-[10px] tracking-[0.15em] uppercase py-2.5 hover:border-black transition-colors",
+      "border-b border-gray-200 mb-5",
+      "flex gap-5",
+      "font-sans text-[10px] tracking-[0.1em] uppercase pb-3 border-b-2",
+      "space-y-4 mb-6",
+      "flex gap-3",
+      "mt-1",
+      "w-4 h-4 rounded-full border border-gray-200 flex items-center justify-center",
+      "w-1.5 h-1.5 rounded-full bg-gray-400",
+      "flex items-center gap-2 mb-0.5",
+      "font-sans text-[9px] tracking-[0.15em] uppercase font-semibold text-black",
+      "font-sans text-[9px] text-gray-300",
+      "font-sans text-[10px] text-gray-500 leading-relaxed",
+      "w-full border border-gray-200 font-sans text-xs text-black placeholder-gray-300 px-4 py-3 focus:outline-none focus:border-black transition-colors resize-none mb-3",
+      "bg-black text-white font-sans text-xs tracking-wide px-5 py-2 hover:bg-gray-800 transition-colors float-right",
+      "px-8 py-3 border-t border-gray-200 flex items-center justify-between",
+      "flex items-center gap-2",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "font-sans text-[9px] text-gray-400"
+    ]
+  },
+  "app/portal/login/page.tsx": {
+    "componentName": "PortalLoginPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      },
+      {
+        "what": "Link",
+        "from": "next/link"
+      }
+    ],
+    "renders": [
+      "Link"
+    ],
+    "classNames": [
+      "min-h-screen bg-white flex flex-col",
+      "flex items-center justify-end px-8 py-5",
+      "flex items-center gap-1.5 text-xs text-gray-500 hover:text-black transition-colors font-sans",
+      "tracking-wide",
+      "flex-1 flex items-center justify-center px-4",
+      "w-full max-w-[420px]",
+      "text-center mb-10",
+      "inline-flex flex-col items-center gap-3",
+      "font-sans font-semibold text-sm tracking-[0.2em] text-black uppercase",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mt-3",
+      "font-sans font-semibold text-base tracking-[0.15em] uppercase text-black",
+      "border border-gray-200 p-8",
+      "flex items-center gap-3 bg-gray-50 border border-gray-200 px-4 py-3 mb-8",
+      "text-gray-400 shrink-0",
+      "font-sans text-[9px] tracking-[0.2em] uppercase font-semibold text-black",
+      "font-sans text-[9px] text-gray-400 tracking-wide uppercase",
+      "space-y-5",
+      "block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "relative",
+      "absolute left-3 top-1/2 -translate-y-1/2 text-gray-300",
+      "w-full border border-gray-200 font-sans text-xs text-black placeholder-gray-300 pl-10 pr-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "flex items-center justify-between mb-2",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400",
+      "font-sans text-[9px] text-gray-400 hover:text-black transition-colors",
+      "relative",
+      "absolute left-3 top-1/2 -translate-y-1/2 text-gray-300",
+      "w-full border border-gray-200 font-sans text-xs text-black pl-10 pr-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "w-full bg-black text-white font-sans text-xs tracking-[0.2em] uppercase py-3.5 hover:bg-gray-800 transition-colors flex items-center justify-center gap-3 mt-6",
+      "flex items-center justify-center gap-2 mt-6",
+      "text-gray-300",
+      "font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400",
+      "mt-8 flex items-center justify-center gap-6",
+      "font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 hover:text-black transition-colors",
+      "text-center font-sans text-[9px] text-gray-300 tracking-wide mt-3"
+    ]
+  },
+  "app/portal/orders/page.tsx": {
+    "componentName": "OrdersPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "PortalHeader",
+        "from": "@/components/portal/PortalHeader"
+      }
+    ],
+    "renders": [
+      "PortalHeader"
+    ],
+    "classNames": [
+      "flex-1 flex flex-col min-h-screen",
+      "flex-1 p-8 bg-white",
+      "flex items-start justify-between mb-6",
+      "font-serif text-3xl text-black italic",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mt-1",
+      "flex items-center gap-3",
+      "border border-gray-200 font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors flex items-center gap-2",
+      "bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors flex items-center gap-2",
+      "grid lg:grid-cols-[1fr_360px] gap-6",
+      "border border-gray-200 overflow-hidden mb-6",
+      "flex items-center justify-between px-5 py-3 border-b border-gray-200",
+      "flex items-center gap-2",
+      "font-sans text-[10px] tracking-[0.2em] uppercase font-semibold text-black",
+      "font-sans text-[9px] text-gray-400",
+      "flex items-center gap-2",
+      "text-gray-400 hover:text-black",
+      "text-gray-400 hover:text-black",
+      "w-full",
+      "border-b border-gray-100 bg-gray-50",
+      "px-4 py-2.5 text-left font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-normal",
+      "border-b border-gray-100 hover:bg-gray-50 transition-colors",
+      "px-4 py-3.5 font-sans text-xs font-semibold text-black whitespace-nowrap",
+      "px-4 py-3.5",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-[9px] uppercase tracking-wide text-gray-400",
+      "px-4 py-3.5 font-sans text-xs text-gray-500",
+      "px-4 py-3.5 font-sans text-xs text-gray-500",
+      "px-4 py-3.5",
+      "font-sans text-[9px] tracking-[0.1em] uppercase px-2 py-1 font-semibold",
+      "px-4 py-3.5",
+      "text-gray-300 hover:text-black transition-colors",
+      "grid grid-cols-3 gap-px bg-gray-200",
+      "bg-white px-6 py-5",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2",
+      "font-serif text-3xl font-bold text-black",
+      "space-y-4",
+      "border border-gray-200 p-5",
+      "flex items-start justify-between mb-4",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-serif text-2xl font-bold text-black",
+      "text-gray-400 hover:text-black transition-colors",
+      "grid grid-cols-2 gap-4 mb-4",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans text-xs font-semibold text-black",
+      "bg-gray-50 border border-gray-200 px-4 py-3",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-sans text-xs font-mono text-black",
+      "border border-gray-200 p-5",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold mb-4",
+      "space-y-3",
+      "flex gap-3 items-start",
+      "w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5",
+      "w-1.5 h-1.5 rounded-full bg-white",
+      "font-sans text-[9px] tracking-[0.1em] uppercase font-semibold",
+      "font-sans text-[9px] text-gray-400 mt-0.5",
+      "border border-gray-200 p-5",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold mb-4",
+      "space-y-2.5 mb-4",
+      "flex items-center justify-between",
+      "font-sans text-[10px] text-gray-500",
+      "font-sans text-[10px] font-medium text-black",
+      "border-t border-gray-200 pt-3 flex items-center justify-between",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-sm font-bold text-black",
+      "font-sans text-[8px] text-gray-400 mt-2 leading-relaxed",
+      "w-full border border-gray-200 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-400 py-2.5 mt-4 hover:border-black hover:text-black transition-colors flex items-center justify-center gap-2",
+      "px-8 py-3 border-t border-gray-200 flex items-center justify-between",
+      "flex items-center gap-2",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "font-sans text-[9px] text-gray-400"
+    ]
+  },
+  "app/portal/procurement/page.tsx": {
+    "componentName": "ProcurementPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "PortalHeader",
+        "from": "@/components/portal/PortalHeader"
+      }
+    ],
+    "renders": [
+      "PortalHeader"
+    ],
+    "classNames": [
+      "flex-1 flex flex-col min-h-screen",
+      "flex-1 p-8 bg-white",
+      "flex items-start justify-between mb-6",
+      "font-serif text-3xl text-black italic",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mt-1",
+      "flex items-center gap-3",
+      "border border-gray-200 font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors flex items-center gap-2",
+      "bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors flex items-center gap-2",
+      "flex items-center justify-between border-b border-gray-200 mb-6",
+      "flex items-center gap-0",
+      "font-sans text-[10px] tracking-[0.1em] uppercase px-5 py-4 border-b-2 transition-colors",
+      "flex items-center gap-2 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-black transition-colors",
+      "grid grid-cols-4 gap-px bg-gray-200 mb-6",
+      "bg-white px-6 py-5",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-serif text-3xl font-bold text-black",
+      "font-sans text-[9px] text-gray-400 mt-1",
+      "border border-gray-200 overflow-hidden",
+      "w-full",
+      "border-b border-gray-200 bg-gray-50",
+      "px-5 py-3 text-left font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-normal",
+      "border-b border-gray-100 hover:bg-gray-50 transition-colors",
+      "px-5 py-4 font-sans text-xs font-semibold text-black",
+      "px-5 py-4 font-sans text-xs text-black",
+      "px-5 py-4 font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "px-5 py-4 font-sans text-xs text-gray-500",
+      "px-5 py-4",
+      "font-sans text-[9px] tracking-[0.1em] uppercase px-2.5 py-1 font-semibold",
+      "px-5 py-4 font-sans text-xs text-gray-400",
+      "px-5 py-4",
+      "font-sans text-[10px] text-gray-400 hover:text-black transition-colors",
+      "px-5 py-3 border-t border-gray-100 flex items-center justify-between",
+      "font-sans text-[10px] text-gray-400",
+      "flex items-center gap-2",
+      "font-sans text-[10px] text-gray-400 border border-gray-200 px-3 py-1 hover:border-black hover:text-black transition-colors",
+      "font-sans text-[10px] text-black bg-black text-white border border-black px-3 py-1",
+      "px-8 py-3 border-t border-gray-200 flex items-center justify-between",
+      "flex items-center gap-2",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "font-sans text-[9px] text-gray-400"
+    ]
+  },
+  "app/portal/projects/page.tsx": {
+    "componentName": "PortalProjectsPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "{ useState }",
+        "from": "react"
+      },
+      {
+        "what": "PortalHeader",
+        "from": "@/components/portal/PortalHeader"
+      }
+    ],
+    "renders": [
+      "PortalHeader"
+    ],
+    "classNames": [
+      "flex-1 flex flex-col min-h-screen",
+      "flex flex-1 overflow-hidden",
+      "w-[240px] border-r border-gray-200 flex flex-col shrink-0",
+      "flex items-center justify-between px-4 py-3 border-b border-gray-200",
+      "font-sans text-[10px] tracking-[0.2em] uppercase font-semibold text-black",
+      "text-gray-400 hover:text-black transition-colors",
+      "px-3 py-2 border-b border-gray-200",
+      "flex items-center gap-2 bg-gray-50 border border-gray-200 px-2.5 py-1.5",
+      "bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-full",
+      "flex-1 overflow-y-auto",
+      "px-4 py-4 border-b border-gray-100 cursor-pointer transition-colors",
+      "flex items-start justify-between gap-2 mb-1",
+      "font-sans text-[9px] text-gray-400",
+      "font-sans text-[8px] tracking-[0.1em] uppercase border px-1.5 py-0.5 font-semibold shrink-0",
+      "font-sans text-[10px] font-semibold text-black leading-tight",
+      "font-sans text-[9px] text-gray-400 mt-1 uppercase tracking-wide",
+      "flex-1 overflow-y-auto p-8",
+      "flex items-center gap-2 font-sans text-[10px] text-gray-400 uppercase tracking-wide mb-4",
+      "text-black font-semibold",
+      "flex items-start justify-between mb-6",
+      "font-sans font-bold text-2xl text-black tracking-tight leading-tight",
+      "flex items-center gap-3 shrink-0",
+      "border border-gray-200 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors flex items-center gap-2",
+      "bg-black text-white font-sans text-[10px] tracking-[0.15em] uppercase px-4 py-2 hover:bg-gray-800 transition-colors flex items-center gap-2",
+      "bg-gray-100 aspect-[16/9] flex items-center justify-center mb-6 relative",
+      "absolute top-4 left-4 bg-white/90 font-sans text-[10px] tracking-[0.15em] uppercase px-3 py-1 flex items-center gap-2",
+      "text-center",
+      "w-48 h-48 border-2 border-dashed border-gray-300 flex items-center justify-center",
+      "font-sans text-xs text-gray-400",
+      "grid md:grid-cols-[1fr_280px] gap-8 mb-8",
+      "flex items-center gap-2 mb-4",
+      "text-gray-400",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold",
+      "space-y-2",
+      "flex items-center gap-3 border border-gray-200 px-4 py-3",
+      "w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center",
+      "font-sans text-[9px] font-bold text-gray-600",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-[9px] uppercase tracking-wide text-gray-400",
+      "w-full border border-dashed border-gray-200 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-400 py-3 hover:border-black hover:text-black transition-colors",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 font-semibold mb-4",
+      "space-y-4",
+      "flex gap-3",
+      "flex flex-col items-center",
+      "w-4 h-4 rounded-full border-2 flex items-center justify-center",
+      "w-2 h-2 rounded-full bg-white",
+      "w-1.5 h-1.5 rounded-full bg-black",
+      "w-px flex-1 mt-1",
+      "pb-4",
+      "font-sans text-[10px] tracking-[0.1em] uppercase font-semibold",
+      "font-sans text-[9px] mt-0.5",
+      "mt-6 border border-gray-200 p-4",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-3",
+      "grid grid-cols-2 gap-4",
+      "font-sans text-[9px] tracking-[0.1em] uppercase text-gray-400",
+      "font-serif text-2xl font-bold text-black",
+      "font-sans text-[9px] tracking-[0.1em] uppercase text-gray-400",
+      "font-serif text-2xl font-bold text-black",
+      "border border-gray-200 p-6 mb-6",
+      "flex items-center justify-between mb-4",
+      "flex items-center gap-2",
+      "text-gray-400",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold",
+      "font-sans text-[10px] text-gray-400 hover:text-black transition-colors",
+      "space-y-4 mb-4",
+      "border-b border-gray-100 pb-4 last:border-0 last:pb-0",
+      "flex items-center gap-2 mb-1",
+      "font-sans text-[10px] font-semibold text-black uppercase tracking-wide",
+      "font-sans text-[9px] text-gray-400",
+      "font-sans text-xs text-gray-500 leading-relaxed",
+      "flex gap-3",
+      "flex-1 border border-gray-200 font-sans text-xs px-4 py-2.5 focus:outline-none focus:border-black transition-colors",
+      "bg-black text-white font-sans text-xs tracking-wide px-5 py-2.5 hover:bg-gray-800 transition-colors",
+      "border border-gray-200 p-6",
+      "flex items-center justify-between mb-4",
+      "flex items-center gap-2",
+      "text-gray-400",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold",
+      "font-sans text-[10px] text-gray-400",
+      "grid grid-cols-2 md:grid-cols-4 gap-3",
+      "border border-dashed border-gray-200 p-4 flex flex-col items-center text-center",
+      "text-gray-300 mb-2",
+      "font-sans text-[9px] font-semibold text-black uppercase tracking-wide",
+      "font-sans text-[9px] text-gray-400",
+      "font-sans text-[9px] text-gray-300 uppercase tracking-wide",
+      "px-8 py-3 border-t border-gray-200 flex items-center",
+      "flex items-center gap-2",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-500"
+    ]
+  },
+  "app/portal/settings/page.tsx": {
+    "componentName": "SettingsPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "PortalHeader",
+        "from": "@/components/portal/PortalHeader"
+      }
+    ],
+    "renders": [
+      "PortalHeader"
+    ],
+    "classNames": [
+      "flex-1 flex flex-col min-h-screen",
+      "flex-1 p-8 bg-white",
+      "flex items-start justify-between mb-6",
+      "font-sans font-bold text-2xl text-black",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mt-1",
+      "flex items-center gap-3",
+      "border border-gray-200 font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors flex items-center gap-2",
+      "bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors",
+      "grid grid-cols-4 gap-px bg-gray-200 mb-6",
+      "bg-white px-6 py-5",
+      "flex items-start justify-between mb-2",
+      "text-gray-300 text-lg",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-1",
+      "font-serif text-2xl font-bold text-black",
+      "font-sans text-[9px] text-gray-400 mt-1 uppercase tracking-wide",
+      "border-b border-gray-200 mb-6",
+      "flex items-center gap-0",
+      "font-sans text-[10px] tracking-[0.1em] uppercase px-6 py-4 border-b-2 transition-colors",
+      "grid lg:grid-cols-[1fr_280px] gap-8",
+      "flex items-center justify-between mb-4",
+      "flex items-center gap-3",
+      "flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 w-56",
+      "bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-full",
+      "border border-gray-200 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-500 px-3 py-1.5 hover:border-black hover:text-black transition-colors flex items-center gap-1.5",
+      "bg-black text-white font-sans text-[10px] tracking-[0.15em] uppercase px-4 py-1.5 hover:bg-gray-800 transition-colors flex items-center gap-2",
+      "border border-gray-200 overflow-hidden mb-6",
+      "w-full",
+      "border-b border-gray-100 bg-gray-50",
+      "px-5 py-3 text-left font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-normal",
+      "border-b border-gray-100 hover:bg-gray-50 transition-colors",
+      "px-5 py-4",
+      "flex items-center gap-3",
+      "w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center shrink-0",
+      "font-sans text-[9px] font-bold text-gray-600",
+      "font-sans text-xs font-semibold text-black",
+      "font-sans text-[9px] text-gray-400",
+      "px-5 py-4",
+      "font-sans text-[9px] tracking-[0.1em] border border-gray-200 px-2.5 py-1 text-gray-600",
+      "px-5 py-4",
+      "flex items-center gap-1.5",
+      "w-1.5 h-1.5 rounded-full",
+      "font-sans text-[10px] text-gray-500",
+      "px-5 py-4 font-sans text-[10px] text-gray-400 uppercase tracking-wide",
+      "px-5 py-4",
+      "text-gray-300 hover:text-black transition-colors font-sans text-sm",
+      "px-5 py-3 border-t border-gray-100 flex items-center justify-between",
+      "font-sans text-[10px] text-gray-400",
+      "flex items-center gap-1.5",
+      "w-7 h-7 font-sans text-[10px]",
+      "border border-gray-200 p-5",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold mb-2",
+      "font-sans text-[9px] uppercase tracking-wide text-gray-400 mb-5",
+      "space-y-3",
+      "flex items-center justify-between border-b border-gray-100 pb-3 last:border-0 last:pb-0",
+      "font-sans text-xs font-bold text-black",
+      "font-sans text-[9px] text-gray-400",
+      "font-sans text-[10px] tracking-[0.1em] uppercase text-gray-400 hover:text-black transition-colors border border-gray-200 px-3 py-1.5 hover:border-black",
+      "space-y-4",
+      "bg-black p-5",
+      "flex items-center gap-2 mb-4",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-semibold",
+      "font-sans text-[9px] uppercase tracking-wide text-gray-500 mb-5",
+      "border border-gray-700 p-4 mb-4",
+      "flex items-center gap-2 mb-2",
+      "text-gray-400",
+      "font-sans text-[10px] font-semibold text-white uppercase tracking-wide",
+      "font-sans text-[9px] text-gray-500 leading-relaxed mb-3",
+      "w-full border border-gray-600 text-white font-sans text-[10px] tracking-[0.15em] uppercase py-2 hover:bg-white hover:text-black transition-colors",
+      "flex items-center justify-between",
+      "font-sans text-[10px] text-gray-400 uppercase tracking-wide",
+      "border border-gray-600 px-4 py-2",
+      "font-sans text-sm font-bold text-white",
+      "px-8 py-3 border-t border-gray-200 flex items-center justify-between",
+      "flex items-center gap-2",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "flex items-center gap-6",
+      "font-sans text-[9px] text-gray-400",
+      "font-sans text-[9px] text-gray-400 hover:text-black uppercase tracking-wide"
+    ]
+  },
+  "app/portal/support/page.tsx": {
+    "componentName": "SupportPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "{ useState }",
+        "from": "react"
+      },
+      {
+        "what": "PortalHeader",
+        "from": "@/components/portal/PortalHeader"
+      }
+    ],
+    "renders": [
+      "PortalHeader"
+    ],
+    "classNames": [
+      "flex-1 flex flex-col min-h-screen",
+      "flex flex-1 overflow-hidden",
+      "w-[240px] border-r border-gray-200 flex flex-col shrink-0",
+      "flex items-center justify-between px-4 py-3 border-b border-gray-200",
+      "font-sans text-[10px] tracking-[0.2em] uppercase font-semibold text-black",
+      "font-sans text-[9px] text-gray-400",
+      "px-3 py-2 border-b border-gray-200",
+      "flex items-center gap-2 bg-gray-50 border border-gray-200 px-2.5 py-1.5",
+      "bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-full",
+      "flex-1 overflow-y-auto",
+      "px-4 py-4 border-b border-gray-100 cursor-pointer transition-colors",
+      "flex items-start justify-between gap-2 mb-1",
+      "font-sans text-[9px] text-gray-400",
+      "font-sans text-[8px] tracking-[0.1em] uppercase px-1.5 py-0.5 font-semibold",
+      "font-sans text-[10px] font-semibold text-black leading-tight mb-1",
+      "font-sans text-[9px] text-gray-400 mb-2",
+      "flex items-center gap-1.5",
+      "font-sans text-[9px] text-gray-400",
+      "ml-auto w-2 h-2 rounded-full",
+      "px-4 py-3 border-t border-gray-200",
+      "w-full font-sans text-[10px] tracking-[0.15em] uppercase text-gray-400 hover:text-black transition-colors",
+      "flex-1 overflow-y-auto p-8",
+      "flex items-start justify-between mb-6",
+      "flex items-center gap-3 mb-2",
+      "font-sans font-bold text-2xl text-black leading-tight",
+      "font-sans text-[9px] tracking-[0.15em] uppercase px-2.5 py-1 font-semibold",
+      "flex items-center gap-4 font-sans text-[10px] text-gray-400 uppercase tracking-wide",
+      "flex items-center gap-3 shrink-0",
+      "border border-gray-200 font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors",
+      "bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors",
+      "grid lg:grid-cols-2 gap-6 mb-6",
+      "border border-gray-200 p-5",
+      "flex items-center gap-2 mb-4",
+      "text-gray-400",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-semibold",
+      "space-y-3",
+      "font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-0.5",
+      "font-sans text-[10px] text-green-700 bg-green-50 px-2 py-1 font-semibold",
+      "font-sans text-xs font-bold text-black uppercase",
+      "border border-gray-200 p-5",
+      "flex items-center gap-2 mb-4",
+      "text-gray-400",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-semibold",
+      "space-y-3",
+      "font-sans text-[9px] text-gray-400 mb-0.5",
+      "font-sans text-xs font-bold text-black",
+      "font-sans text-[10px] text-gray-400",
+      "font-sans text-[9px] text-gray-400 mb-0.5",
+      "font-sans text-xs text-black",
+      "font-sans text-xs text-blue-600",
+      "font-sans text-[9px] text-gray-400 mb-0.5",
+      "font-sans text-xs text-black",
+      "border border-gray-200 p-5 mb-6",
+      "flex items-center gap-2 mb-4",
+      "text-gray-400",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-semibold",
+      "font-sans text-sm text-gray-600 leading-relaxed italic border border-gray-100 p-4 bg-gray-50",
+      "border border-gray-200 p-5 mb-6",
+      "flex items-center gap-2 mb-5",
+      "text-gray-400",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-semibold",
+      "space-y-4 mb-4",
+      "flex gap-3",
+      "w-1.5 h-1.5 rounded-full bg-black mt-1.5 shrink-0",
+      "flex items-center gap-2 mb-0.5",
+      "font-sans text-[9px] tracking-[0.15em] uppercase font-semibold text-black",
+      "font-sans text-[9px] text-gray-400",
+      "font-sans text-[10px] text-gray-500 leading-relaxed",
+      "w-full border border-gray-200 font-sans text-xs px-4 py-3 focus:outline-none focus:border-black transition-colors",
+      "w-[240px] border-l border-gray-200 flex flex-col shrink-0 p-5",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold mb-5",
+      "mb-5",
+      "flex items-center gap-2 mb-3",
+      "text-gray-400",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-semibold",
+      "space-y-2",
+      "flex items-center gap-2 border border-gray-200 p-2.5 hover:border-black cursor-pointer transition-colors",
+      "w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0",
+      "font-sans text-[8px] font-bold text-gray-600",
+      "min-w-0",
+      "font-sans text-[9px] font-semibold text-black uppercase",
+      "flex items-center gap-1 mt-0.5",
+      "w-1.5 h-1.5 rounded-full shrink-0",
+      "font-sans text-[8px] uppercase text-gray-400 tracking-wide truncate",
+      "mb-5",
+      "flex items-center gap-2 mb-3",
+      "text-gray-400",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-semibold",
+      "border border-gray-200 p-3",
+      "font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-1",
+      "font-sans text-xs font-bold text-black",
+      "font-sans text-[10px] text-gray-500",
+      "w-full border border-gray-200 font-sans text-[9px] tracking-[0.1em] uppercase text-gray-400 py-1.5 mt-2 hover:border-black hover:text-black transition-colors",
+      "mb-5",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-semibold mb-3",
+      "grid grid-cols-2 gap-2",
+      "border border-gray-200 font-sans text-[9px] tracking-[0.1em] uppercase text-gray-500 py-2.5 hover:border-black hover:text-black transition-colors flex flex-col items-center gap-1",
+      "text-base",
+      "bg-black p-4 mt-auto",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-semibold mb-1",
+      "font-sans text-[10px] text-white leading-relaxed mb-3",
+      "w-full bg-white text-black font-sans text-[10px] tracking-[0.15em] uppercase py-2.5 hover:bg-gray-100 transition-colors",
+      "px-8 py-3 border-t border-gray-200 flex items-center justify-between",
+      "flex items-center gap-2",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] uppercase tracking-wide text-gray-500",
+      "flex items-center gap-6",
+      "font-sans text-[9px] text-gray-400",
+      "font-sans text-[9px] text-gray-400 hover:text-black uppercase tracking-wide"
+    ]
+  },
+  "app/projects/page.tsx": {
+    "componentName": "ProjectsPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      },
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "Navbar",
+        "from": "@/components/Navbar"
+      },
+      {
+        "what": "Footer",
+        "from": "@/components/Footer"
+      },
+      {
+        "what": "{ caseStudies }",
+        "from": "@/data/projects"
+      }
+    ],
+    "renders": [
+      "Footer",
+      "Link",
+      "Navbar"
+    ],
+    "classNames": [
+      "min-h-screen bg-white",
+      "border-b border-gray-200",
+      "max-w-7xl mx-auto px-6 py-16",
+      "flex flex-col md:flex-row md:items-end justify-between gap-6",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-5",
+      "font-serif text-5xl md:text-6xl text-black mb-2 leading-tight",
+      "italic",
+      "flex flex-col sm:flex-row gap-3 shrink-0",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 self-center",
+      "bg-black text-white font-sans text-xs tracking-[0.15em] uppercase px-6 py-2.5 hover:bg-gray-800 transition-colors",
+      "max-w-7xl mx-auto px-6 py-12",
+      "block group mb-2",
+      "bg-[#0a0a0a] aspect-[16/7] flex items-center justify-center relative overflow-hidden",
+      "absolute inset-0 bg-gradient-to-b from-transparent to-black/70",
+      "absolute bottom-0 left-0 right-0 p-8",
+      "font-sans text-[9px] tracking-[0.25em] uppercase text-gray-400 mb-2",
+      "font-serif text-2xl md:text-3xl text-white italic group-hover:underline leading-tight",
+      "font-sans text-xs text-gray-400 mt-2 leading-relaxed max-w-xl",
+      "flex items-center justify-between py-3 border-b border-gray-200",
+      "flex items-center gap-4",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400",
+      "font-sans text-[10px] tracking-wide text-gray-400 hover:text-black transition-colors",
+      "max-w-7xl mx-auto px-6 pb-16",
+      "grid md:grid-cols-2 gap-px bg-gray-200",
+      "bg-white",
+      "block group",
+      "bg-[#111] aspect-video flex items-center justify-center relative overflow-hidden",
+      "absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900",
+      "absolute inset-0 flex items-end p-6",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-500 mb-1",
+      "font-serif text-lg text-white italic group-hover:underline",
+      "p-4 flex items-center justify-between border-b border-gray-100",
+      "flex items-center gap-3",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400",
+      "text-gray-200",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400",
+      "font-sans text-[10px] text-gray-400 hover:text-black transition-colors",
+      "bg-black",
+      "max-w-7xl mx-auto px-6 py-20 text-center",
+      "font-serif text-4xl md:text-5xl text-white mb-2 leading-tight",
+      "italic text-gray-400",
+      "font-sans text-sm text-gray-400 mt-6 mb-10 max-w-md mx-auto leading-relaxed",
+      "flex flex-col sm:flex-row items-center justify-center gap-4",
+      "border border-white text-white font-sans text-xs tracking-[0.15em] uppercase px-8 py-3 hover:bg-white hover:text-black transition-colors",
+      "border border-gray-700 text-gray-400 font-sans text-xs tracking-[0.15em] uppercase px-8 py-3 hover:border-gray-400 transition-colors"
+    ]
+  },
+  "app/services/page.tsx": {
+    "componentName": "ServicesPage",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "type { Metadata }",
+        "from": "next"
+      },
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "Navbar",
+        "from": "@/components/Navbar"
+      },
+      {
+        "what": "Footer",
+        "from": "@/components/Footer"
+      },
+      {
+        "what": "{ services, processSteps }",
+        "from": "@/data/services"
+      }
+    ],
+    "renders": [
+      "Footer",
+      "Link",
+      "Navbar"
+    ],
+    "classNames": [
+      "min-h-screen bg-white",
+      "border-b border-gray-200",
+      "max-w-7xl mx-auto px-6 py-16",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-5",
+      "font-serif text-5xl md:text-6xl text-black italic mb-6 leading-tight",
+      "font-sans text-sm text-gray-500 leading-relaxed max-w-lg",
+      "border-b border-gray-200",
+      "max-w-7xl mx-auto px-6",
+      "grid grid-cols-2 md:grid-cols-5 divide-x divide-gray-200",
+      "py-6 px-4 first:pl-0",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-300 mb-2",
+      "font-sans text-[10px] tracking-[0.15em] uppercase text-black font-semibold",
+      "max-w-7xl mx-auto px-6 py-16",
+      "space-y-0",
+      "grid md:grid-cols-2 gap-0 border-b border-gray-200",
+      "bg-[#0a0a0a] aspect-video md:aspect-auto min-h-64 flex items-center justify-center relative overflow-hidden",
+      "absolute inset-0 bg-gradient-to-br from-gray-800 to-black opacity-80",
+      "relative z-10 text-center p-8",
+      "font-sans text-[10px] tracking-[0.25em] uppercase text-gray-500 mb-2",
+      "font-serif text-4xl text-white/20 font-bold",
+      "p-8 md:p-12 flex flex-col justify-center",
+      "flex items-center gap-3 mb-5",
+      "w-8 h-8 border border-black flex items-center justify-center",
+      "font-sans text-[10px] font-bold text-black",
+      "font-sans font-semibold text-base text-black tracking-tight",
+      "font-sans text-sm text-gray-500 leading-relaxed mb-7",
+      "grid grid-cols-2 gap-2",
+      "flex items-center gap-2",
+      "text-gray-300 font-sans text-xs",
+      "font-sans text-[10px] tracking-[0.1em] uppercase text-gray-500",
+      "border-t border-gray-200",
+      "max-w-7xl mx-auto px-6 py-16",
+      "font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-8",
+      "flex items-center justify-between mb-6",
+      "font-sans text-sm text-gray-500",
+      "font-sans text-xs text-gray-400 hover:text-black transition-colors shrink-0 ml-6",
+      "grid grid-cols-2 gap-px bg-gray-200",
+      "bg-[#111] aspect-video flex items-center justify-center relative overflow-hidden group",
+      "absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900",
+      "relative z-10 text-center p-6",
+      "font-sans text-[9px] tracking-[0.2em] uppercase text-gray-500",
+      "bg-black",
+      "max-w-7xl mx-auto px-6 py-16 text-center",
+      "font-serif text-3xl md:text-4xl text-white italic mb-4",
+      "font-sans text-sm text-gray-400 mb-8 max-w-lg mx-auto leading-relaxed",
+      "flex flex-col sm:flex-row items-center justify-center gap-4",
+      "bg-white text-black font-sans text-xs tracking-[0.15em] uppercase px-8 py-3 hover:bg-gray-100 transition-colors",
+      "border border-gray-600 text-white font-sans text-xs tracking-[0.15em] uppercase px-8 py-3 hover:border-white transition-colors"
+    ]
+  },
+  "components/CTA.tsx": {
+    "componentName": "CTA",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "{ ctaSection }",
+        "from": "@/lib/home-data"
+      }
+    ],
+    "renders": [
+      "Link"
+    ],
+    "classNames": [
+      "bg-black py-20",
+      "max-w-7xl mx-auto px-6 text-center",
+      "font-serif text-3xl md:text-4xl text-white mb-3 text-balance",
+      "font-sans text-sm text-gray-400 mb-10 leading-relaxed",
+      "flex items-center justify-center gap-4",
+      "bg-white text-black font-sans text-sm font-medium tracking-wide px-8 py-3 hover:bg-gray-100 transition-colors",
+      "w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center hover:bg-[#20bd5a] transition-colors shrink-0"
+    ]
+  },
+  "components/Footer.tsx": {
+    "componentName": "Footer",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "{ footerCatalogLinks, footerLegalLinks, footerServicesLinks, siteConfig, socialLinks, type SocialPlatform, }",
+        "from": "@/lib/home-data"
+      }
+    ],
+    "renders": [
+      "Link"
+    ],
+    "classNames": [
+      "bg-black text-white",
+      "max-w-7xl mx-auto px-6 py-16",
+      "grid md:grid-cols-4 gap-12",
+      "flex items-center gap-2 mb-5",
+      "font-sans font-semibold text-xs tracking-[0.15em] uppercase text-white",
+      "font-sans text-xs text-gray-400 leading-relaxed mb-7 max-w-[180px]",
+      "flex items-center gap-4",
+      "text-gray-500 hover:text-white transition-colors",
+      "font-sans text-[10px] font-semibold tracking-[0.2em] uppercase text-white mb-6",
+      "flex flex-col gap-3",
+      "font-sans text-xs text-gray-400 hover:text-white transition-colors",
+      "font-sans text-[10px] font-semibold tracking-[0.2em] uppercase text-white mb-6",
+      "flex flex-col gap-3",
+      "font-sans text-xs text-gray-400 hover:text-white transition-colors",
+      "font-sans text-[10px] font-semibold tracking-[0.2em] uppercase text-white mb-6",
+      "font-sans text-xs text-gray-400 mb-4 leading-relaxed",
+      "flex",
+      "sr-only",
+      "flex-1 min-w-0 bg-transparent border border-gray-700 font-sans text-xs text-white placeholder-gray-600 px-3 py-2.5 focus:outline-none focus:border-gray-400 transition-colors",
+      "bg-white text-black px-3.5 py-2.5 font-sans text-sm font-medium hover:bg-gray-200 transition-colors shrink-0",
+      "border-t border-gray-800",
+      "max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3",
+      "font-sans text-[10px] text-gray-600 tracking-wide",
+      "flex items-center gap-6",
+      "font-sans text-[10px] text-gray-600 tracking-wide hover:text-gray-400 transition-colors uppercase"
+    ]
+  },
+  "components/Hero.tsx": {
+    "componentName": "Hero",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "Image",
+        "from": "next/image"
+      },
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "{ heroContent }",
+        "from": "@/lib/home-data"
+      }
+    ],
+    "renders": [
+      "Image",
+      "Link"
+    ],
+    "classNames": [
+      "bg-white overflow-hidden",
+      "max-w-7xl mx-auto",
+      "grid lg:grid-cols-[1fr_1fr] min-h-[580px]",
+      "flex flex-col justify-center px-6 py-16 lg:py-20 lg:pr-16 xl:pr-24",
+      "mb-7",
+      "inline-block border border-black text-black font-sans text-[10px] font-medium tracking-[0.2em] uppercase px-2.5 py-1",
+      "font-serif text-[2.6rem] md:text-5xl lg:text-[3.2rem] leading-[1.1] tracking-tight text-black mb-5 text-balance",
+      "italic",
+      "font-sans text-sm text-gray-500 leading-relaxed mb-9 max-w-sm",
+      "flex flex-col sm:flex-row gap-3",
+      "bg-black text-white font-sans text-xs font-medium tracking-wide px-7 py-3 text-center hover:bg-gray-800 transition-colors",
+      "border border-black text-black font-sans text-xs font-medium tracking-wide px-7 py-3 text-center hover:bg-gray-50 transition-colors",
+      "relative bg-[#e8e8e8] min-h-[380px] lg:min-h-full flex items-center justify-center",
+      "object-contain w-full h-auto p-4"
+    ]
+  },
+  "components/Navbar.tsx": {
+    "componentName": "Navbar",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "{ mainNavigation, siteConfig }",
+        "from": "@/lib/home-data"
+      }
+    ],
+    "renders": [
+      "GlobeIcon",
+      "Link"
+    ],
+    "classNames": [
+      "sticky top-0 z-50 bg-white border-b border-gray-200",
+      "max-w-7xl mx-auto px-6 h-14 flex items-center justify-between",
+      "flex items-center gap-2 shrink-0",
+      "font-sans font-semibold text-xs tracking-[0.15em] text-black uppercase",
+      "hidden md:flex items-center gap-7",
+      "font-sans text-xs text-black hover:text-gray-500 transition-colors",
+      "flex items-center gap-5",
+      "hidden md:flex items-center gap-1 text-xs text-black hover:text-gray-500 transition-colors",
+      "tracking-wide",
+      "hidden md:block text-xs text-black hover:text-gray-500 transition-colors",
+      "bg-black text-white font-sans text-xs font-medium px-4 py-2 tracking-wide hover:bg-gray-800 transition-colors"
+    ]
+  },
+  "components/ProductFeature.tsx": {
+    "componentName": "ProductFeature",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "Image",
+        "from": "next/image"
+      },
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "{ featuredProduct }",
+        "from": "@/lib/home-data"
+      }
+    ],
+    "renders": [
+      "Image",
+      "Link"
+    ],
+    "classNames": [
+      "py-0 bg-white",
+      "max-w-7xl mx-auto",
+      "grid lg:grid-cols-2",
+      "bg-white flex items-center justify-center py-12 px-8 lg:py-16 lg:px-12",
+      "w-full h-auto object-contain",
+      "bg-white flex flex-col justify-center py-12 px-8 lg:py-16 lg:px-16 border-l border-gray-100",
+      "font-sans text-[10px] tracking-[0.25em] text-gray-400 uppercase mb-3",
+      "font-serif text-3xl md:text-4xl text-black mb-7 text-balance",
+      "flex flex-wrap gap-2.5 mb-8",
+      "font-sans text-xs text-black border border-gray-300 px-3.5 py-1.5 tracking-wide",
+      "inline-flex items-center gap-2 font-sans text-sm font-medium text-black group",
+      "border-b border-black pb-px group-hover:border-gray-500 group-hover:text-gray-500 transition-colors",
+      "text-base leading-none group-hover:translate-x-0.5 transition-transform"
+    ]
+  },
+  "components/Projects.tsx": {
+    "componentName": "Projects",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "Image",
+        "from": "next/image"
+      },
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "{ projects }",
+        "from": "@/lib/home-data"
+      }
+    ],
+    "renders": [
+      "Image",
+      "Link"
+    ],
+    "classNames": [
+      "py-20 bg-white",
+      "max-w-7xl mx-auto px-6",
+      "mb-10",
+      "font-serif text-3xl md:text-4xl text-black",
+      "grid md:grid-cols-3 gap-5",
+      "group block",
+      "relative w-full overflow-hidden bg-gray-100 aspect-[4/3]",
+      "object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]",
+      "pt-4",
+      "font-sans text-[10px] tracking-[0.18em] text-gray-400 uppercase mb-1",
+      "font-sans text-sm font-medium text-black tracking-tight"
+    ]
+  },
+  "components/Solutions.tsx": {
+    "componentName": "Solutions",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "{ solutions, type SolutionIcon }",
+        "from": "@/lib/home-data"
+      }
+    ],
+    "renders": [
+      "GlobeIcon",
+      "TruckIcon",
+      "WrenchIcon"
+    ],
+    "classNames": [
+      "py-20 bg-white",
+      "max-w-7xl mx-auto px-6",
+      "text-center mb-12",
+      "font-serif text-3xl md:text-[2.2rem] text-black mb-3",
+      "w-14 h-px bg-gray-300 mx-auto",
+      "grid md:grid-cols-3 gap-5",
+      "bg-[#F5F5F5] p-8",
+      "flex items-center gap-2.5 mb-4",
+      "font-sans text-[11px] font-semibold tracking-[0.12em] text-black uppercase",
+      "font-sans text-sm text-gray-500 leading-relaxed"
+    ]
+  },
+  "components/Stats.tsx": {
+    "componentName": "Stats",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "{ stats, type StatIcon }",
+        "from": "@/lib/home-data"
+      }
+    ],
+    "renders": [],
+    "classNames": [
+      "border-y border-gray-200 bg-white",
+      "max-w-7xl mx-auto",
+      "grid grid-cols-3 divide-x divide-gray-200",
+      "flex items-center justify-center gap-4 py-7 px-6",
+      "shrink-0",
+      "font-sans text-xl font-semibold text-black leading-none mb-1",
+      "font-sans text-xs text-gray-500 tracking-wide"
+    ]
+  },
+  "components/portal/PortalHeader.tsx": {
+    "componentName": "PortalHeader",
+    "params": "{ searchPlaceholder = 'Search portal...' }: Props",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "Link",
+        "from": "next/link"
+      }
+    ],
+    "renders": [],
+    "classNames": [
+      "h-12 border-b border-gray-200 bg-white flex items-center justify-between px-6 shrink-0",
+      "flex items-center gap-2",
+      "flex items-center gap-1 text-xs text-gray-500 hover:text-black transition-colors",
+      "tracking-wide",
+      "flex items-center gap-4",
+      "flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 w-52",
+      "bg-transparent font-sans text-xs text-black placeholder-gray-400 focus:outline-none w-full",
+      "w-8 h-8 rounded-full bg-gray-200 overflow-hidden flex items-center justify-center",
+      "font-sans text-xs font-bold text-gray-600"
+    ]
+  },
+  "components/portal/PortalSidebar.tsx": {
+    "componentName": "PortalSidebar",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "Link",
+        "from": "next/link"
+      },
+      {
+        "what": "{ usePathname }",
+        "from": "next/navigation"
+      }
+    ],
+    "renders": [
+      "Link"
+    ],
+    "classNames": [
+      "w-[190px] shrink-0 bg-white border-r border-gray-200 flex flex-col min-h-screen",
+      "px-5 py-5 border-b border-gray-200",
+      "flex items-center gap-2",
+      "font-sans font-semibold text-xs tracking-[0.15em] uppercase text-black",
+      "flex-1 py-4",
+      "flex items-center gap-3 px-5 py-2.5 font-sans text-xs transition-colors",
+      "px-5 py-4 border-t border-gray-200",
+      "flex items-center gap-2 mb-3",
+      "w-6 h-6 rounded-full bg-black flex items-center justify-center",
+      "text-white font-sans text-[10px] font-bold",
+      "font-sans text-xs font-medium text-black",
+      "font-sans text-[10px] text-gray-400",
+      "flex items-center gap-1",
+      "w-1.5 h-1.5 rounded-full bg-green-500",
+      "font-sans text-[10px] text-gray-500 uppercase tracking-wide"
+    ]
+  },
+  "components/portal/StatCard.tsx": {
+    "componentName": "StatCard",
+    "params": "{ label, value, trend, trendUp, icon }: Props",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [],
+    "renders": [],
+    "classNames": [
+      "border border-gray-200 bg-white p-5",
+      "flex items-start justify-between mb-4",
+      "text-gray-400",
+      "font-sans text-[10px] tracking-wide",
+      "font-sans text-[10px] tracking-[0.15em] uppercase text-gray-400 mb-1",
+      "font-serif text-3xl font-bold text-black"
+    ]
+  },
+  "components/theme-provider.tsx": {
+    "componentName": "ThemeProvider",
+    "params": "{ children, ...props }: ThemeProviderProps",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ ThemeProvider as NextThemesProvider, type ThemeProviderProps, }",
+        "from": "next-themes"
+      }
+    ],
+    "renders": [
+      "NextThemesProvider"
+    ],
+    "classNames": []
+  },
+  "components/ui/accordion.tsx": {
+    "componentName": "Accordion",
+    "params": "{ ...props }: React.ComponentProps<typeof AccordionPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as AccordionPrimitive",
+        "from": "@radix-ui/react-accordion"
+      },
+      {
+        "what": "{ ChevronDownIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "AccordionPrimitive",
+      "ChevronDownIcon"
+    ],
+    "classNames": [
+      "flex",
+      "text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200",
+      "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
+    ]
+  },
+  "components/ui/alert-dialog.tsx": {
+    "componentName": "AlertDialog",
+    "params": "{ ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as AlertDialogPrimitive",
+        "from": "@radix-ui/react-alert-dialog"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ buttonVariants }",
+        "from": "@/components/ui/button"
+      }
+    ],
+    "renders": [
+      "AlertDialogOverlay",
+      "AlertDialogPortal",
+      "AlertDialogPrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/alert.tsx": {
+    "componentName": "Alert",
+    "params": "{ className, variant, ...props }: React.ComponentProps<'div'> & VariantProps<typeof alertVariants>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [],
+    "classNames": []
+  },
+  "components/ui/aspect-ratio.tsx": {
+    "componentName": "AspectRatio",
+    "params": "{ ...props }: React.ComponentProps<typeof AspectRatioPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as AspectRatioPrimitive",
+        "from": "@radix-ui/react-aspect-ratio"
+      }
+    ],
+    "renders": [
+      "AspectRatioPrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/avatar.tsx": {
+    "componentName": "Avatar",
+    "params": "{ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as AvatarPrimitive",
+        "from": "@radix-ui/react-avatar"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "AvatarPrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/badge.tsx": {
+    "componentName": "Badge",
+    "params": "{ className, variant, asChild = false, ...props }: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ Slot }",
+        "from": "@radix-ui/react-slot"
+      },
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "Comp"
+    ],
+    "classNames": []
+  },
+  "components/ui/breadcrumb.tsx": {
+    "componentName": "Breadcrumb",
+    "params": "{ ...props }: React.ComponentProps<'nav'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ Slot }",
+        "from": "@radix-ui/react-slot"
+      },
+      {
+        "what": "{ ChevronRight, MoreHorizontal }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "ChevronRight",
+      "Comp",
+      "MoreHorizontal"
+    ],
+    "classNames": [
+      "size-4",
+      "sr-only"
+    ]
+  },
+  "components/ui/button-group.tsx": {
+    "componentName": "ButtonGroup",
+    "params": "{ className, orientation, ...props }: React.ComponentProps<'div'> & VariantProps<typeof buttonGroupVariants>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "{ Slot }",
+        "from": "@radix-ui/react-slot"
+      },
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Separator }",
+        "from": "@/components/ui/separator"
+      }
+    ],
+    "renders": [
+      "Comp",
+      "Separator"
+    ],
+    "classNames": []
+  },
+  "components/ui/button.tsx": {
+    "componentName": "Button",
+    "params": "{ className, variant, size, asChild = false, ...props }: React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & { asChild?: boolean }",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ Slot }",
+        "from": "@radix-ui/react-slot"
+      },
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "Comp"
+    ],
+    "classNames": []
+  },
+  "components/ui/calendar.tsx": {
+    "componentName": "Calendar",
+    "params": "{ className, classNames, showOutsideDays = true, captionLayout = 'label', buttonVariant = 'ghost', formatters, components, ...props }: React.ComponentProps<typeof DayPicker> & { buttonVariant?: React.ComponentProps<typeof Button>['variant'] }",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ DayButton, DayPicker, getDefaultClassNames }",
+        "from": "react-day-picker"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Button, buttonVariants }",
+        "from": "@/components/ui/button"
+      }
+    ],
+    "renders": [
+      "Button",
+      "ChevronDownIcon",
+      "ChevronLeftIcon",
+      "ChevronRightIcon",
+      "DayPicker",
+      "HTMLButtonElement"
+    ],
+    "classNames": [
+      "flex size-(--cell-size) items-center justify-center text-center"
+    ]
+  },
+  "components/ui/card.tsx": {
+    "componentName": "Card",
+    "params": "{ className, ...props }: React.ComponentProps<'div'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [],
+    "classNames": []
+  },
+  "components/ui/carousel.tsx": {
+    "componentName": "useCarousel",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "useEmblaCarousel, { type UseEmblaCarouselType, }",
+        "from": "embla-carousel-react"
+      },
+      {
+        "what": "{ ArrowLeft, ArrowRight }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Button }",
+        "from": "@/components/ui/button"
+      }
+    ],
+    "renders": [
+      "ArrowLeft",
+      "ArrowRight",
+      "Button",
+      "Carousel",
+      "CarouselContext",
+      "CarouselContextProps",
+      "HTMLDivElement"
+    ],
+    "classNames": [
+      "overflow-hidden",
+      "sr-only",
+      "sr-only"
+    ]
+  },
+  "components/ui/chart.tsx": {
+    "componentName": "useChart",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as RechartsPrimitive",
+        "from": "recharts"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "ChartContainer",
+      "ChartContext",
+      "ChartContextProps",
+      "ChartStyle",
+      "RechartsPrimitive"
+    ],
+    "classNames": [
+      "grid gap-1.5",
+      "grid gap-1.5",
+      "text-muted-foreground",
+      "text-foreground font-mono font-medium tabular-nums",
+      "[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
+      "h-2 w-2 shrink-0 rounded-[2px]"
+    ]
+  },
+  "components/ui/checkbox.tsx": {
+    "componentName": "Checkbox",
+    "params": "{ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as CheckboxPrimitive",
+        "from": "@radix-ui/react-checkbox"
+      },
+      {
+        "what": "{ CheckIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "CheckIcon",
+      "CheckboxPrimitive"
+    ],
+    "classNames": [
+      "flex items-center justify-center text-current transition-none",
+      "size-3.5"
+    ]
+  },
+  "components/ui/collapsible.tsx": {
+    "componentName": "Collapsible",
+    "params": "{ ...props }: React.ComponentProps<typeof CollapsiblePrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as CollapsiblePrimitive",
+        "from": "@radix-ui/react-collapsible"
+      }
+    ],
+    "renders": [
+      "CollapsiblePrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/command.tsx": {
+    "componentName": "Command",
+    "params": "{ className, ...props }: React.ComponentProps<typeof CommandPrimitive>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ Command as CommandPrimitive }",
+        "from": "cmdk"
+      },
+      {
+        "what": "{ SearchIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, }",
+        "from": "@/components/ui/dialog"
+      }
+    ],
+    "renders": [
+      "Command",
+      "CommandPrimitive",
+      "Dialog",
+      "DialogContent",
+      "DialogDescription",
+      "DialogHeader",
+      "DialogTitle",
+      "SearchIcon"
+    ],
+    "classNames": [
+      "sr-only",
+      "[&_[cmdk-group-heading]]:text-muted-foreground **:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5",
+      "flex h-9 items-center gap-2 border-b px-3",
+      "size-4 shrink-0 opacity-50",
+      "py-6 text-center text-sm"
+    ]
+  },
+  "components/ui/context-menu.tsx": {
+    "componentName": "ContextMenu",
+    "params": "{ ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as ContextMenuPrimitive",
+        "from": "@radix-ui/react-context-menu"
+      },
+      {
+        "what": "{ CheckIcon, ChevronRightIcon, CircleIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "CheckIcon",
+      "ChevronRightIcon",
+      "CircleIcon",
+      "ContextMenuPrimitive"
+    ],
+    "classNames": [
+      "ml-auto",
+      "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
+      "size-4",
+      "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
+      "size-2 fill-current"
+    ]
+  },
+  "components/ui/dialog.tsx": {
+    "componentName": "Dialog",
+    "params": "{ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as DialogPrimitive",
+        "from": "@radix-ui/react-dialog"
+      },
+      {
+        "what": "{ XIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "DialogOverlay",
+      "DialogPortal",
+      "DialogPrimitive",
+      "XIcon"
+    ],
+    "classNames": [
+      "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+      "sr-only"
+    ]
+  },
+  "components/ui/drawer.tsx": {
+    "componentName": "Drawer",
+    "params": "{ ...props }: React.ComponentProps<typeof DrawerPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ Drawer as DrawerPrimitive }",
+        "from": "vaul"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "DrawerOverlay",
+      "DrawerPortal",
+      "DrawerPrimitive"
+    ],
+    "classNames": [
+      "bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block"
+    ]
+  },
+  "components/ui/dropdown-menu.tsx": {
+    "componentName": "DropdownMenu",
+    "params": "{ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as DropdownMenuPrimitive",
+        "from": "@radix-ui/react-dropdown-menu"
+      },
+      {
+        "what": "{ CheckIcon, ChevronRightIcon, CircleIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "CheckIcon",
+      "ChevronRightIcon",
+      "CircleIcon",
+      "DropdownMenuPrimitive"
+    ],
+    "classNames": [
+      "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
+      "size-4",
+      "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
+      "size-2 fill-current",
+      "ml-auto size-4"
+    ]
+  },
+  "components/ui/empty.tsx": {
+    "componentName": "Empty",
+    "params": "{ className, ...props }: React.ComponentProps<'div'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [],
+    "classNames": []
+  },
+  "components/ui/field.tsx": {
+    "componentName": "FieldSet",
+    "params": "{ className, ...props }: React.ComponentProps<'fieldset'>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "{ useMemo }",
+        "from": "react"
+      },
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Label }",
+        "from": "@/components/ui/label"
+      },
+      {
+        "what": "{ Separator }",
+        "from": "@/components/ui/separator"
+      }
+    ],
+    "renders": [
+      "Label",
+      "Separator"
+    ],
+    "classNames": [
+      "absolute inset-0 top-1/2",
+      "bg-background text-muted-foreground relative mx-auto block w-fit px-2",
+      "ml-4 flex list-disc flex-col gap-1"
+    ]
+  },
+  "components/ui/form.tsx": {
+    "componentName": "FormItem",
+    "params": "{ className, ...props }: React.ComponentProps<'div'>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as LabelPrimitive",
+        "from": "@radix-ui/react-label"
+      },
+      {
+        "what": "{ Slot }",
+        "from": "@radix-ui/react-slot"
+      },
+      {
+        "what": "{ Controller, FormProvider, useFormContext, useFormState, type ControllerProps, type FieldPath, type FieldValues, }",
+        "from": "react-hook-form"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Label }",
+        "from": "@/components/ui/label"
+      }
+    ],
+    "renders": [
+      "Controller",
+      "FormField",
+      "FormFieldContext",
+      "FormFieldContextValue",
+      "FormItemContext",
+      "FormItemContextValue",
+      "Label",
+      "Slot",
+      "TFieldValues"
+    ],
+    "classNames": []
+  },
+  "components/ui/hover-card.tsx": {
+    "componentName": "HoverCard",
+    "params": "{ ...props }: React.ComponentProps<typeof HoverCardPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as HoverCardPrimitive",
+        "from": "@radix-ui/react-hover-card"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "HoverCardPrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/input-group.tsx": {
+    "componentName": "InputGroup",
+    "params": "{ className, ...props }: React.ComponentProps<'div'>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Button }",
+        "from": "@/components/ui/button"
+      },
+      {
+        "what": "{ Input }",
+        "from": "@/components/ui/input"
+      },
+      {
+        "what": "{ Textarea }",
+        "from": "@/components/ui/textarea"
+      }
+    ],
+    "renders": [
+      "Button",
+      "Input",
+      "React",
+      "Textarea"
+    ],
+    "classNames": []
+  },
+  "components/ui/input-otp.tsx": {
+    "componentName": "InputOTP",
+    "params": "{ className, containerClassName, ...props }: React.ComponentProps<typeof OTPInput> & { containerClassName?: string }",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ OTPInput, OTPInputContext }",
+        "from": "input-otp"
+      },
+      {
+        "what": "{ MinusIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "MinusIcon",
+      "OTPInput"
+    ],
+    "classNames": [
+      "pointer-events-none absolute inset-0 flex items-center justify-center",
+      "animate-caret-blink bg-foreground h-4 w-px duration-1000"
+    ]
+  },
+  "components/ui/input.tsx": {
+    "componentName": "Input",
+    "params": "{ className, type, ...props }: React.ComponentProps<'input'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [],
+    "classNames": []
+  },
+  "components/ui/item.tsx": {
+    "componentName": "ItemGroup",
+    "params": "{ className, ...props }: React.ComponentProps<'div'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ Slot }",
+        "from": "@radix-ui/react-slot"
+      },
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Separator }",
+        "from": "@/components/ui/separator"
+      }
+    ],
+    "renders": [
+      "Comp",
+      "Separator"
+    ],
+    "classNames": []
+  },
+  "components/ui/kbd.tsx": {
+    "componentName": "Kbd",
+    "params": "{ className, ...props }: React.ComponentProps<'kbd'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [],
+    "classNames": []
+  },
+  "components/ui/label.tsx": {
+    "componentName": "Label",
+    "params": "{ className, ...props }: React.ComponentProps<typeof LabelPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as LabelPrimitive",
+        "from": "@radix-ui/react-label"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "LabelPrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/menubar.tsx": {
+    "componentName": "Menubar",
+    "params": "{ className, ...props }: React.ComponentProps<typeof MenubarPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as MenubarPrimitive",
+        "from": "@radix-ui/react-menubar"
+      },
+      {
+        "what": "{ CheckIcon, ChevronRightIcon, CircleIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "CheckIcon",
+      "ChevronRightIcon",
+      "CircleIcon",
+      "MenubarPortal",
+      "MenubarPrimitive"
+    ],
+    "classNames": [
+      "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
+      "size-4",
+      "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
+      "size-2 fill-current",
+      "ml-auto h-4 w-4"
+    ]
+  },
+  "components/ui/navigation-menu.tsx": {
+    "componentName": "NavigationMenu",
+    "params": "{ className, children, viewport = true, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & { viewport?: boolean }",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as NavigationMenuPrimitive",
+        "from": "@radix-ui/react-navigation-menu"
+      },
+      {
+        "what": "{ cva }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ ChevronDownIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "ChevronDownIcon",
+      "NavigationMenuPrimitive",
+      "NavigationMenuViewport"
+    ],
+    "classNames": [
+      "relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180",
+      "absolute top-full left-0 isolate z-50 flex justify-center",
+      "bg-border relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm shadow-md"
+    ]
+  },
+  "components/ui/pagination.tsx": {
+    "componentName": "Pagination",
+    "params": "{ className, ...props }: React.ComponentProps<'nav'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon, }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Button, buttonVariants }",
+        "from": "@/components/ui/button"
+      }
+    ],
+    "renders": [
+      "ChevronLeftIcon",
+      "ChevronRightIcon",
+      "MoreHorizontalIcon",
+      "PaginationLink",
+      "React"
+    ],
+    "classNames": [
+      "hidden sm:block",
+      "hidden sm:block",
+      "size-4",
+      "sr-only"
+    ]
+  },
+  "components/ui/popover.tsx": {
+    "componentName": "Popover",
+    "params": "{ ...props }: React.ComponentProps<typeof PopoverPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as PopoverPrimitive",
+        "from": "@radix-ui/react-popover"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "PopoverPrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/progress.tsx": {
+    "componentName": "Progress",
+    "params": "{ className, value, ...props }: React.ComponentProps<typeof ProgressPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as ProgressPrimitive",
+        "from": "@radix-ui/react-progress"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "ProgressPrimitive"
+    ],
+    "classNames": [
+      "bg-primary h-full w-full flex-1 transition-all"
+    ]
+  },
+  "components/ui/radio-group.tsx": {
+    "componentName": "RadioGroup",
+    "params": "{ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as RadioGroupPrimitive",
+        "from": "@radix-ui/react-radio-group"
+      },
+      {
+        "what": "{ CircleIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "CircleIcon",
+      "RadioGroupPrimitive"
+    ],
+    "classNames": [
+      "relative flex items-center justify-center",
+      "fill-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2"
+    ]
+  },
+  "components/ui/resizable.tsx": {
+    "componentName": "ResizablePanelGroup",
+    "params": "{ className, ...props }: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ GripVerticalIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "* as ResizablePrimitive",
+        "from": "react-resizable-panels"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "GripVerticalIcon",
+      "ResizablePrimitive"
+    ],
+    "classNames": [
+      "bg-border z-10 flex h-4 w-3 items-center justify-center rounded-xs border",
+      "size-2.5"
+    ]
+  },
+  "components/ui/scroll-area.tsx": {
+    "componentName": "ScrollArea",
+    "params": "{ className, children, ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as ScrollAreaPrimitive",
+        "from": "@radix-ui/react-scroll-area"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "ScrollAreaPrimitive",
+      "ScrollBar"
+    ],
+    "classNames": [
+      "focus-visible:ring-ring/50 size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:outline-1",
+      "bg-border relative flex-1 rounded-full"
+    ]
+  },
+  "components/ui/select.tsx": {
+    "componentName": "Select",
+    "params": "{ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as SelectPrimitive",
+        "from": "@radix-ui/react-select"
+      },
+      {
+        "what": "{ CheckIcon, ChevronDownIcon, ChevronUpIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "CheckIcon",
+      "ChevronDownIcon",
+      "ChevronUpIcon",
+      "SelectPrimitive",
+      "SelectScrollDownButton",
+      "SelectScrollUpButton"
+    ],
+    "classNames": [
+      "size-4 opacity-50",
+      "absolute right-2 flex size-3.5 items-center justify-center",
+      "size-4",
+      "size-4",
+      "size-4"
+    ]
+  },
+  "components/ui/separator.tsx": {
+    "componentName": "Separator",
+    "params": "{ className, orientation = 'horizontal', decorative = true, ...props }: React.ComponentProps<typeof SeparatorPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as SeparatorPrimitive",
+        "from": "@radix-ui/react-separator"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "SeparatorPrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/sheet.tsx": {
+    "componentName": "Sheet",
+    "params": "{ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as SheetPrimitive",
+        "from": "@radix-ui/react-dialog"
+      },
+      {
+        "what": "{ XIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "SheetOverlay",
+      "SheetPortal",
+      "SheetPrimitive",
+      "XIcon"
+    ],
+    "classNames": [
+      "ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none",
+      "size-4",
+      "sr-only"
+    ]
+  },
+  "components/ui/sidebar.tsx": {
+    "componentName": "useSidebar",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ Slot }",
+        "from": "@radix-ui/react-slot"
+      },
+      {
+        "what": "{ cva, VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ PanelLeftIcon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ useIsMobile }",
+        "from": "@/hooks/use-mobile"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ Button }",
+        "from": "@/components/ui/button"
+      },
+      {
+        "what": "{ Input }",
+        "from": "@/components/ui/input"
+      },
+      {
+        "what": "{ Separator }",
+        "from": "@/components/ui/separator"
+      },
+      {
+        "what": "{ Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, }",
+        "from": "@/components/ui/sheet"
+      },
+      {
+        "what": "{ Skeleton }",
+        "from": "@/components/ui/skeleton"
+      },
+      {
+        "what": "{ Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, }",
+        "from": "@/components/ui/tooltip"
+      }
+    ],
+    "renders": [
+      "Button",
+      "Comp",
+      "Input",
+      "PanelLeftIcon",
+      "Separator",
+      "Sheet",
+      "SheetContent",
+      "SheetDescription",
+      "SheetHeader",
+      "SheetTitle",
+      "SidebarContext",
+      "SidebarContextProps",
+      "Skeleton",
+      "Tooltip",
+      "TooltipContent",
+      "TooltipProvider",
+      "TooltipTrigger"
+    ],
+    "classNames": [
+      "bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden",
+      "sr-only",
+      "flex h-full w-full flex-col",
+      "group peer text-sidebar-foreground hidden md:block",
+      "bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm",
+      "sr-only",
+      "size-4 rounded-md",
+      "h-4 max-w-(--skeleton-width) flex-1"
+    ]
+  },
+  "components/ui/skeleton.tsx": {
+    "componentName": "Skeleton",
+    "params": "{ className, ...props }: React.ComponentProps<'div'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [],
+    "classNames": []
+  },
+  "components/ui/slider.tsx": {
+    "componentName": "Slider",
+    "params": "{ className, defaultValue, value, min = 0, max = 100, ...props }: React.ComponentProps<typeof SliderPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as SliderPrimitive",
+        "from": "@radix-ui/react-slider"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "SliderPrimitive"
+    ],
+    "classNames": [
+      "bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5",
+      "bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full",
+      "border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+    ]
+  },
+  "components/ui/sonner.tsx": {
+    "componentName": "",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "{ useTheme }",
+        "from": "next-themes"
+      },
+      {
+        "what": "{ Toaster as Sonner, ToasterProps }",
+        "from": "sonner"
+      }
+    ],
+    "renders": [
+      "Sonner"
+    ],
+    "classNames": [
+      "toaster group"
+    ]
+  },
+  "components/ui/spinner.tsx": {
+    "componentName": "Spinner",
+    "params": "{ className, ...props }: React.ComponentProps<'svg'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "{ Loader2Icon }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "Loader2Icon"
+    ],
+    "classNames": []
+  },
+  "components/ui/switch.tsx": {
+    "componentName": "Switch",
+    "params": "{ className, ...props }: React.ComponentProps<typeof SwitchPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as SwitchPrimitive",
+        "from": "@radix-ui/react-switch"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "SwitchPrimitive"
+    ],
+    "classNames": [
+      "bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none block size-4 rounded-full ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0"
+    ]
+  },
+  "components/ui/table.tsx": {
+    "componentName": "Table",
+    "params": "{ className, ...props }: React.ComponentProps<'table'>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [],
+    "classNames": [
+      "relative w-full overflow-x-auto"
+    ]
+  },
+  "components/ui/tabs.tsx": {
+    "componentName": "Tabs",
+    "params": "{ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Root>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as TabsPrimitive",
+        "from": "@radix-ui/react-tabs"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "TabsPrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/textarea.tsx": {
+    "componentName": "Textarea",
+    "params": "{ className, ...props }: React.ComponentProps<'textarea'>",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [],
+    "classNames": []
+  },
+  "components/ui/toast.tsx": {
+    "componentName": "",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as ToastPrimitives",
+        "from": "@radix-ui/react-toast"
+      },
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ X }",
+        "from": "lucide-react"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "ToastPrimitives",
+      "X"
+    ],
+    "classNames": [
+      "h-4 w-4"
+    ]
+  },
+  "components/ui/toaster.tsx": {
+    "componentName": "Toaster",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "{ useToast }",
+        "from": "@/hooks/use-toast"
+      },
+      {
+        "what": "{ Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport, }",
+        "from": "@/components/ui/toast"
+      }
+    ],
+    "renders": [
+      "Toast",
+      "ToastClose",
+      "ToastDescription",
+      "ToastProvider",
+      "ToastTitle",
+      "ToastViewport"
+    ],
+    "classNames": [
+      "grid gap-1"
+    ]
+  },
+  "components/ui/toggle-group.tsx": {
+    "componentName": "ToggleGroup",
+    "params": "{ className, variant, size, children, ...props }: React.ComponentProps<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as ToggleGroupPrimitive",
+        "from": "@radix-ui/react-toggle-group"
+      },
+      {
+        "what": "{ type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      },
+      {
+        "what": "{ toggleVariants }",
+        "from": "@/components/ui/toggle"
+      }
+    ],
+    "renders": [
+      "ToggleGroupContext",
+      "ToggleGroupPrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/toggle.tsx": {
+    "componentName": "Toggle",
+    "params": "{ className, variant, size, ...props }: React.ComponentProps<typeof TogglePrimitive.Root> & VariantProps<typeof toggleVariants>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as TogglePrimitive",
+        "from": "@radix-ui/react-toggle"
+      },
+      {
+        "what": "{ cva, type VariantProps }",
+        "from": "class-variance-authority"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "TogglePrimitive"
+    ],
+    "classNames": []
+  },
+  "components/ui/tooltip.tsx": {
+    "componentName": "TooltipProvider",
+    "params": "{ delayDuration = 0, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>",
+    "propsInterfaces": [],
+    "useClient": true,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      },
+      {
+        "what": "* as TooltipPrimitive",
+        "from": "@radix-ui/react-tooltip"
+      },
+      {
+        "what": "{ cn }",
+        "from": "@/lib/utils"
+      }
+    ],
+    "renders": [
+      "TooltipPrimitive",
+      "TooltipProvider"
+    ],
+    "classNames": [
+      "bg-foreground fill-foreground z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]"
+    ]
+  },
+  "components/ui/use-mobile.tsx": {
+    "componentName": "useIsMobile",
+    "params": "",
+    "propsInterfaces": [],
+    "useClient": false,
+    "imports": [
+      {
+        "what": "* as React",
+        "from": "react"
+      }
+    ],
+    "renders": [],
+    "classNames": []
+  }
+}

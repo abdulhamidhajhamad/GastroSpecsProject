@@ -1,0 +1,761 @@
+{
+  "componentUsage": [
+    {
+      "file": "components/CTA.tsx",
+      "used": true,
+      "importers": [
+        "app/page.tsx"
+      ]
+    },
+    {
+      "file": "components/Footer.tsx",
+      "used": true,
+      "importers": [
+        "app/about/page.tsx",
+        "app/catalog/[slug]/page.tsx",
+        "app/catalog/page.tsx",
+        "app/contact/page.tsx",
+        "app/page.tsx",
+        "app/projects/page.tsx",
+        "app/services/page.tsx"
+      ]
+    },
+    {
+      "file": "components/Hero.tsx",
+      "used": true,
+      "importers": [
+        "app/page.tsx"
+      ]
+    },
+    {
+      "file": "components/Navbar.tsx",
+      "used": true,
+      "importers": [
+        "app/about/page.tsx",
+        "app/catalog/[slug]/page.tsx",
+        "app/catalog/page.tsx",
+        "app/contact/page.tsx",
+        "app/page.tsx",
+        "app/projects/page.tsx",
+        "app/services/page.tsx"
+      ]
+    },
+    {
+      "file": "components/ProductFeature.tsx",
+      "used": true,
+      "importers": [
+        "app/page.tsx"
+      ]
+    },
+    {
+      "file": "components/Projects.tsx",
+      "used": true,
+      "importers": [
+        "app/page.tsx"
+      ]
+    },
+    {
+      "file": "components/Solutions.tsx",
+      "used": true,
+      "importers": [
+        "app/page.tsx"
+      ]
+    },
+    {
+      "file": "components/Stats.tsx",
+      "used": true,
+      "importers": [
+        "app/page.tsx"
+      ]
+    },
+    {
+      "file": "components/portal/PortalHeader.tsx",
+      "used": true,
+      "importers": [
+        "app/portal/dashboard/page.tsx",
+        "app/portal/inventory/page.tsx",
+        "app/portal/invoices/page.tsx",
+        "app/portal/leads/page.tsx",
+        "app/portal/orders/page.tsx",
+        "app/portal/procurement/page.tsx",
+        "app/portal/projects/page.tsx",
+        "app/portal/settings/page.tsx",
+        "app/portal/support/page.tsx"
+      ]
+    },
+    {
+      "file": "components/portal/PortalSidebar.tsx",
+      "used": true,
+      "importers": [
+        "app/portal/layout.tsx"
+      ]
+    },
+    {
+      "file": "components/portal/StatCard.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/theme-provider.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/accordion.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/alert-dialog.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/alert.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/aspect-ratio.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/avatar.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/badge.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/breadcrumb.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/button-group.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/button.tsx",
+      "used": true,
+      "importers": [
+        "components/ui/alert-dialog.tsx",
+        "components/ui/calendar.tsx",
+        "components/ui/carousel.tsx",
+        "components/ui/input-group.tsx",
+        "components/ui/pagination.tsx",
+        "components/ui/sidebar.tsx"
+      ]
+    },
+    {
+      "file": "components/ui/calendar.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/card.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/carousel.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/chart.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/checkbox.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/collapsible.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/command.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/context-menu.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/dialog.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/drawer.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/dropdown-menu.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/empty.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/field.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/form.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/hover-card.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/input-group.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/input-otp.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/input.tsx",
+      "used": true,
+      "importers": [
+        "components/ui/input-group.tsx",
+        "components/ui/sidebar.tsx"
+      ]
+    },
+    {
+      "file": "components/ui/item.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/kbd.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/label.tsx",
+      "used": true,
+      "importers": [
+        "components/ui/field.tsx",
+        "components/ui/form.tsx"
+      ]
+    },
+    {
+      "file": "components/ui/menubar.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/navigation-menu.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/pagination.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/popover.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/progress.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/radio-group.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/resizable.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/scroll-area.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/select.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/separator.tsx",
+      "used": true,
+      "importers": [
+        "components/ui/button-group.tsx",
+        "components/ui/field.tsx",
+        "components/ui/item.tsx",
+        "components/ui/sidebar.tsx"
+      ]
+    },
+    {
+      "file": "components/ui/sheet.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/sidebar.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/skeleton.tsx",
+      "used": true,
+      "importers": [
+        "components/ui/sidebar.tsx"
+      ]
+    },
+    {
+      "file": "components/ui/slider.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/sonner.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/spinner.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/switch.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/table.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/tabs.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/textarea.tsx",
+      "used": true,
+      "importers": [
+        "components/ui/input-group.tsx"
+      ]
+    },
+    {
+      "file": "components/ui/toast.tsx",
+      "used": true,
+      "importers": [
+        "components/ui/use-toast.ts",
+        "hooks/use-toast.ts"
+      ]
+    },
+    {
+      "file": "components/ui/toaster.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/toggle-group.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/toggle.tsx",
+      "used": true,
+      "importers": [
+        "components/ui/toggle-group.tsx"
+      ]
+    },
+    {
+      "file": "components/ui/tooltip.tsx",
+      "used": false,
+      "importers": []
+    },
+    {
+      "file": "components/ui/use-mobile.tsx",
+      "used": false,
+      "importers": []
+    }
+  ],
+  "deadExports": [
+    {
+      "file": "attached_assets/Pasted--GastroSpecs-Complete-Replit-Project-Prompt-Senior-Next_1776180908941.txt",
+      "export": "generateWhatsAppLink"
+    },
+    {
+      "file": "attached_assets/Pasted--GastroSpecs-Complete-Replit-Project-Prompt-Senior-Next_1776180908941.txt",
+      "export": "WA_MESSAGES"
+    },
+    {
+      "file": "components/CTA.tsx",
+      "export": "CTA"
+    },
+    {
+      "file": "components/Footer.tsx",
+      "export": "Footer"
+    },
+    {
+      "file": "components/Hero.tsx",
+      "export": "Hero"
+    },
+    {
+      "file": "components/Navbar.tsx",
+      "export": "Navbar"
+    },
+    {
+      "file": "components/ProductFeature.tsx",
+      "export": "ProductFeature"
+    },
+    {
+      "file": "components/Projects.tsx",
+      "export": "Projects"
+    },
+    {
+      "file": "components/Solutions.tsx",
+      "export": "Solutions"
+    },
+    {
+      "file": "components/Stats.tsx",
+      "export": "Stats"
+    },
+    {
+      "file": "components/portal/PortalHeader.tsx",
+      "export": "PortalHeader"
+    },
+    {
+      "file": "components/portal/PortalSidebar.tsx",
+      "export": "PortalSidebar"
+    },
+    {
+      "file": "components/portal/StatCard.tsx",
+      "export": "StatCard"
+    },
+    {
+      "file": "components/theme-provider.tsx",
+      "export": "ThemeProvider"
+    },
+    {
+      "file": "components/ui/accordion.tsx",
+      "export": " Accordion, AccordionItem, AccordionTrigger, AccordionContent "
+    },
+    {
+      "file": "components/ui/alert-dialog.tsx",
+      "export": "\r\n  AlertDialog,\r\n  AlertDialogPortal,\r\n  AlertDialogOverlay,\r\n  AlertDialogTrigger,\r\n  AlertDialogContent,\r\n  AlertDialogHeader,\r\n  AlertDialogFooter,\r\n  AlertDialogTitle,\r\n  AlertDialogDescription,\r\n  AlertDialogAction,\r\n  AlertDialogCancel,\r\n"
+    },
+    {
+      "file": "components/ui/alert.tsx",
+      "export": " Alert, AlertTitle, AlertDescription "
+    },
+    {
+      "file": "components/ui/aspect-ratio.tsx",
+      "export": " AspectRatio "
+    },
+    {
+      "file": "components/ui/avatar.tsx",
+      "export": " Avatar, AvatarImage, AvatarFallback "
+    },
+    {
+      "file": "components/ui/badge.tsx",
+      "export": " Badge, badgeVariants "
+    },
+    {
+      "file": "components/ui/breadcrumb.tsx",
+      "export": "\r\n  Breadcrumb,\r\n  BreadcrumbList,\r\n  BreadcrumbItem,\r\n  BreadcrumbLink,\r\n  BreadcrumbPage,\r\n  BreadcrumbSeparator,\r\n  BreadcrumbEllipsis,\r\n"
+    },
+    {
+      "file": "components/ui/button-group.tsx",
+      "export": "\r\n  ButtonGroup,\r\n  ButtonGroupSeparator,\r\n  ButtonGroupText,\r\n  buttonGroupVariants,\r\n"
+    },
+    {
+      "file": "components/ui/button.tsx",
+      "export": " Button, buttonVariants "
+    },
+    {
+      "file": "components/ui/calendar.tsx",
+      "export": " Calendar, CalendarDayButton "
+    },
+    {
+      "file": "components/ui/card.tsx",
+      "export": "\r\n  Card,\r\n  CardHeader,\r\n  CardFooter,\r\n  CardTitle,\r\n  CardAction,\r\n  CardDescription,\r\n  CardContent,\r\n"
+    },
+    {
+      "file": "components/ui/carousel.tsx",
+      "export": "\r\n  type CarouselApi,\r\n  Carousel,\r\n  CarouselContent,\r\n  CarouselItem,\r\n  CarouselPrevious,\r\n  CarouselNext,\r\n"
+    },
+    {
+      "file": "components/ui/chart.tsx",
+      "export": "ChartConfig"
+    },
+    {
+      "file": "components/ui/chart.tsx",
+      "export": "\r\n  ChartContainer,\r\n  ChartTooltip,\r\n  ChartTooltipContent,\r\n  ChartLegend,\r\n  ChartLegendContent,\r\n  ChartStyle,\r\n"
+    },
+    {
+      "file": "components/ui/checkbox.tsx",
+      "export": " Checkbox "
+    },
+    {
+      "file": "components/ui/collapsible.tsx",
+      "export": " Collapsible, CollapsibleTrigger, CollapsibleContent "
+    },
+    {
+      "file": "components/ui/command.tsx",
+      "export": "\r\n  Command,\r\n  CommandDialog,\r\n  CommandInput,\r\n  CommandList,\r\n  CommandEmpty,\r\n  CommandGroup,\r\n  CommandItem,\r\n  CommandShortcut,\r\n  CommandSeparator,\r\n"
+    },
+    {
+      "file": "components/ui/context-menu.tsx",
+      "export": "\r\n  ContextMenu,\r\n  ContextMenuTrigger,\r\n  ContextMenuContent,\r\n  ContextMenuItem,\r\n  ContextMenuCheckboxItem,\r\n  ContextMenuRadioItem,\r\n  ContextMenuLabel,\r\n  ContextMenuSeparator,\r\n  ContextMenuShortcut,\r\n  ContextMenuGroup,\r\n  ContextMenuPortal,\r\n  ContextMenuSub,\r\n  ContextMenuSubContent,\r\n  ContextMenuSubTrigger,\r\n  ContextMenuRadioGroup,\r\n"
+    },
+    {
+      "file": "components/ui/dialog.tsx",
+      "export": "\r\n  Dialog,\r\n  DialogClose,\r\n  DialogContent,\r\n  DialogDescription,\r\n  DialogFooter,\r\n  DialogHeader,\r\n  DialogOverlay,\r\n  DialogPortal,\r\n  DialogTitle,\r\n  DialogTrigger,\r\n"
+    },
+    {
+      "file": "components/ui/drawer.tsx",
+      "export": "\r\n  Drawer,\r\n  DrawerPortal,\r\n  DrawerOverlay,\r\n  DrawerTrigger,\r\n  DrawerClose,\r\n  DrawerContent,\r\n  DrawerHeader,\r\n  DrawerFooter,\r\n  DrawerTitle,\r\n  DrawerDescription,\r\n"
+    },
+    {
+      "file": "components/ui/dropdown-menu.tsx",
+      "export": "\r\n  DropdownMenu,\r\n  DropdownMenuPortal,\r\n  DropdownMenuTrigger,\r\n  DropdownMenuContent,\r\n  DropdownMenuGroup,\r\n  DropdownMenuLabel,\r\n  DropdownMenuItem,\r\n  DropdownMenuCheckboxItem,\r\n  DropdownMenuRadioGroup,\r\n  DropdownMenuRadioItem,\r\n  DropdownMenuSeparator,\r\n  DropdownMenuShortcut,\r\n  DropdownMenuSub,\r\n  DropdownMenuSubTrigger,\r\n  DropdownMenuSubContent,\r\n"
+    },
+    {
+      "file": "components/ui/empty.tsx",
+      "export": "\r\n  Empty,\r\n  EmptyHeader,\r\n  EmptyTitle,\r\n  EmptyDescription,\r\n  EmptyContent,\r\n  EmptyMedia,\r\n"
+    },
+    {
+      "file": "components/ui/field.tsx",
+      "export": "\r\n  Field,\r\n  FieldLabel,\r\n  FieldDescription,\r\n  FieldError,\r\n  FieldGroup,\r\n  FieldLegend,\r\n  FieldSeparator,\r\n  FieldSet,\r\n  FieldContent,\r\n  FieldTitle,\r\n"
+    },
+    {
+      "file": "components/ui/form.tsx",
+      "export": "\r\n  useFormField,\r\n  Form,\r\n  FormItem,\r\n  FormLabel,\r\n  FormControl,\r\n  FormDescription,\r\n  FormMessage,\r\n  FormField,\r\n"
+    },
+    {
+      "file": "components/ui/hover-card.tsx",
+      "export": " HoverCard, HoverCardTrigger, HoverCardContent "
+    },
+    {
+      "file": "components/ui/input-group.tsx",
+      "export": "\r\n  InputGroup,\r\n  InputGroupAddon,\r\n  InputGroupButton,\r\n  InputGroupText,\r\n  InputGroupInput,\r\n  InputGroupTextarea,\r\n"
+    },
+    {
+      "file": "components/ui/input-otp.tsx",
+      "export": " InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator "
+    },
+    {
+      "file": "components/ui/input.tsx",
+      "export": " Input "
+    },
+    {
+      "file": "components/ui/item.tsx",
+      "export": "\r\n  Item,\r\n  ItemMedia,\r\n  ItemContent,\r\n  ItemActions,\r\n  ItemGroup,\r\n  ItemSeparator,\r\n  ItemTitle,\r\n  ItemDescription,\r\n  ItemHeader,\r\n  ItemFooter,\r\n"
+    },
+    {
+      "file": "components/ui/kbd.tsx",
+      "export": " Kbd, KbdGroup "
+    },
+    {
+      "file": "components/ui/label.tsx",
+      "export": " Label "
+    },
+    {
+      "file": "components/ui/menubar.tsx",
+      "export": "\r\n  Menubar,\r\n  MenubarPortal,\r\n  MenubarMenu,\r\n  MenubarTrigger,\r\n  MenubarContent,\r\n  MenubarGroup,\r\n  MenubarSeparator,\r\n  MenubarLabel,\r\n  MenubarItem,\r\n  MenubarShortcut,\r\n  MenubarCheckboxItem,\r\n  MenubarRadioGroup,\r\n  MenubarRadioItem,\r\n  MenubarSub,\r\n  MenubarSubTrigger,\r\n  MenubarSubContent,\r\n"
+    },
+    {
+      "file": "components/ui/navigation-menu.tsx",
+      "export": "\r\n  NavigationMenu,\r\n  NavigationMenuList,\r\n  NavigationMenuItem,\r\n  NavigationMenuContent,\r\n  NavigationMenuTrigger,\r\n  NavigationMenuLink,\r\n  NavigationMenuIndicator,\r\n  NavigationMenuViewport,\r\n  navigationMenuTriggerStyle,\r\n"
+    },
+    {
+      "file": "components/ui/pagination.tsx",
+      "export": "\r\n  Pagination,\r\n  PaginationContent,\r\n  PaginationLink,\r\n  PaginationItem,\r\n  PaginationPrevious,\r\n  PaginationNext,\r\n  PaginationEllipsis,\r\n"
+    },
+    {
+      "file": "components/ui/popover.tsx",
+      "export": " Popover, PopoverTrigger, PopoverContent, PopoverAnchor "
+    },
+    {
+      "file": "components/ui/progress.tsx",
+      "export": " Progress "
+    },
+    {
+      "file": "components/ui/radio-group.tsx",
+      "export": " RadioGroup, RadioGroupItem "
+    },
+    {
+      "file": "components/ui/resizable.tsx",
+      "export": " ResizablePanelGroup, ResizablePanel, ResizableHandle "
+    },
+    {
+      "file": "components/ui/scroll-area.tsx",
+      "export": " ScrollArea, ScrollBar "
+    },
+    {
+      "file": "components/ui/select.tsx",
+      "export": "\r\n  Select,\r\n  SelectContent,\r\n  SelectGroup,\r\n  SelectItem,\r\n  SelectLabel,\r\n  SelectScrollDownButton,\r\n  SelectScrollUpButton,\r\n  SelectSeparator,\r\n  SelectTrigger,\r\n  SelectValue,\r\n"
+    },
+    {
+      "file": "components/ui/separator.tsx",
+      "export": " Separator "
+    },
+    {
+      "file": "components/ui/sheet.tsx",
+      "export": "\r\n  Sheet,\r\n  SheetTrigger,\r\n  SheetClose,\r\n  SheetContent,\r\n  SheetHeader,\r\n  SheetFooter,\r\n  SheetTitle,\r\n  SheetDescription,\r\n"
+    },
+    {
+      "file": "components/ui/sidebar.tsx",
+      "export": "\r\n  Sidebar,\r\n  SidebarContent,\r\n  SidebarFooter,\r\n  SidebarGroup,\r\n  SidebarGroupAction,\r\n  SidebarGroupContent,\r\n  SidebarGroupLabel,\r\n  SidebarHeader,\r\n  SidebarInput,\r\n  SidebarInset,\r\n  SidebarMenu,\r\n  SidebarMenuAction,\r\n  SidebarMenuBadge,\r\n  SidebarMenuButton,\r\n  SidebarMenuItem,\r\n  SidebarMenuSkeleton,\r\n  SidebarMenuSub,\r\n  SidebarMenuSubButton,\r\n  SidebarMenuSubItem,\r\n  SidebarProvider,\r\n  SidebarRail,\r\n  SidebarSeparator,\r\n  SidebarTrigger,\r\n  useSidebar,\r\n"
+    },
+    {
+      "file": "components/ui/skeleton.tsx",
+      "export": " Skeleton "
+    },
+    {
+      "file": "components/ui/slider.tsx",
+      "export": " Slider "
+    },
+    {
+      "file": "components/ui/sonner.tsx",
+      "export": " Toaster "
+    },
+    {
+      "file": "components/ui/spinner.tsx",
+      "export": " Spinner "
+    },
+    {
+      "file": "components/ui/switch.tsx",
+      "export": " Switch "
+    },
+    {
+      "file": "components/ui/table.tsx",
+      "export": "\r\n  Table,\r\n  TableHeader,\r\n  TableBody,\r\n  TableFooter,\r\n  TableHead,\r\n  TableRow,\r\n  TableCell,\r\n  TableCaption,\r\n"
+    },
+    {
+      "file": "components/ui/tabs.tsx",
+      "export": " Tabs, TabsList, TabsTrigger, TabsContent "
+    },
+    {
+      "file": "components/ui/textarea.tsx",
+      "export": " Textarea "
+    },
+    {
+      "file": "components/ui/toast.tsx",
+      "export": "\r\n  type ToastProps,\r\n  type ToastActionElement,\r\n  ToastProvider,\r\n  ToastViewport,\r\n  Toast,\r\n  ToastTitle,\r\n  ToastDescription,\r\n  ToastClose,\r\n  ToastAction,\r\n"
+    },
+    {
+      "file": "components/ui/toaster.tsx",
+      "export": "Toaster"
+    },
+    {
+      "file": "components/ui/toggle-group.tsx",
+      "export": " ToggleGroup, ToggleGroupItem "
+    },
+    {
+      "file": "components/ui/toggle.tsx",
+      "export": " Toggle, toggleVariants "
+    },
+    {
+      "file": "components/ui/tooltip.tsx",
+      "export": " Tooltip, TooltipTrigger, TooltipContent, TooltipProvider "
+    },
+    {
+      "file": "components/ui/use-mobile.tsx",
+      "export": "useIsMobile"
+    },
+    {
+      "file": "components/ui/use-toast.ts",
+      "export": "reducer"
+    },
+    {
+      "file": "components/ui/use-toast.ts",
+      "export": " useToast, toast "
+    },
+    {
+      "file": "data/products.ts",
+      "export": "getProductsByCategory"
+    },
+    {
+      "file": "data/products.ts",
+      "export": "Product"
+    },
+    {
+      "file": "data/projects.ts",
+      "export": "CaseStudy"
+    },
+    {
+      "file": "data/services.ts",
+      "export": "Service"
+    },
+    {
+      "file": "hooks/use-toast.ts",
+      "export": "reducer"
+    },
+    {
+      "file": "hooks/use-toast.ts",
+      "export": " useToast, toast "
+    },
+    {
+      "file": "lib/home-data.ts",
+      "export": "LinkItem"
+    },
+    {
+      "file": "lib/home-data.ts",
+      "export": "StatIcon"
+    },
+    {
+      "file": "lib/home-data.ts",
+      "export": "StatItem"
+    },
+    {
+      "file": "lib/home-data.ts",
+      "export": "SolutionIcon"
+    },
+    {
+      "file": "lib/home-data.ts",
+      "export": "SolutionItem"
+    },
+    {
+      "file": "lib/home-data.ts",
+      "export": "ProjectItem"
+    },
+    {
+      "file": "lib/home-data.ts",
+      "export": "SocialPlatform"
+    },
+    {
+      "file": "lib/home-data.ts",
+      "export": "SocialLinkItem"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 
+import { SITE_URL } from '@/lib/constants'
 import { siteConfig } from '@/lib/home-data'
 import './globals.css'
 
@@ -16,6 +17,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: `${siteConfig.name} | Commercial Kitchen Engineering`,
   description: siteConfig.description,
   icons: {

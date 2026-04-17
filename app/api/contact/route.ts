@@ -1,23 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { CONTACT_SUCCESS_PATH } from '@/lib/constants'
+import { parseContactFormData } from '@/lib/validations'
+import type { ApiErrorResponse } from '@/types'
+
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
 
-    const fullName = formData.get('fullName')?.toString() ?? ''
-    const company = formData.get('company')?.toString() ?? ''
-    const email = formData.get('email')?.toString() ?? ''
-    const phone = formData.get('phone')?.toString() ?? ''
-    const scope = formData.get('scope')?.toString() ?? ''
-
-    if (!fullName || !email) {
-      return NextResponse.json({ error: 'Name and email are required.' }, { status: 400 })
+    const parsed = parseContactFormData(formData)
+    if (!parsed.success) {
+      const validationError: ApiErrorResponse = {
+        success: false,
+        error: 'Invalid quote request payload.',
+        details: parsed.error.flatten().fieldErrors,
+      }
+      return NextResponse.json(validationError, { status: 400 })
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 })
-    }
+    const { fullName, company, email, phone, scope, categories } = parsed.data
 
     console.log('New quote request:', {
       fullName,
@@ -25,12 +26,19 @@ export async function POST(request: NextRequest) {
       email,
       phone,
       scope,
+      categories,
       timestamp: new Date().toISOString(),
     })
 
-    return NextResponse.redirect(new URL('/contact?submitted=true', request.url))
+    return NextResponse.redirect(new URL(CONTACT_SUCCESS_PATH, request.url))
   } catch (error) {
     console.error('Contact form error:', error)
-    return NextResponse.json({ error: 'Internal server error.' }, { status: 500 })
+
+    const serverError: ApiErrorResponse = {
+      success: false,
+      error: 'Internal server error.',
+    }
+
+    return NextResponse.json(serverError, { status: 500 })
   }
 }

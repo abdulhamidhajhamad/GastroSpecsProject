@@ -1,21 +1,6 @@
-export type Product = {
-  slug: string
-  brand: string
-  name: string
-  category: string
-  tags: string[]
-  image: string
-  price: string
-  priceHigh?: string
-  description: string
-  specs: { label: string; value: string }[]
-  certifications: string[]
-  leadTime: string
-  inStock: boolean
-  related?: string[]
-}
+import type { Product, ProductCategoryOption } from '@/types'
 
-export const categories = [
+export const categories: ProductCategoryOption[] = [
   { id: 'all', label: 'ALL EQUIPMENT' },
   { id: 'cooking', label: 'COOKING' },
   { id: 'refrigeration', label: 'REFRIGERATION' },
@@ -31,7 +16,7 @@ export const products: Product[] = [
     name: 'iCombi Pro 10-Grid',
     category: 'cooking',
     tags: ['ELECTRIC', '10 × 1/1 GN', 'INTELLIGENT COOKING'],
-    image: '/assets/vulcan_master_series.png',
+    image: '/images/vulcan_master_series.png',
     price: '$14,200',
     priceHigh: '$16,500',
     description:
@@ -55,7 +40,7 @@ export const products: Product[] = [
     name: 'Primus Flight-Type Dishwasher',
     category: 'dishwashing',
     tags: ['HIGH VOLUME', 'SERVOTRONICS CONTROL'],
-    image: '/assets/project_obsidian_grill.png',
+    image: '/images/project_obsidian_grill.png',
     price: '$28,000',
     priceHigh: '$34,000',
     description:
@@ -79,7 +64,7 @@ export const products: Product[] = [
     name: 'ChefStep MindBig',
     category: 'cooking',
     tags: ['GAS/ELEC', 'CLIMATER TECH'],
-    image: '/assets/project_global_tech_hq.png',
+    image: '/images/project_global_tech_hq.png',
     price: '$8,900',
     description:
       'Next-generation combi unit blending sous-vide precision with convection steam intelligence. Ideal for pastry, fish, and delicate proteins.',
@@ -100,7 +85,7 @@ export const products: Product[] = [
     name: 'Opal G5 Refrigerated Counter',
     category: 'refrigeration',
     tags: ['R290 GAS', '2-DOOR'],
-    image: '/assets/hero_kitchen_pano.png',
+    image: '/images/hero_kitchen_pano.png',
     price: '$4,100',
     priceHigh: '$5,200',
     description:
@@ -122,7 +107,7 @@ export const products: Product[] = [
     name: 'EV0900 Gas Boiling Top',
     category: 'cooking',
     tags: ['GAS POWERED', '6 BURNERS'],
-    image: '/assets/vulcan_master_series.png',
+    image: '/images/vulcan_master_series.png',
     price: '$3,200',
     description:
       'Heavy-duty six-burner gas top designed for continuous high-output kitchen environments. Full stainless steel construction with cast iron grates.',
@@ -143,7 +128,7 @@ export const products: Product[] = [
     name: 'EcoPro G5 Cabinet',
     category: 'refrigeration',
     tags: ['STAINLESS STEEL', 'LOW ENERGY'],
-    image: '/assets/project_obsidian_grill.png',
+    image: '/images/project_obsidian_grill.png',
     price: '$2,800',
     description:
       'The EcoPro G5 upright refrigeration cabinet is engineered for efficiency and durability. Features hydrocarbon refrigerant and superior insulation.',
@@ -164,7 +149,7 @@ export const products: Product[] = [
     name: 'Evolution Series Range',
     category: 'cooking',
     tags: ['ROBAN WIDTH', 'GAS OVEN'],
-    image: '/assets/project_global_tech_hq.png',
+    image: '/images/project_global_tech_hq.png',
     price: '$6,500',
     priceHigh: '$9,000',
     description:
@@ -186,7 +171,7 @@ export const products: Product[] = [
     name: 'Star 90 Solid Top',
     category: 'cooking',
     tags: ['HEAVY DUTY', '4-ZONE'],
-    image: '/assets/hero_kitchen_pano.png',
+    image: '/images/hero_kitchen_pano.png',
     price: '$4,400',
     description:
       'Solid carbon steel top with 4 independent heat zones. The preferred choice for teppanyaki-style operations and high-volume sauté stations.',
@@ -207,7 +192,7 @@ export const products: Product[] = [
     name: 'V-Series 36" Heavy-Duty Modular Range',
     category: 'cooking',
     tags: ['GAS', 'MODULAR', 'HEAVY DUTY'],
-    image: '/assets/vulcan_master_series.png',
+    image: '/images/vulcan_master_series.png',
     price: '$11,800',
     priceHigh: '$14,200',
     description:
@@ -232,7 +217,7 @@ export const products: Product[] = [
     name: 'Blast Chiller / Freezer 10-Tray',
     category: 'refrigeration',
     tags: ['BLAST CHILL', 'SHOCK FREEZE'],
-    image: '/assets/project_obsidian_grill.png',
+    image: '/images/project_obsidian_grill.png',
     price: '$9,200',
     description:
       'Professional blast chiller and shock freezer for HACCP compliance. Rapidly reduces food temperature to safe levels, preserving quality and texture.',
@@ -253,7 +238,7 @@ export const products: Product[] = [
     name: 'Induction Power Griddle',
     category: 'cooking',
     tags: ['INDUCTION', 'HIGH EFFICIENCY'],
-    image: '/assets/hero_kitchen_pano.png',
+    image: '/images/hero_kitchen_pano.png',
     price: '$5,600',
     description:
       'Professional induction griddle with uniform heating across the entire cooking surface. 40% energy savings over conventional gas griddles.',
@@ -274,7 +259,7 @@ export const products: Product[] = [
     name: 'Low-Temp Under-Counter Dishwasher',
     category: 'dishwashing',
     tags: ['LOW TEMP', 'CHEMICAL SANITIZE'],
-    image: '/assets/project_global_tech_hq.png',
+    image: '/images/project_global_tech_hq.png',
     price: '$3,800',
     description:
       'Compact chemical sanitizing undercounter dishwasher for bars, cafés, and small operations. Quiet operation, easy to service.',
@@ -292,10 +277,5 @@ export const products: Product[] = [
 ]
 
 export function getProductBySlug(slug: string): Product | undefined {
-  return products.find((p) => p.slug === slug)
-}
-
-export function getProductsByCategory(category: string): Product[] {
-  if (category === 'all') return products
-  return products.filter((p) => p.category === category)
+  return products.find((product) => product.slug === slug)
 }
