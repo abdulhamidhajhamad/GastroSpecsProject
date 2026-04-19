@@ -36,10 +36,10 @@ export const heroContent = {
     href: '/services',
   },
   image: {
-    src: '/images/vulcan_master_series.png',
-    alt: 'Vulcan Master Series modular commercial kitchen equipment',
-    width: 680,
-    height: 420,
+    src: '/images/land1.jpeg',
+    alt: 'Commercial Kitchen Layout',
+    width: 1200,
+    height: 900,
   },
 } as const
 
@@ -54,17 +54,17 @@ export type StatItem = {
 export const stats: StatItem[] = [
   {
     icon: 'coverage',
-    value: '45+',
-    label: 'Countries Covered',
+    value: 'Worldwide',
+    label: 'Global Shipping',
   },
   {
     icon: 'awards',
-    value: '12',
-    label: 'Design Awards',
+    value: 'Expert',
+    label: 'Kitchen Design',
   },
   {
     icon: 'items',
-    value: '10k+',
+    value: '500+',
     label: 'Items Sourced',
   },
 ]
@@ -120,26 +120,30 @@ export type ProjectItem = {
   image: string
   category: string
   title: string
+  description?: string
   href: string
 }
 
 export const projects: ProjectItem[] = [
   {
-    image: '/images/project_obsidian_grill.png',
-    category: 'Project',
-    title: 'The Obsidian Grill',
+    image: '/images/pic1.jpeg',
+    category: 'Retail & Supermarkets',
+    title: 'Commercial Refrigeration',
+    description: 'We supply and install complete cooling setups, from heavy-duty walk-in freezers to sleek, multi-deck display units for every supermarket department.',
     href: '/projects/obsidian-grill-fine-dining',
   },
   {
-    image: '/images/project_global_tech_hq.png',
-    category: 'Project',
-    title: 'Global Tech HQ',
+    image: '/images/pic2.jpeg',
+    category: 'Enterprise Kitchens',
+    title: 'Hotels & Mega Kitchens',
+    description: 'Built for peak volume. We design and fully equip industrial-grade kitchens tailored for luxury hotels, resorts, and large-scale catering facilities.',
     href: '/projects/global-tech-hq-exclusive-dining',
   },
   {
-    image: '/images/hero_kitchen_pano.png',
-    category: 'Project',
-    title: 'Skyline Culinary Lab',
+    image: '/images/pic3.jpeg',
+    category: 'Café & Bakery',
+    title: 'Coffee Shops & Bakeries',
+    description: 'From precision baking ovens to stunning pastry display cases, we source everything you need to bring your artisanal café or bakery concept to life.',
     href: '/projects/culinary-academy-innovation-lab',
   },
 ]

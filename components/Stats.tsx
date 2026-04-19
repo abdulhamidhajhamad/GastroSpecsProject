@@ -1,35 +1,39 @@
 import { stats, type StatIcon } from '@/lib/home-data'
 
 function renderStatIcon(icon: StatIcon) {
+  const svgProps = {
+    width: "32",
+    height: "32",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "#000",
+    strokeWidth: "1.5",
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": "true",
+  }
+
   switch (icon) {
     case 'coverage':
       return (
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-          <circle cx="14" cy="14" r="12" stroke="#000" strokeWidth="1.5" />
-          <ellipse cx="14" cy="14" rx="5.5" ry="12" stroke="#000" strokeWidth="1.5" />
-          <line x1="2" y1="14" x2="26" y2="14" stroke="#000" strokeWidth="1.5" />
-          <line x1="4" y1="8" x2="24" y2="8" stroke="#000" strokeWidth="1.2" />
-          <line x1="4" y1="20" x2="24" y2="20" stroke="#000" strokeWidth="1.2" />
+        <svg {...svgProps}>
+          <circle cx="12" cy="12" r="10" />
+          <line x1="2" y1="12" x2="22" y2="12" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
         </svg>
       )
     case 'awards':
       return (
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-          <path
-            d="M14 3L17.09 9.26L24 10.27L19 15.14L20.18 22.02L14 18.77L7.82 22.02L9 15.14L4 10.27L10.91 9.26L14 3Z"
-            stroke="#000"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-          />
-          <path d="M9 24h10" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+        <svg {...svgProps}>
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
         </svg>
       )
     case 'items':
       return (
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-          <rect x="5" y="10" width="18" height="14" rx="1" stroke="#000" strokeWidth="1.5" />
-          <path d="M9 10V7a5 5 0 0 1 10 0v3" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M10 16h8M10 19h5" stroke="#000" strokeWidth="1.2" strokeLinecap="round" />
+        <svg {...svgProps}>
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+          <polyline points="3.29 7 12 12 20.71 7" />
+          <line x1="12" y1="22" x2="12" y2="12" />
         </svg>
       )
     default:
@@ -45,14 +49,16 @@ export default function Stats() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="flex items-center justify-center gap-4 py-7 px-6"
+              className="flex flex-row items-center justify-center gap-5 py-8 px-6"
             >
-              <div className="shrink-0">{renderStatIcon(stat.icon)}</div>
-              <div>
-                <p className="font-sans text-xl font-semibold text-black leading-none mb-1">
+              <div className="flex items-center justify-center text-black shrink-0">
+                {renderStatIcon(stat.icon)}
+              </div>
+              <div className="flex flex-col justify-center">
+                <p className="font-sans text-[22px] font-semibold text-black leading-tight">
                   {stat.value}
                 </p>
-                <p className="font-sans text-xs text-gray-500 tracking-wide">
+                <p className="font-sans text-[13px] text-gray-500 tracking-wide font-medium mt-[2px] leading-tight">
                   {stat.label}
                 </p>
               </div>

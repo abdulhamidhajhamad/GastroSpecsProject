@@ -42,13 +42,13 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="relative bg-[#e8e8e8] min-h-[380px] lg:min-h-full flex items-center justify-center">
+          <div className="relative w-full h-full min-h-[380px] lg:min-h-full">
             <Image
               src={heroContent.image.src}
               alt={heroContent.image.alt}
               width={heroContent.image.width}
               height={heroContent.image.height}
-              className="object-contain w-full h-auto p-4"
+              className="object-cover w-full h-full absolute inset-0"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
             />

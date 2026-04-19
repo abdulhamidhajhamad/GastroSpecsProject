@@ -35,9 +35,14 @@ export default function Projects() {
                 <p className="font-sans text-[10px] tracking-[0.18em] text-gray-400 uppercase mb-1">
                   {project.category}
                 </p>
-                <h3 className="font-sans text-sm font-medium text-black tracking-tight">
+                <h3 className="font-sans text-[15px] font-semibold text-black tracking-tight mb-2">
                   {project.title}
                 </h3>
+                {project.description && (
+                  <p className="font-sans text-[13px] text-gray-500 leading-relaxed max-w-[95%]">
+                    {project.description}
+                  </p>
+                )}
               </div>
             </Link>
           ))}
