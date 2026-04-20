@@ -8,6 +8,7 @@ const navItems = [
   { label: 'Leads / CRM', href: '/portal/leads', icon: LeadsIcon },
   { label: 'Projects', href: '/portal/projects', icon: ProjectsIcon },
   { label: 'Procurement', href: '/portal/procurement', icon: ProcurementIcon },
+  { label: 'Suppliers', href: '/portal/suppliers', icon: SuppliersIcon },
   { label: 'Orders', href: '/portal/orders', icon: OrdersIcon },
   { label: 'Invoices', href: '/portal/invoices', icon: InvoicesIcon },
   { label: 'Support', href: '/portal/support', icon: SupportIcon },
@@ -48,6 +49,16 @@ function ProcurementIcon() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
       <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
       <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+    </svg>
+  )
+}
+function SuppliersIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <rect x="3" y="7" width="18" height="13" rx="1" />
+      <path d="M7 7V4h10v3" />
+      <path d="M8 13h8" />
+      <path d="M10 17h4" />
     </svg>
   )
 }
