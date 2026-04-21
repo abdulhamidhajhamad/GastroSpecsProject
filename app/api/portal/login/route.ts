@@ -8,8 +8,20 @@ import {
 } from '@/lib/constants'
 import { portalLoginSchema } from '@/lib/validations'
 
+function getRedirectOrigin(request: NextRequest) {
+  if (process.env.NODE_ENV !== 'production' && request.nextUrl.hostname === '0.0.0.0') {
+    return request.nextUrl.origin.replace('0.0.0.0', 'localhost')
+  }
+
+  return request.nextUrl.origin
+}
+
+function buildRedirectUrl(request: NextRequest, path: string) {
+  return new URL(path, getRedirectOrigin(request))
+}
+
 function buildLoginRedirect(request: NextRequest, errorCode: string, nextPath?: string) {
-  const loginUrl = new URL(PORTAL_LOGIN_PATH, request.url)
+  const loginUrl = buildRedirectUrl(request, PORTAL_LOGIN_PATH)
   loginUrl.searchParams.set('error', errorCode)
 
   if (nextPath) {
@@ -49,7 +61,7 @@ export async function POST(request: NextRequest) {
     }
 
     const targetPath = parsed.data.next ?? PORTAL_DASHBOARD_PATH
-    const response = NextResponse.redirect(new URL(targetPath, request.url))
+    const response = NextResponse.redirect(buildRedirectUrl(request, targetPath))
 
     response.cookies.set(PORTAL_SESSION_COOKIE, 'active', {
       httpOnly: true,
