@@ -85,7 +85,7 @@ export default function MachineDrawer({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => (!open ? onClose() : null)}>
-      <DialogContent showCloseButton={false} className="w-[720px] max-w-[95vw] h-[85vh] max-h-[85vh] p-0 gap-0 rounded-none border border-gray-200 flex flex-col overflow-hidden bg-white">
+      <DialogContent showCloseButton={false} className="w-[800px] max-w-[95vw] h-[85vh] max-h-[85vh] p-0 gap-0 rounded-none border border-gray-200 flex flex-col overflow-hidden bg-white">
         <DialogTitle className="sr-only">
           {isEditMode ? 'Edit machine' : 'Add new machine'}
         </DialogTitle>

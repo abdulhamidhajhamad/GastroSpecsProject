@@ -12,7 +12,7 @@ type MachineDeleteModalProps = {
 export default function MachineDeleteModal({ machine, onConfirm, onCancel }: MachineDeleteModalProps) {
   return (
     <Dialog open={Boolean(machine)} onOpenChange={(open) => (!open ? onCancel() : null)}>
-      <DialogContent showCloseButton={false} className="max-w-md p-0 gap-0 rounded-none border border-gray-200">
+      <DialogContent showCloseButton={false} className="max-w-[480px] p-0 gap-0 rounded-none border border-gray-200">
         <div className="px-6 py-5 border-b border-gray-200">
           <h2 className="font-sans font-semibold text-sm tracking-[0.12em] uppercase text-black">DELETE MACHINE</h2>
         </div>

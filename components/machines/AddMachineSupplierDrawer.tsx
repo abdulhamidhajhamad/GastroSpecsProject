@@ -58,7 +58,7 @@ export default function AddMachineSupplierDrawer({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => (!open ? onClose() : null)}>
-      <DialogContent showCloseButton={false} className="w-[720px] max-w-[95vw] h-[85vh] max-h-[85vh] p-0 gap-0 rounded-none border border-gray-200 flex flex-col overflow-hidden bg-white">
+      <DialogContent showCloseButton={false} className="w-[800px] max-w-[95vw] h-[85vh] max-h-[85vh] p-0 gap-0 rounded-none border border-gray-200 flex flex-col overflow-hidden bg-white">
         <DialogTitle className="sr-only">Link Supplier</DialogTitle>
         <div className="flex h-full flex-col bg-white">
           <div className="px-6 py-5 border-b border-gray-200 bg-gray-50">
