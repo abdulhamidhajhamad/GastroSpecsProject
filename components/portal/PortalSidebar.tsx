@@ -9,6 +9,7 @@ const navItems = [
   { label: 'Projects', href: '/portal/projects', icon: ProjectsIcon },
   { label: 'Procurement', href: '/portal/procurement', icon: ProcurementIcon },
   { label: 'Suppliers', href: '/portal/suppliers', icon: SuppliersIcon },
+  { label: 'Machines', href: '/portal/machines', icon: SuppliersIcon },
   { label: 'Orders', href: '/portal/orders', icon: OrdersIcon },
   { label: 'Invoices', href: '/portal/invoices', icon: InvoicesIcon },
   { label: 'Support', href: '/portal/support', icon: SupportIcon },
