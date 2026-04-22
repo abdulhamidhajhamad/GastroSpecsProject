@@ -22,7 +22,7 @@ export default function SupplierQuickViewModal({ supplier, onClose, onEdit }: Su
     <Dialog open={Boolean(supplier)} onOpenChange={(open) => (!open ? onClose() : null)}>
       <DialogContent
         showCloseButton={false}
-        className="w-[min(980px,calc(100%-2rem))] max-w-none p-0 gap-0 rounded-none border border-gray-200"
+        className="w-[min(980px,calc(100%-2rem))] max-w-none sm:max-w-[980px] p-0 gap-0 rounded-none border border-gray-200"
       >
         <DialogTitle className="sr-only">
           {supplier ? `Supplier quick view for ${supplier.companyName}` : 'Supplier quick view'}
@@ -70,8 +70,14 @@ export default function SupplierQuickViewModal({ supplier, onClose, onEdit }: Su
                 </div>
               </div>
 
-              <SupplierDetailOverview supplier={supplier} />
-              <SupplierContactsCard contacts={supplier.contacts} />
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-1 min-w-0">
+                  <SupplierDetailOverview supplier={supplier} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <SupplierContactsCard contacts={supplier.contacts} />
+                </div>
+              </div>
             </div>
 
             <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-end gap-3">

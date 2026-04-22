@@ -3,39 +3,30 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 
-import type { Supplier } from '@/types/supplier'
+import type { Customer } from '@/types/customer'
 
-type SupplierActionsMenuProps = {
-  supplier: Supplier
-  onEdit: (supplier: Supplier) => void
-  onDelete: (supplier: Supplier) => void
-  onAddContact?: (supplier: Supplier) => void
+type CustomerActionsMenuProps = {
+  customer: Customer
+  onEdit: (customer: Customer) => void
+  onDelete: (customer: Customer) => void
 }
 
-export default function SupplierActionsMenu({ supplier, onEdit, onDelete, onAddContact }: SupplierActionsMenuProps) {
+export default function CustomerActionsMenu({ customer, onEdit, onDelete }: CustomerActionsMenuProps) {
   const router = useRouter()
   const [isOpen, setIsOpen] = React.useState(false)
   const menuRef = React.useRef<HTMLDivElement | null>(null)
 
   React.useEffect(() => {
-    if (!isOpen) {
-      return
-    }
+    if (!isOpen) return
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (!menuRef.current) {
-        return
-      }
-
-      if (!menuRef.current.contains(event.target as Node)) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsOpen(false)
       }
     }
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false)
-      }
+      if (event.key === 'Escape') setIsOpen(false)
     }
 
     document.addEventListener('mousedown', handleClickOutside)
@@ -55,7 +46,6 @@ export default function SupplierActionsMenu({ supplier, onEdit, onDelete, onAddC
         className="w-7 h-7 border border-gray-200 font-sans text-sm text-gray-400 hover:border-black hover:text-black transition-colors"
         aria-haspopup="menu"
         aria-expanded={isOpen}
-        aria-label={`Open actions for ${supplier.companyName}`}
       >
         ...
       </button>
@@ -67,7 +57,7 @@ export default function SupplierActionsMenu({ supplier, onEdit, onDelete, onAddC
             className="w-full text-left px-3 py-2 font-sans text-[11px] tracking-[0.08em] uppercase text-gray-500 hover:bg-gray-50 hover:text-black transition-colors"
             onClick={() => {
               setIsOpen(false)
-              router.push(`/portal/suppliers/${supplier.id}`)
+              router.push(`/portal/customers/${customer.id}`)
             }}
           >
             View Details
@@ -77,29 +67,17 @@ export default function SupplierActionsMenu({ supplier, onEdit, onDelete, onAddC
             className="w-full text-left px-3 py-2 font-sans text-[11px] tracking-[0.08em] uppercase text-gray-500 hover:bg-gray-50 hover:text-black transition-colors"
             onClick={() => {
               setIsOpen(false)
-              onEdit(supplier)
+              onEdit(customer)
             }}
           >
             Edit
           </button>
-          {onAddContact && (
-            <button
-              type="button"
-              className="w-full text-left px-3 py-2 font-sans text-[11px] tracking-[0.08em] uppercase text-gray-500 hover:bg-gray-50 hover:text-black transition-colors"
-              onClick={() => {
-                setIsOpen(false)
-                onAddContact(supplier)
-              }}
-            >
-              Add Contact
-            </button>
-          )}
           <button
             type="button"
             className="w-full text-left px-3 py-2 font-sans text-[11px] tracking-[0.08em] uppercase text-red-500 hover:bg-red-50 transition-colors"
             onClick={() => {
               setIsOpen(false)
-              onDelete(supplier)
+              onDelete(customer)
             }}
           >
             Delete

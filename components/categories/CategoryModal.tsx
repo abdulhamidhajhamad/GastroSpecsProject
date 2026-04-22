@@ -75,11 +75,11 @@ export default function CategoryModal({
     setUploadError('')
     setIsUploadingImage(true)
 
-    // Temporary ID for new creations, otherwise use actual
-    const targetId = isSubMode ? 'sub' : (selectedCategory?.id || `new_${Date.now()}`)
+    const targetPath: 'parents' | 'subs' = isSubMode ? 'subs' : 'parents'
+    const targetId = Date.now().toString()
 
     try {
-      const url = await uploadCategoryImage(file, targetId)
+      const url = await uploadCategoryImage(file, targetPath, targetId)
       setImageUrl(url)
     } catch (err: any) {
       setUploadError(err.message || 'Failed to upload image')

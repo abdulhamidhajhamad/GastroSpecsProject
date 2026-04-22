@@ -2,8 +2,14 @@
 
 import * as React from 'react'
 
-import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import type { Supplier } from '@/types/supplier'
+
+type SupplierContactMethod = {
+  type: 'wechat' | 'whatsapp' | 'email'
+  value: string
+  id: string
+}
 
 type SupplierDrawerProps = {
   isOpen: boolean
@@ -25,11 +31,36 @@ type SupplierFormState = {
   wechat: string
   primaryContactName: string
   primaryContactPosition: string
-  primaryContactMethods: string
+  primaryContactMethods: SupplierContactMethod[]
 }
 
 function getInitialFormState(initialData: Supplier | null): SupplierFormState {
   const primaryContact = initialData?.contacts[0]
+
+  let parsedMethods: SupplierContactMethod[] = []
+  if (primaryContact?.contactMethods) {
+    try {
+      const parsed = typeof primaryContact.contactMethods === 'string' 
+        ? JSON.parse(primaryContact.contactMethods) 
+        : primaryContact.contactMethods
+      
+      Object.entries(parsed).forEach(([key, value]) => {
+        if (key === 'wechat' || key === 'whatsapp' || key === 'email') {
+          parsedMethods.push({ id: crypto.randomUUID(), type: key, value: String(value) })
+        }
+      })
+    } catch {
+      // handle error silently
+    }
+  }
+
+  if (parsedMethods.length === 0) {
+    parsedMethods = [
+      { id: crypto.randomUUID(), type: 'wechat', value: '' },
+      { id: crypto.randomUUID(), type: 'whatsapp', value: '' },
+      { id: crypto.randomUUID(), type: 'email', value: '' },
+    ]
+  }
 
   return {
     companyName: initialData?.companyName ?? '',
@@ -45,7 +76,7 @@ function getInitialFormState(initialData: Supplier | null): SupplierFormState {
     wechat: initialData?.wechat ?? '',
     primaryContactName: primaryContact?.name ?? '',
     primaryContactPosition: primaryContact?.position ?? '',
-    primaryContactMethods: primaryContact?.contactMethods ?? '',
+    primaryContactMethods: parsedMethods,
   }
 }
 
@@ -67,6 +98,27 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
     setFormData((prev) => ({ ...prev, [key]: value }))
   }
 
+  const handleAddMethod = (type: 'wechat' | 'whatsapp' | 'email') => {
+    setFormData((prev) => ({
+      ...prev,
+      primaryContactMethods: [...prev.primaryContactMethods, { id: crypto.randomUUID(), type, value: '' }]
+    }))
+  }
+
+  const handleUpdateMethod = (id: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      primaryContactMethods: prev.primaryContactMethods.map((m) => m.id === id ? { ...m, value } : m)
+    }))
+  }
+
+  const handleRemoveMethod = (id: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      primaryContactMethods: prev.primaryContactMethods.filter((m) => m.id !== id)
+    }))
+  }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -79,23 +131,81 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
     console.log('Supplier drawer submit:', formData)
   }
 
-  return (
-    <Sheet open={isOpen} onOpenChange={(open) => (!open ? onClose() : null)}>
-      <SheetContent side="right" className="w-[480px] max-w-[95vw] p-0 gap-0">
-        <SheetTitle className="sr-only">
-          {isEditMode ? 'Edit supplier drawer' : 'Add new supplier drawer'}
-        </SheetTitle>
+  const renderMethodSection = (type: 'wechat' | 'whatsapp' | 'email', title: string, placeholder: string) => {
+    const sectionMethods = formData.primaryContactMethods.filter(m => m.type === type)
+    
+    return (
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <label className="block font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400">{title}</label>
+          <button
+            type="button"
+            onClick={() => handleAddMethod(type)}
+            className="w-5 h-5 flex items-center justify-center border border-gray-200 text-gray-400 hover:border-black hover:text-black transition-colors"
+          >
+            +
+          </button>
+        </div>
+        
+        {sectionMethods.length === 0 ? (
+          <p className="font-sans text-[10px] text-gray-400 italic">No {title} added</p>
+        ) : (
+          <div className="space-y-2">
+            {sectionMethods.map((method) => (
+              <div className="flex items-center gap-2" key={method.id}>
+                <input
+                  type={type === 'email' ? 'email' : 'text'}
+                  value={method.value}
+                  onChange={(e) => handleUpdateMethod(method.id, e.target.value)}
+                  placeholder={placeholder}
+                  className="flex-1 border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveMethod(method.id)}
+                  className="px-3 py-2.5 border border-gray-200 font-sans text-[9px] uppercase tracking-wider text-red-400 hover:border-red-500 hover:text-red-500 transition-colors"
+                >
+                  Clear
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
 
-        <div className="flex h-full flex-col bg-white">
-          <div className="px-6 py-5 border-b border-gray-200">
-            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-1">Suppliers</p>
-            <h2 className="font-sans font-semibold text-sm tracking-[0.12em] uppercase text-black">
-              {isEditMode ? 'EDIT SUPPLIER' : 'ADD NEW SUPPLIER'}
-            </h2>
+  return (
+    <Dialog open={isOpen} onOpenChange={(open) => (!open ? onClose() : null)}>
+      <DialogContent
+        showCloseButton={false}
+        className="w-[720px] max-w-[95vw] h-[88vh] max-h-[760px] p-0 gap-0 rounded-none border border-gray-200"
+      >
+        <DialogTitle className="sr-only">
+          {isEditMode ? 'Edit supplier drawer' : 'Add new supplier drawer'}
+        </DialogTitle>
+
+        <div className="flex h-full flex-col bg-white overflow-hidden">
+          <div className="px-6 py-5 border-b border-gray-200 flex items-start justify-between gap-4 shrink-0">
+            <div className="overflow-hidden">
+              <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-1 truncate">Suppliers</p>
+              <h2 className="font-sans font-semibold text-sm tracking-[0.12em] uppercase text-black">
+                {isEditMode ? 'EDIT SUPPLIER' : 'ADD NEW SUPPLIER'}
+              </h2>
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="font-sans text-[14px] leading-none text-gray-400 hover:text-black transition-colors shrink-0 p-1"
+              aria-label="Close modal"
+            >
+              x
+            </button>
           </div>
 
-          <form id="supplier-drawer-form" onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-6">
-            <section>
+          <div className="flex-1 overflow-y-auto">
+            <form id="supplier-drawer-form" onSubmit={handleSubmit} className="p-6 space-y-8">
+              <section>
               <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold mb-3">Company Info</p>
               <div className="space-y-4">
                 <div>
@@ -243,38 +353,35 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
-                <div className="col-span-2">
-                  <label className="block font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-2">Contact Methods (JSON string)</label>
-                  <textarea
-                    rows={3}
-                    value={formData.primaryContactMethods}
-                    onChange={(event) => handleChange('primaryContactMethods', event.target.value)}
-                    placeholder='{"wechat":"contact_wechat","phone":"+86 ..."}'
-                    className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors resize-none"
-                  />
+                <div className="col-span-2 space-y-6 mt-4">
+                  <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold mb-4 border-b border-gray-100 pb-2">Contact Methods</p>
+                  {renderMethodSection('wechat', 'WeChat', 'WeChat ID')}
+                  {renderMethodSection('whatsapp', 'WhatsApp', '+1 234 567 8900')}
+                  {renderMethodSection('email', 'Email Address', 'email@example.com')}
                 </div>
               </div>
             </section>
           </form>
+          </div>
 
-          <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-end gap-3">
+          <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-end gap-3 shrink-0 bg-gray-50 z-10 relative">
             <button
               type="button"
               onClick={onClose}
-              className="border border-gray-200 font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors"
+              className="border border-gray-200 bg-white font-sans text-[10px] tracking-[0.12em] uppercase text-gray-500 px-5 py-2.5 hover:border-black hover:text-black transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               form="supplier-drawer-form"
-              className="bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors"
+              className="bg-black text-white font-sans text-[10px] tracking-[0.12em] uppercase px-5 py-2.5 hover:bg-gray-800 transition-colors"
             >
               {isEditMode ? 'Update Supplier' : 'Save Supplier'}
             </button>
           </div>
         </div>
-      </SheetContent>
-    </Sheet>
+      </DialogContent>
+    </Dialog>
   )
 }

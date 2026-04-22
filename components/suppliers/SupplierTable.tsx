@@ -6,6 +6,7 @@ type SupplierTableProps = {
   onEdit: (supplier: Supplier) => void
   onDelete: (supplier: Supplier) => void
   onView: (supplier: Supplier) => void
+  onAddContact?: (supplier: Supplier) => void
 }
 
 function formatShortId(id: string) {
@@ -18,7 +19,7 @@ function formatLocation(supplier: Supplier) {
     .join(', ')
 }
 
-export default function SupplierTable({ suppliers, onEdit, onDelete, onView }: SupplierTableProps) {
+export default function SupplierTable({ suppliers, onEdit, onDelete, onView, onAddContact }: SupplierTableProps) {
   return (
     <table className="w-full">
       <thead>
@@ -81,7 +82,12 @@ export default function SupplierTable({ suppliers, onEdit, onDelete, onView }: S
                 onClick={(event) => event.stopPropagation()}
                 onKeyDown={(event) => event.stopPropagation()}
               >
-                <SupplierActionsMenu supplier={supplier} onEdit={onEdit} onDelete={onDelete} />
+                <SupplierActionsMenu
+                  supplier={supplier}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                  onAddContact={onAddContact}
+                />
               </td>
             </tr>
           ))

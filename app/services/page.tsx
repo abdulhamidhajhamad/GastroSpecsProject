@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 import { services, processSteps } from '@/data/services'
 
 export const metadata: Metadata = {
-  title: 'Sourcing & Kitchen Design Services | GastroSpecs',
+  title: 'Sourcing and Kitchen Design Services | GastroSpecs',
   description:
     'From single product sourcing to full kitchen consultancy. Factory-direct pricing, CAD design, DDP logistics, and after-sales support worldwide.',
 }
@@ -19,7 +19,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6 py-16">
           <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-5">ENGINEERING EXCELLENCE</p>
           <h1 className="font-serif text-5xl md:text-6xl text-black italic mb-6 leading-tight">
-            Sourcing & Kitchen<br />Design
+            Sourcing and Kitchen<br />Design
           </h1>
           <p className="font-sans text-sm text-gray-500 leading-relaxed max-w-lg">
             From a single unit sourced to a seamless integration of high-performance equipment and engineered workflow design.

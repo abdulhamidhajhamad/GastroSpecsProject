@@ -1,51 +1,46 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export async function uploadCategoryImage(
   file: File,
-  categoryId: string
+  path: 'parents' | 'subs',
+  id: string
 ): Promise<string> {
-  const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
-  const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
-
-  if (!ALLOWED_TYPES.includes(file.type)) {
-    throw new Error('Invalid file type. Only JPEG, PNG, and WebP are allowed.');
+  // Validate file type
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
+  if (!allowedTypes.includes(file.type)) {
+    throw new Error('Invalid file type: Only JPEG, PNG, and WebP images are allowed.')
   }
 
-  if (file.size > MAX_FILE_SIZE) {
-    throw new Error('File size exceeds the 2MB limit.');
+  // Validate file size (max 2MB)
+  const maxSizeBytes = 2 * 1024 * 1024
+  if (file.size > maxSizeBytes) {
+    throw new Error('File is too large: Maximum file size is 2MB.')
   }
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  // Generate unique filename with timestamp
+  const timestamp = Date.now()
+  const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_')
+  const fileName = `${id}-${timestamp}-${safeName}`
+  const filePath = `${path}/${id}/${fileName}`
 
-  if (!supabaseUrl || !supabaseKey) {
-    throw new Error('Supabase configuration is missing in environment variables.');
-  }
-
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
-  const timestamp = Date.now();
-  const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, '_');
-  const filePath = `categories/${categoryId}/${timestamp}-${safeFilename}`;
-
+  // Upload to Supabase Storage
   const { data, error } = await supabase.storage
     .from('category-images')
-    .upload(filePath, file, {
-      cacheControl: '3600',
-      upsert: false,
-    });
+    .upload(filePath, file)
 
   if (error) {
-    throw new Error(`Failed to upload image: ${error.message}`);
+    throw new Error(`Failed to upload image: ${error.message}`)
   }
 
-  const { data: publicUrlData } = supabase.storage
+  // Retrieve public URL
+  const { data: { publicUrl } } = supabase.storage
     .from('category-images')
-    .getPublicUrl(data.path);
+    .getPublicUrl(data.path)
 
-  if (!publicUrlData.publicUrl) {
-    throw new Error('Failed to retrieve public URL for the uploaded image.');
-  }
-
-  return publicUrlData.publicUrl;
+  return publicUrl
 }

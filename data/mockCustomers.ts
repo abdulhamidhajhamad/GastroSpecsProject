@@ -1,0 +1,87 @@
+import type { Customer } from '@/types/customer'
+
+export const mockCustomers: Customer[] = [
+  {
+    id: 'cust_1a2b3c',
+    name: 'Ahmed Al-Farsi',
+    companyName: 'Gulf Coast Hotels',
+    country: 'United Arab Emirates',
+    city: 'Dubai',
+    customerType: 'Hotel Chain',
+    contact: {
+      whatsapp: '+971 50 123 4567',
+      email: 'ahmed@gulfcoasthotels.ae',
+    },
+    ordersCount: 12,
+    createdAt: '2025-01-15T08:00:00Z',
+  },
+  {
+    id: 'cust_4d5e6f',
+    name: 'Sarah Chen',
+    companyName: 'Bistro Asia Group',
+    country: 'Singapore',
+    city: 'Singapore',
+    customerType: 'Restaurant Chain',
+    contact: {
+      wechat: 'sarah_bistro',
+      email: 'schen@bistroasia.sg',
+    },
+    ordersCount: 8,
+    createdAt: '2025-03-22T10:30:00Z',
+  },
+  {
+    id: 'cust_7g8h9i',
+    name: 'Mohammed Yasir',
+    companyName: 'Fresh Farms Butchery',
+    country: 'Saudi Arabia',
+    city: 'Riyadh',
+    customerType: 'Butchery',
+    contact: {
+      whatsapp: '+966 50 987 6543',
+    },
+    ordersCount: 3,
+    createdAt: '2025-06-10T14:15:00Z',
+  },
+  {
+    id: 'cust_0j1k2l',
+    name: 'Elena Rostova',
+    companyName: 'EuroFoods Supermarkets',
+    country: 'Russia',
+    city: 'Moscow',
+    customerType: 'Supermarket',
+    contact: {
+      whatsapp: '+7 903 123 45 67',
+      email: 'elena.r@eurofoods.ru',
+    },
+    ordersCount: 24,
+    createdAt: '2024-11-05T09:45:00Z',
+  },
+  {
+    id: 'cust_3m4n5o',
+    name: 'John Smith',
+    companyName: 'Industrial Kitchens LLC',
+    country: 'United Kingdom',
+    city: 'London',
+    customerType: 'Factory',
+    contact: {
+      email: 'jsmith@industrialkitchens.co.uk',
+    },
+    ordersCount: 1,
+    createdAt: '2026-02-18T11:20:00Z',
+  },
+  {
+    id: 'cust_6p7q8r',
+    name: 'Fatima Zahra',
+    companyName: 'Oasis Catering',
+    country: 'Qatar',
+    city: 'Doha',
+    customerType: 'Catering',
+    contact: {
+      whatsapp: '+974 5555 1234',
+      wechat: 'fatimaz_qatar',
+      email: 'fatima@oasiscatering.qa',
+    },
+    ordersCount: 5,
+    createdAt: '2025-08-30T16:00:00Z',
+  },
+]

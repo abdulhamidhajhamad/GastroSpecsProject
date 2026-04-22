@@ -3,103 +3,98 @@
 import * as React from 'react'
 
 import PortalHeader from '@/components/portal/PortalHeader'
-import OrderDeleteModal from '@/components/orders/OrderDeleteModal'
-import OrderModal from '@/components/orders/OrderModal'
-import OrderStatCards from '@/components/orders/OrderStatCards'
-import OrderStatusFilter from '@/components/orders/OrderStatusFilter'
-import OrderTable from '@/components/orders/OrderTable'
-import { mockOrders } from '@/data/mockOrders'
-import { useOrders } from '@/hooks/useOrders'
-import type { Order } from '@/types/order'
+import CustomerDeleteModal from '@/components/customers/CustomerDeleteModal'
+import CustomerModal from '@/components/customers/CustomerModal'
+import CustomerStatCards from '@/components/customers/CustomerStatCards'
+import CustomerTable from '@/components/customers/CustomerTable'
+import { mockCustomers } from '@/data/mockCustomers'
+import { useCustomers } from '@/hooks/useCustomers'
+import type { Customer } from '@/types/customer'
 
 const feed = [
   {
-    name: 'Lin Wei',
-    time: '4M AGO',
-    message: 'Released shipment schedule for order ORD-1001 to the logistics team.',
+    name: 'Emma',
+    time: '2M AGO',
+    message: 'Added Ahmed Al-Farsi to VIP segment.',
   },
   {
-    name: 'Kevin Luo',
-    time: '23M AGO',
-    message: 'Updated factory readiness notes for the Qatar catering rollout.',
-  },
-  {
-    name: 'Ivy Chen',
-    time: '1H AGO',
-    message: 'Confirmed shipping documents for the EuroFoods refrigeration bundle.',
+    name: 'Raj',
+    time: '15M AGO',
+    message: 'Updated WeChat contact for Sarah Chen (Bistro Asia Group).',
   },
   {
     name: 'System',
+    time: '1H AGO',
+    message: 'New registration: Fatima Zahra (Oasis Catering - Qatar).',
+  },
+  {
+    name: 'David',
     time: '3H AGO',
-    message: 'Auto-status sync completed for delivered and cancelled orders.',
+    message: 'Generated Q1 sales report for EuroFoods Supermarkets.',
   },
 ]
 
 function exportReport() {
-  console.log('Exporting orders report...')
+  console.log('Exporting customers report...')
 }
 
-function buildOrderSearchValue(order: Order) {
-  const itemText = order.items.map((item) => [item.machineName, item.supplierName, item.notes].filter(Boolean).join(' ')).join(' ')
+function filterCustomers(query: string) {
+  if (!query.trim()) return mockCustomers
 
-  return [
-    order.id,
-    order.customerName,
-    order.customerCompany,
-    order.salesPersonName,
-    order.salesPersonId,
-    order.notes,
-    itemText,
-    order.status,
-  ]
-    .filter(Boolean)
-    .join(' ')
-    .toLowerCase()
+  const q = query.toLowerCase()
+  return mockCustomers.filter((customer) => {
+    const textSearch = [
+      customer.id,
+      customer.name,
+      customer.companyName,
+      customer.country,
+      customer.city,
+      customer.customerType,
+      customer.contact?.email,
+      customer.contact?.whatsapp,
+      customer.contact?.wechat
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase()
+    
+    return textSearch.includes(q)
+  })
 }
 
-export default function OrdersPage() {
+export default function CustomersPage() {
   const {
     isModalOpen,
-    selectedOrder,
+    modalMode,
+    selectedCustomer,
     isDeleteModalOpen,
-    orderToDelete,
-    statusFilter,
+    customerToDelete,
     openAddModal,
-    openViewModal,
+    openEditModal,
     closeModal,
     openDeleteModal,
     closeDeleteModal,
     confirmDelete,
-    setStatusFilter,
-  } = useOrders()
+  } = useCustomers()
 
   const [searchQuery, setSearchQuery] = React.useState('')
+  const filteredCustomers = React.useMemo(() => filterCustomers(searchQuery), [searchQuery])
 
-  const filteredOrders = React.useMemo(() => {
-    const normalized = searchQuery.trim().toLowerCase()
-
-    return mockOrders.filter((order) => {
-      const matchesStatus = statusFilter === 'ALL' || order.status === statusFilter
-      const matchesSearch = !normalized || buildOrderSearchValue(order).includes(normalized)
-      return matchesStatus && matchesSearch
-    })
-  }, [searchQuery, statusFilter])
-
-  const totalOrders = mockOrders.length
-  const inProduction = mockOrders.filter((order) => order.status === 'MANUFACTURING' || order.status === 'READY').length
-  const shipped = mockOrders.filter((order) => order.status === 'SHIPPED').length
-  const delivered = mockOrders.filter((order) => order.status === 'DELIVERED').length
+  // Dynamic stats
+  const totalCustomers = mockCustomers.length
+  const uniqueCountries = new Set(mockCustomers.map(c => c.country).filter(Boolean)).size
+  const activeCustomers = mockCustomers.filter(c => c.ordersCount > 0).length
+  const newThisMonth = 1
 
   return (
     <main className="min-h-screen bg-gray-50 pb-20">
       <PortalHeader />
-
       <div className="bg-white border-b border-gray-200 px-8 py-8 mb-8">
-        <div className="flex items-end justify-between gap-6">
+        <div className="flex items-end justify-between">
           <div>
             <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-2">Portal</p>
-            <h1 className="font-serif text-3xl text-black italic">ORDERS</h1>
-            <p className="font-sans text-sm text-gray-500 mt-2">Track and manage customer orders</p>
+            <h1 className="font-serif text-3xl text-black italic">Customers / CRM</h1>
+            <p className="font-sans text-sm text-gray-500 mt-2">Manage your client relationships</p>
           </div>
           <div className="flex gap-3">
             <button
@@ -117,26 +112,25 @@ export default function OrdersPage() {
               onClick={openAddModal}
               className="bg-black text-white px-5 py-2 font-sans text-xs tracking-wide hover:bg-gray-800 transition-colors"
             >
-              + Create Order
+              + Add Customer
             </button>
           </div>
         </div>
       </div>
 
       <div className="px-8 max-w-[1600px] mx-auto">
-        <OrderStatCards
-          total={totalOrders}
-          manufacturing={inProduction}
-          shipped={shipped}
-          delivered={delivered}
+        <CustomerStatCards
+          total={totalCustomers}
+          countries={uniqueCountries}
+          withOrders={activeCustomers}
+          newThisMonth={newThisMonth}
         />
 
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
           <div className="xl:col-span-3">
-            <div className="bg-white border border-gray-200 p-4 mb-4">
-              <OrderStatusFilter statusFilter={statusFilter} onChange={setStatusFilter} />
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 w-full max-w-[360px]">
+            <div className="bg-white border border-gray-200 mb-8 p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 w-full max-w-[320px]">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400">
                     <circle cx="11" cy="11" r="8" />
                     <path d="m21 21-4.35-4.35" />
@@ -145,21 +139,22 @@ export default function OrdersPage() {
                     type="search"
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
-                    placeholder="Search order, customer, machine..."
+                    placeholder="Search name, company, city, contact..."
                     className="bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-full"
                   />
                 </div>
                 <p className="font-sans text-[10px] uppercase tracking-[0.15em] text-gray-400 whitespace-nowrap">
-                  {filteredOrders.length} Results
+                  {filteredCustomers.length} Results
                 </p>
               </div>
             </div>
 
             <div className="bg-white border border-gray-200 overflow-x-auto">
-              <OrderTable
-                orders={filteredOrders}
-                onView={openViewModal}
+              <CustomerTable
+                customers={filteredCustomers}
+                onEdit={openEditModal}
                 onDelete={openDeleteModal}
+                onView={(c) => console.log('View customer details:', c.id)}
               />
             </div>
           </div>
@@ -170,7 +165,9 @@ export default function OrdersPage() {
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
-              <h2 className="font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold">Live System Feed</h2>
+              <h2 className="font-sans text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold">
+                Live System Feed
+              </h2>
             </div>
             <div className="p-5">
               <div className="relative border-l border-gray-100 ml-3 space-y-6">
@@ -195,15 +192,16 @@ export default function OrdersPage() {
         </div>
       </div>
 
-      <OrderModal
+      <CustomerModal
         isOpen={isModalOpen}
-        order={selectedOrder}
+        mode={modalMode}
+        initialData={modalMode === 'edit' ? selectedCustomer : null}
         onClose={closeModal}
       />
 
-      <OrderDeleteModal
+      <CustomerDeleteModal
         isOpen={isDeleteModalOpen}
-        order={orderToDelete}
+        customer={customerToDelete}
         onClose={closeDeleteModal}
         onConfirm={confirmDelete}
       />

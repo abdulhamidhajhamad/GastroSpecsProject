@@ -3,6 +3,7 @@
 import * as React from 'react'
 
 import PortalHeader from '@/components/portal/PortalHeader'
+import AddSupplierContactDrawer from '@/components/suppliers/AddSupplierContactDrawer'
 import SupplierDeleteModal from '@/components/suppliers/SupplierDeleteModal'
 import SupplierDrawer from '@/components/suppliers/SupplierDrawer'
 import SupplierQuickViewModal from '@/components/suppliers/SupplierQuickViewModal'
@@ -70,6 +71,14 @@ function buildSupplierSearchValue(supplier: Supplier) {
 }
 
 export default function SuppliersPage() {
+  const [isAddContactDrawerOpen, setIsAddContactDrawerOpen] = React.useState(false)
+  const [supplierForContact, setSupplierForContact] = React.useState<Supplier | null>(null)
+
+  const handleOpenAddContactDrawer = (supplier: Supplier) => {
+    setSupplierForContact(supplier)
+    setIsAddContactDrawerOpen(true)
+  }
+
   const {
     isDrawerOpen,
     drawerMode,
@@ -196,6 +205,7 @@ export default function SuppliersPage() {
               onEdit={openEditDrawer}
               onDelete={openDeleteModal}
               onView={openQuickView}
+              onAddContact={handleOpenAddContactDrawer}
             />
           </div>
 
@@ -238,6 +248,12 @@ export default function SuppliersPage() {
         isOpen={isDrawerOpen}
         initialData={drawerMode === 'edit' ? selectedSupplier : null}
         onClose={closeDrawer}
+      />
+
+      <AddSupplierContactDrawer
+        isOpen={isAddContactDrawerOpen}
+        supplier={supplierForContact}
+        onClose={() => setIsAddContactDrawerOpen(false)}
       />
 
       <SupplierDeleteModal

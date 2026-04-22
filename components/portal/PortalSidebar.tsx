@@ -11,10 +11,10 @@ const navItems = [
   { label: 'Suppliers', href: '/portal/suppliers', icon: SuppliersIcon },
   { label: 'Machines', href: '/portal/machines', icon: SuppliersIcon },
   { label: 'Categories', href: '/portal/categories', icon: CategoriesIcon },
+  { label: 'Customers', href: '/portal/customers', icon: CustomersIcon },
   { label: 'Orders', href: '/portal/orders', icon: OrdersIcon },
   { label: 'Invoices', href: '/portal/invoices', icon: InvoicesIcon },
   { label: 'Support', href: '/portal/support', icon: SupportIcon },
-  { label: 'Inventory', href: '/portal/inventory', icon: InventoryIcon },
   { label: 'Settings', href: '/portal/settings', icon: SettingsIcon },
 ]
 
@@ -74,6 +74,16 @@ function CategoriesIcon() {
     </svg>
   )
 }
+function CustomersIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="9" cy="7" r="4" />
+      <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+      <path d="M17 11h4" />
+      <path d="M19 9v4" />
+    </svg>
+  )
+}
 function OrdersIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -96,13 +106,6 @@ function SupportIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-    </svg>
-  )
-}
-function InventoryIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
     </svg>
   )
 }
