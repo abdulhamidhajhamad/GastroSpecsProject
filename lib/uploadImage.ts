@@ -1,46 +1,84 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024
+const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey)
+let supabaseClient: ReturnType<typeof createClient> | null = null
 
-export async function uploadCategoryImage(
-  file: File,
-  path: 'parents' | 'subs',
-  id: string
-): Promise<string> {
-  // Validate file type
-  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
-  if (!allowedTypes.includes(file.type)) {
-    throw new Error('Invalid file type: Only JPEG, PNG, and WebP images are allowed.')
+function getSupabaseClient() {
+  if (supabaseClient) {
+    return supabaseClient
   }
 
-  // Validate file size (max 2MB)
-  const maxSizeBytes = 2 * 1024 * 1024
-  if (file.size > maxSizeBytes) {
-    throw new Error('File is too large: Maximum file size is 2MB.')
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable.')
   }
 
-  // Generate unique filename with timestamp
+  if (!supabaseAnonKey) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable.')
+  }
+
+  try {
+    const parsedUrl = new URL(supabaseUrl)
+    if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
+      throw new Error('invalid protocol')
+    }
+  } catch {
+    throw new Error('Invalid NEXT_PUBLIC_SUPABASE_URL. Must be a valid HTTP or HTTPS URL.')
+  }
+
+  supabaseClient = createClient(supabaseUrl, supabaseAnonKey)
+  return supabaseClient
+}
+
+function validateImageFile(file: File) {
+  if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+    throw new Error('Invalid file type. Only JPEG, PNG, and WebP images are allowed.')
+  }
+
+  if (file.size > MAX_FILE_SIZE_BYTES) {
+    throw new Error('File is too large. Maximum file size is 5MB.')
+  }
+}
+
+function sanitizeFileName(fileName: string) {
+  return fileName.replace(/[^a-zA-Z0-9.-]/g, '_')
+}
+
+function buildFileName(file: File) {
   const timestamp = Date.now()
-  const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_')
-  const fileName = `${id}-${timestamp}-${safeName}`
-  const filePath = `${path}/${id}/${fileName}`
+  return `${timestamp}-${sanitizeFileName(file.name)}`
+}
 
-  // Upload to Supabase Storage
-  const { data, error } = await supabase.storage
-    .from('category-images')
-    .upload(filePath, file)
+async function uploadImageToBucket(bucket: string, filePath: string, file: File) {
+  const supabase = getSupabaseClient()
+  const { data, error } = await supabase.storage.from(bucket).upload(filePath, file)
 
   if (error) {
-    throw new Error(`Failed to upload image: ${error.message}`)
+    throw new Error(`Failed to upload image. ${error.message}`)
   }
 
-  // Retrieve public URL
-  const { data: { publicUrl } } = supabase.storage
-    .from('category-images')
-    .getPublicUrl(data.path)
+  const { data: publicData } = supabase.storage.from(bucket).getPublicUrl(data.path)
+  return publicData.publicUrl
+}
 
-  return publicUrl
+export async function uploadCategoryImage(file: File, path: 'parents' | 'subs', id: string): Promise<string> {
+  validateImageFile(file)
+
+  const fileName = buildFileName(file)
+  const filePath = `${path}/${id}/${fileName}`
+
+  return uploadImageToBucket('category-images', filePath, file)
+}
+
+export async function uploadMachineImage(file: File, machineId: string): Promise<string> {
+  validateImageFile(file)
+
+  const fileName = buildFileName(file)
+  const filePath = `machines/${machineId}/${fileName}`
+
+  return uploadImageToBucket('machines-gallery', filePath, file)
 }

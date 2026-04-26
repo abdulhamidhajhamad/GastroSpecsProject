@@ -8,8 +8,13 @@ import OrderModal from '@/components/orders/OrderModal'
 import OrderStatCards from '@/components/orders/OrderStatCards'
 import OrderStatusFilter from '@/components/orders/OrderStatusFilter'
 import OrderTable from '@/components/orders/OrderTable'
-import { mockOrders } from '@/data/mockOrders'
 import { useOrders } from '@/hooks/useOrders'
+import type { OrderModalSubmitData } from '@/components/orders/OrderModal'
+import { customersApi } from '@/lib/api/customers.api'
+import { machinesApi } from '@/lib/api/machines.api'
+import { ordersApi } from '@/lib/api/orders.api'
+import type { Customer } from '@/types/customer'
+import type { Machine } from '@/types/machine'
 import type { Order } from '@/types/order'
 
 const feed = [
@@ -35,30 +40,12 @@ const feed = [
   },
 ]
 
-function exportReport() {
-  console.log('Exporting orders report...')
-}
-
-function buildOrderSearchValue(order: Order) {
-  const itemText = order.items.map((item) => [item.machineName, item.supplierName, item.notes].filter(Boolean).join(' ')).join(' ')
-
-  return [
-    order.id,
-    order.customerName,
-    order.customerCompany,
-    order.salesPersonName,
-    order.salesPersonId,
-    order.notes,
-    itemText,
-    order.status,
-  ]
-    .filter(Boolean)
-    .join(' ')
-    .toLowerCase()
-}
-
 export default function OrdersPage() {
   const {
+    orders,
+    isLoading,
+    error,
+    search,
     isModalOpen,
     selectedOrder,
     isDeleteModalOpen,
@@ -70,25 +57,79 @@ export default function OrdersPage() {
     openDeleteModal,
     closeDeleteModal,
     confirmDelete,
+    fetchOrders,
+    setSearch,
     setStatusFilter,
   } = useOrders()
 
-  const [searchQuery, setSearchQuery] = React.useState('')
+  const [customerOptions, setCustomerOptions] = React.useState<Customer[]>([])
+  const [machineOptions, setMachineOptions] = React.useState<Machine[]>([])
+  const [isModalSubmitting, setIsModalSubmitting] = React.useState(false)
+  const [modalSubmitError, setModalSubmitError] = React.useState<string | null>(null)
 
   const filteredOrders = React.useMemo(() => {
-    const normalized = searchQuery.trim().toLowerCase()
+    return orders.filter((order) => statusFilter === 'ALL' || order.status === statusFilter)
+  }, [orders, statusFilter])
 
-    return mockOrders.filter((order) => {
-      const matchesStatus = statusFilter === 'ALL' || order.status === statusFilter
-      const matchesSearch = !normalized || buildOrderSearchValue(order).includes(normalized)
-      return matchesStatus && matchesSearch
-    })
-  }, [searchQuery, statusFilter])
+  React.useEffect(() => {
+    const loadOptions = async () => {
+      try {
+        const [customers, machines] = await Promise.all([
+          customersApi.list<Customer[]>(),
+          machinesApi.list<Machine[]>(),
+        ])
 
-  const totalOrders = mockOrders.length
-  const inProduction = mockOrders.filter((order) => order.status === 'MANUFACTURING' || order.status === 'READY').length
-  const shipped = mockOrders.filter((order) => order.status === 'SHIPPED').length
-  const delivered = mockOrders.filter((order) => order.status === 'DELIVERED').length
+        setCustomerOptions(customers)
+        setMachineOptions(machines)
+      } catch {
+        setCustomerOptions([])
+        setMachineOptions([])
+      }
+    }
+
+    void loadOptions()
+  }, [])
+
+  React.useEffect(() => {
+    if (!isModalOpen) {
+      setModalSubmitError(null)
+    }
+  }, [isModalOpen])
+
+  const handleOrderSubmit = React.useCallback(async (payload: OrderModalSubmitData) => {
+    setIsModalSubmitting(true)
+    setModalSubmitError(null)
+
+    try {
+      if (!selectedOrder) {
+        await ordersApi.create({
+          customerId: payload.customerId,
+          salesPersonId: payload.salesPersonId,
+          notes: payload.notes.trim() || undefined,
+          items: payload.items.map((item) => ({
+            machineId: item.machineId,
+            supplierId: item.supplierId,
+            quantity: item.quantity,
+            unitPrice: item.unitPrice,
+            notes: item.notes.trim() || undefined,
+          })),
+        })
+
+        closeModal()
+        await fetchOrders(search)
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to save order'
+      setModalSubmitError(message)
+    } finally {
+      setIsModalSubmitting(false)
+    }
+  }, [selectedOrder, closeModal, fetchOrders, search])
+
+  const totalOrders = orders.length
+  const inProduction = orders.filter((order) => order.status === 'MANUFACTURING' || order.status === 'READY').length
+  const shipped = orders.filter((order) => order.status === 'SHIPPED').length
+  const delivered = orders.filter((order) => order.status === 'DELIVERED').length
 
   return (
     <main className="min-h-screen bg-gray-50 pb-20">
@@ -103,7 +144,7 @@ export default function OrdersPage() {
           </div>
           <div className="flex gap-3">
             <button
-              onClick={exportReport}
+              onClick={() => console.log('Exporting orders report...')}
               className="flex items-center gap-2 border border-gray-200 px-4 py-2 font-sans text-xs tracking-wide text-gray-600 hover:border-black hover:text-black transition-colors"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -143,8 +184,8 @@ export default function OrdersPage() {
                   </svg>
                   <input
                     type="search"
-                    value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
                     placeholder="Search order, customer, machine..."
                     className="bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-full"
                   />
@@ -158,10 +199,24 @@ export default function OrdersPage() {
             <div className="bg-white border border-gray-200 overflow-x-auto">
               <OrderTable
                 orders={filteredOrders}
+                isLoading={isLoading}
                 onView={openViewModal}
                 onDelete={openDeleteModal}
               />
             </div>
+
+            {error && (
+              <div className="mt-4 border border-red-200 bg-red-50 px-4 py-3 flex items-center justify-between gap-4">
+                <p className="font-sans text-xs text-red-700">{error}</p>
+                <button
+                  type="button"
+                  onClick={() => void fetchOrders(search)}
+                  className="border border-red-300 bg-white font-sans text-[10px] tracking-[0.12em] uppercase text-red-700 px-3 py-1.5 hover:border-red-500 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="xl:col-span-1 border border-gray-200 bg-white self-start">
@@ -198,7 +253,12 @@ export default function OrdersPage() {
       <OrderModal
         isOpen={isModalOpen}
         order={selectedOrder}
+        customers={customerOptions}
+        machines={machineOptions}
         onClose={closeModal}
+        onSubmit={handleOrderSubmit}
+        isSubmitting={isModalSubmitting}
+        submitError={modalSubmitError}
       />
 
       <OrderDeleteModal

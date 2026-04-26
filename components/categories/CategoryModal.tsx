@@ -6,6 +6,13 @@ import { uploadCategoryImage } from '@/lib/uploadImage'
 
 type ModalMode = 'add-parent' | 'add-sub' | 'edit-parent' | 'edit-sub'
 
+export type CategoryModalSubmitData = {
+  name: string
+  description?: string
+  imageUrl?: string
+  parentId?: string
+}
+
 type CategoryModalProps = {
   isOpen: boolean
   onClose: () => void
@@ -15,6 +22,9 @@ type CategoryModalProps = {
   parentForNewSub: Category | null
   isUploadingImage: boolean
   setIsUploadingImage: (val: boolean) => void
+  onSubmit: (payload: CategoryModalSubmitData) => Promise<void>
+  isSubmitting: boolean
+  submitError: string | null
 }
 
 export default function CategoryModal({
@@ -26,6 +36,9 @@ export default function CategoryModal({
   parentForNewSub,
   isUploadingImage,
   setIsUploadingImage,
+  onSubmit,
+  isSubmitting,
+  submitError,
 }: CategoryModalProps) {
   const [name, setName] = React.useState('')
   const [description, setDescription] = React.useState('')
@@ -96,15 +109,12 @@ export default function CategoryModal({
       return
     }
 
-    if (isParentMode) {
-      console.log('Submit Parent Category:', { name, description, imageUrl })
-    } else {
-      const parentId = mode === 'add-sub' ? parentForNewSub?.id : parentForNewSub?.id // In real app, sub category might have parentId inside it
-      console.log('Submit Sub-Category:', { name, parentId, imageUrl })
-    }
-
-    // Usually we would call an API here and then close
-    onClose()
+    void onSubmit({
+      name,
+      description: isParentMode ? description : undefined,
+      imageUrl: imageUrl || undefined,
+      parentId: isSubMode ? parentForNewSub?.id : undefined,
+    })
   }
 
   if (!isOpen) return null
@@ -133,6 +143,11 @@ export default function CategoryModal({
 
         <div className="flex-1 overflow-y-auto px-6 py-6">
           <form id="category-form" onSubmit={handleSubmit} className="space-y-6">
+            {submitError && (
+              <div className="border border-red-200 bg-red-50 px-4 py-3">
+                <p className="text-xs font-sans text-red-700">{submitError}</p>
+              </div>
+            )}
             
             {/* SUB-CATEGORY READONLY PARENT */}
             {isSubMode && parentForNewSub && (
@@ -158,6 +173,7 @@ export default function CategoryModal({
                   setName(e.target.value)
                   setError('')
                 }}
+                disabled={isSubmitting}
                 className={`w-full border ${error ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-black'} px-4 py-3 outline-none font-sans text-sm transition-colors rounded-sm`}
                 placeholder="e.g., Refrigeration Equipment"
               />
@@ -176,6 +192,7 @@ export default function CategoryModal({
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     rows={3}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 px-4 py-3 outline-none focus:border-black font-sans text-sm transition-colors rounded-sm resize-none"
                     placeholder="Brief description of this category..."
                   />
@@ -195,7 +212,7 @@ export default function CategoryModal({
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <label className="cursor-pointer bg-white px-4 py-2 font-sans text-xs font-semibold text-black uppercase tracking-wider rounded-sm hover:bg-gray-100 transition-colors">
                       Change Image
-                      <input type="file" className="hidden" accept="image/jpeg, image/png, image/webp" onChange={handleImageUpload} />
+                            <input type="file" className="hidden" accept="image/jpeg, image/png, image/webp" onChange={handleImageUpload} disabled={isSubmitting || isUploadingImage} />
                     </label>
                   </div>
                 </div>
@@ -219,7 +236,7 @@ export default function CategoryModal({
                       <span className="font-sans text-sm text-gray-500">
                         {isParentMode ? 'Click to upload cover image' : 'Click to upload sub-category image'}
                       </span>
-                      <span className="font-sans text-xs text-gray-400 mt-1">JPEG, PNG, WEBP (Max 2MB)</span>
+                      <span className="font-sans text-xs text-gray-400 mt-1">JPEG, PNG, WEBP (Max 5MB)</span>
                     </>
                   )}
                   <input 
@@ -227,7 +244,7 @@ export default function CategoryModal({
                     className="hidden" 
                     accept="image/jpeg, image/png, image/webp" 
                     onChange={handleImageUpload} 
-                    disabled={isUploadingImage}
+                      disabled={isUploadingImage || isSubmitting}
                   />
                 </label>
               )}
@@ -240,6 +257,7 @@ export default function CategoryModal({
           <button
             type="button"
             onClick={onClose}
+            disabled={isSubmitting}
             className="px-5 py-2.5 font-sans text-xs font-semibold tracking-[0.08em] uppercase text-gray-600 hover:text-black hover:bg-gray-200 transition-colors rounded-sm"
           >
             Cancel
@@ -247,9 +265,16 @@ export default function CategoryModal({
           <button
             type="submit"
             form="category-form"
-            className="px-5 py-2.5 font-sans text-xs font-semibold tracking-[0.08em] uppercase bg-black text-white hover:bg-gray-800 transition-colors rounded-sm"
+            disabled={isSubmitting}
+            className="px-5 py-2.5 font-sans text-xs font-semibold tracking-[0.08em] uppercase bg-black text-white hover:bg-gray-800 transition-colors rounded-sm disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
           >
-            {isParentMode ? 'Save Category' : 'Save Sub-Category'}
+            {isSubmitting && (
+              <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+                <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" className="opacity-90" />
+              </svg>
+            )}
+            {isSubmitting ? 'Saving...' : (isParentMode ? 'Save Category' : 'Save Sub-Category')}
           </button>
         </div>
       </div>

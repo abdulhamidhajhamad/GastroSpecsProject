@@ -4,17 +4,33 @@ import * as React from 'react'
 
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import type { Machine, MachineSupplierFormData } from '@/types/machine'
-import { mockSuppliers } from '@/data/mockSuppliers'
 
 type AddMachineSupplierDrawerProps = {
   isOpen: boolean
   machine: Machine | null
+  suppliers: Array<{ id: string; companyName: string }>
+  onSubmit: (data: AddMachineSupplierSubmitData) => Promise<void>
+  isSubmitting: boolean
+  submitError: string | null
   onClose: () => void
+}
+
+export type AddMachineSupplierSubmitData = {
+  supplierId: string
+  costPrice: number
+  moq?: number
+  leadTimeDays?: number
+  modelNumber?: string
+  qualityNotes?: string
 }
 
 export default function AddMachineSupplierDrawer({
   isOpen,
   machine,
+  suppliers,
+  onSubmit,
+  isSubmitting,
+  submitError,
   onClose
 }: AddMachineSupplierDrawerProps) {
   const [searchQuery, setSearchQuery] = React.useState('')
@@ -45,16 +61,27 @@ export default function AddMachineSupplierDrawer({
     setFormData(prev => ({ ...prev, [key]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Link Supplier to Machine:', machine?.name, formData)
-    onClose()
+
+    if (!formData.supplierId || formData.costPrice === '') {
+      return
+    }
+
+    await onSubmit({
+      supplierId: formData.supplierId,
+      costPrice: Number(formData.costPrice),
+      moq: formData.moq === '' ? undefined : Number(formData.moq),
+      leadTimeDays: formData.leadTimeDays === '' ? undefined : Number(formData.leadTimeDays),
+      modelNumber: formData.modelNumber.trim() || undefined,
+      qualityNotes: formData.qualityNotes.trim() || undefined,
+    })
   }
 
   const filteredSuppliers = React.useMemo(() => {
-    if (!searchQuery.trim()) return mockSuppliers
-    return mockSuppliers.filter(sup => sup.companyName.toLowerCase().includes(searchQuery.toLowerCase()))
-  }, [searchQuery])
+    if (!searchQuery.trim()) return suppliers
+    return suppliers.filter(sup => sup.companyName.toLowerCase().includes(searchQuery.toLowerCase()))
+  }, [searchQuery, suppliers])
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => (!open ? onClose() : null)}>
@@ -89,6 +116,7 @@ export default function AddMachineSupplierDrawer({
                     placeholder="Search by name..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    disabled={isSubmitting}
                     className="bg-transparent font-sans text-xs text-black placeholder-gray-400 focus:outline-none w-full pl-6 pr-2"
                   />
                 </div>
@@ -193,6 +221,7 @@ export default function AddMachineSupplierDrawer({
             <button
               type="button"
               onClick={onClose}
+              disabled={isSubmitting}
               className="font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:text-black hover:bg-gray-50 transition-colors"
             >
               Cancel
@@ -200,11 +229,21 @@ export default function AddMachineSupplierDrawer({
             <button
               type="submit"
               form="link-supplier-form"
-              className="bg-black text-white font-sans text-xs tracking-wide px-6 py-2 hover:bg-gray-800 transition-colors"
+              disabled={isSubmitting}
+              className="bg-black text-white font-sans text-xs tracking-wide px-6 py-2 hover:bg-gray-800 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
             >
-              Link Supplier
+              {isSubmitting && (
+                <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+                  <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" className="opacity-90" />
+                </svg>
+              )}
+              {isSubmitting ? 'Saving...' : 'Link Supplier'}
             </button>
           </div>
+          {submitError && (
+            <p className="px-6 pb-4 font-sans text-[11px] text-red-600">{submitError}</p>
+          )}
         </div>
       </DialogContent>
     </Dialog>

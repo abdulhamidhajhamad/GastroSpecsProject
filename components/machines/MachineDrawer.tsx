@@ -12,51 +12,96 @@ type MachineDrawerProps = {
   step: DrawerStep
   setStep: (step: DrawerStep) => void
   initialData: Machine | null
+  suppliers: Array<{ id: string; companyName: string }>
+  categories: Array<{ id: string; name: string }>
+  onSubmit: (payload: MachineDrawerSubmitData) => Promise<void>
+  isSubmitting: boolean
+  submitError: string | null
   onClose: () => void
-  onOpenAddSupplier?: (machine: Machine) => void
+}
+
+export type MachineDrawerSubmitData = {
+  supplierId: string
+  categoryId: string
+  name: string
+  modelNumber?: string
+  costPrice: number
+  images: string[]
+  moq?: number
+  leadTimeDays?: number
+  specifications: Record<string, string>
+  notes?: string
 }
 
 type SpecItem = { key: string; value: string }
-
-const CATEGORIES = [
-  { id: 'cat_prep_01', name: 'Food Preparation' },
-  { id: 'cat_cook_01', name: 'Cooking Equipment' },
-  { id: 'cat_ref_01', name: 'Refrigeration' },
-  { id: 'cat_wash_01', name: 'Warewashing' },
-  { id: 'cat_disp_01', name: 'Display' },
-]
 
 export default function MachineDrawer({
   isOpen,
   step,
   setStep,
   initialData,
+  suppliers,
+  categories,
+  onSubmit,
+  isSubmitting,
+  submitError,
   onClose,
-  onOpenAddSupplier,
 }: MachineDrawerProps) {
   const isEditMode = Boolean(initialData)
 
+  const [supplierId, setSupplierId] = React.useState('')
   const [name, setName] = React.useState('')
   const [categoryId, setCategoryId] = React.useState('')
+  const [modelNumber, setModelNumber] = React.useState('')
+  const [costPrice, setCostPrice] = React.useState<number | ''>('')
+  const [moq, setMoq] = React.useState<number | ''>('')
+  const [leadTimeDays, setLeadTimeDays] = React.useState<number | ''>('')
+  const [imageUrls, setImageUrls] = React.useState<string[]>([])
   const [specs, setSpecs] = React.useState<SpecItem[]>([{ key: '', value: '' }, { key: '', value: '' }])
   const [notes, setNotes] = React.useState('')
+  const [formError, setFormError] = React.useState<string | null>(null)
 
   React.useEffect(() => {
     if (!isOpen) return
 
+    const machine = initialData as any
+
     if (initialData) {
       setName(initialData.name)
       setCategoryId(initialData.categoryId)
+      setSupplierId(machine?.supplierId || machine?.machineSuppliers?.[0]?.supplierId || '')
+      setModelNumber(machine?.modelNumber || machine?.machineSuppliers?.[0]?.modelNumber || '')
+      setCostPrice(machine?.costPrice ?? machine?.machineSuppliers?.[0]?.costPrice ?? '')
+      setMoq(machine?.moq ?? machine?.machineSuppliers?.[0]?.moq ?? '')
+      setLeadTimeDays(machine?.leadTimeDays ?? machine?.machineSuppliers?.[0]?.leadTimeDays ?? '')
       setNotes(initialData.notes || '')
+
+      if (Array.isArray(machine?.images)) {
+        setImageUrls(
+          machine.images
+            .map((img: any) => (typeof img === 'string' ? img : img?.url))
+            .filter((url: string | undefined) => Boolean(url)),
+        )
+      } else {
+        setImageUrls([])
+      }
       
       const specEntries = Object.entries(initialData.specifications).map(([key, value]) => ({ key, value }))
       setSpecs(specEntries.length > 0 ? specEntries : [{ key: '', value: '' }, { key: '', value: '' }])
     } else {
+      setSupplierId('')
       setName('')
       setCategoryId('')
+      setModelNumber('')
+      setCostPrice('')
+      setMoq('')
+      setLeadTimeDays('')
+      setImageUrls([])
       setNotes('')
       setSpecs([{ key: '', value: '' }, { key: '', value: '' }])
     }
+
+    setFormError(null)
   }, [isOpen, initialData])
 
   const handleAddSpec = () => setSpecs((prev) => [...prev, { key: '', value: '' }])
@@ -71,16 +116,48 @@ export default function MachineDrawer({
     setSpecs((prev) => prev.filter((_, i) => i !== index))
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    if (!name.trim()) {
+      setFormError('Machine name is required.')
+      return
+    }
+
+    if (!categoryId) {
+      setFormError('Category is required.')
+      return
+    }
+
+    if (!supplierId) {
+      setFormError('Supplier is required.')
+      return
+    }
+
+    if (costPrice === '' || Number(costPrice) <= 0) {
+      setFormError('Cost price must be greater than 0.')
+      return
+    }
+
     const specRecord = specs.reduce((acc, curr) => {
       if (curr.key.trim() && curr.value.trim()) {
         acc[curr.key.trim()] = curr.value.trim()
       }
       return acc
     }, {} as Record<string, string>)
-    
-    console.log('Save Machine:', { name, categoryId, specifications: specRecord, notes })
-    onClose()
+
+    setFormError(null)
+
+    await onSubmit({
+      supplierId,
+      categoryId,
+      name: name.trim(),
+      modelNumber: modelNumber.trim() || undefined,
+      costPrice: Number(costPrice),
+      images: imageUrls,
+      moq: moq === '' ? undefined : Number(moq),
+      leadTimeDays: leadTimeDays === '' ? undefined : Number(leadTimeDays),
+      specifications: specRecord,
+      notes: notes.trim() || undefined,
+    })
   }
 
   return (
@@ -113,20 +190,86 @@ export default function MachineDrawer({
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    disabled={isSubmitting}
                     placeholder="e.g. Planetary Dough Mixer 30L"
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
+                </div>
+                <div>
+                  <label className="block font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-2">Supplier *</label>
+                  <select
+                    value={supplierId}
+                    onChange={(e) => setSupplierId(e.target.value)}
+                    disabled={isSubmitting}
+                    className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
+                  >
+                    <option value="" disabled>Select supplier</option>
+                    {suppliers.map((supplier) => (
+                      <option key={supplier.id} value={supplier.id}>{supplier.companyName}</option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label className="block font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-2">Category *</label>
                   <select
                     value={categoryId}
                     onChange={(e) => setCategoryId(e.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   >
                     <option value="" disabled>Select category</option>
-                    {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                    {categories.map((category) => (
+                      <option key={category.id} value={category.id}>{category.name}</option>
+                    ))}
                   </select>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-2">Model Number</label>
+                    <input
+                      type="text"
+                      value={modelNumber}
+                      onChange={(e) => setModelNumber(e.target.value)}
+                      disabled={isSubmitting}
+                      className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-2">Cost Price *</label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={costPrice}
+                      onChange={(e) => setCostPrice(e.target.value ? Number(e.target.value) : '')}
+                      disabled={isSubmitting}
+                      className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-2">MOQ</label>
+                    <input
+                      type="number"
+                      min="1"
+                      value={moq}
+                      onChange={(e) => setMoq(e.target.value ? Number(e.target.value) : '')}
+                      disabled={isSubmitting}
+                      className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-2">Lead Time (Days)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={leadTimeDays}
+                      onChange={(e) => setLeadTimeDays(e.target.value ? Number(e.target.value) : '')}
+                      disabled={isSubmitting}
+                      className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="block font-sans text-[9px] tracking-[0.15em] uppercase text-gray-400 mb-2">Specifications</label>
@@ -138,6 +281,7 @@ export default function MachineDrawer({
                           placeholder="Key (e.g. Power)"
                           value={s.key}
                           onChange={(e) => handleSpecChange(idx, 'key', e.target.value)}
+                          disabled={isSubmitting}
                           className="flex-1 border border-gray-200 font-sans text-xs px-2 py-2 focus:outline-none focus:border-black"
                         />
                         <input
@@ -145,6 +289,7 @@ export default function MachineDrawer({
                           placeholder="Value (e.g. 1.5kW)"
                           value={s.value}
                           onChange={(e) => handleSpecChange(idx, 'value', e.target.value)}
+                          disabled={isSubmitting}
                           className="flex-1 border border-gray-200 font-sans text-xs px-2 py-2 focus:outline-none focus:border-black"
                         />
                         <button type="button" onClick={() => handleRemoveSpec(idx)} className="text-gray-400 hover:text-red-500 w-6 h-6 flex items-center justify-center font-sans text-lg leading-none">×</button>
@@ -161,6 +306,7 @@ export default function MachineDrawer({
                     rows={4}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
+                    disabled={isSubmitting}
                     placeholder="Internal quality tracking, accessory lists..."
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black resize-none"
                   />
@@ -170,9 +316,37 @@ export default function MachineDrawer({
 
             {step === 'images' && (
               <div className="space-y-6">
-                <div className="border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center h-40 cursor-pointer hover:bg-gray-100 transition-colors gap-2">
+                <div className="border border-gray-200 bg-gray-50 p-4 space-y-3">
+                  <p className="font-sans text-[10px] uppercase tracking-[0.12em] text-gray-500">Image URLs (optional)</p>
+                  {imageUrls.map((url, index) => (
+                    <input
+                      key={`img-url-${index}`}
+                      type="url"
+                      value={url}
+                      onChange={(e) => {
+                        setImageUrls((prev) => {
+                          const copy = [...prev]
+                          copy[index] = e.target.value
+                          return copy
+                        })
+                      }}
+                      disabled={isSubmitting}
+                      placeholder="https://example.com/image.jpg"
+                      className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
+                    />
+                  ))}
+                  <button
+                    type="button"
+                    disabled={isSubmitting}
+                    onClick={() => setImageUrls((prev) => [...prev, ''])}
+                    className="font-sans text-[10px] uppercase tracking-[0.1em] text-black hover:underline"
+                  >
+                    + Add Image URL
+                  </button>
+                </div>
+                <div className="border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center h-40 gap-2">
                   <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
-                  <p className="font-sans text-xs text-gray-500 uppercase tracking-wide">Click to upload or drag & drop</p>
+                  <p className="font-sans text-xs text-gray-500 uppercase tracking-wide">Local upload coming soon</p>
                 </div>
                 
                 <div>
@@ -205,51 +379,25 @@ export default function MachineDrawer({
 
             {step === 'suppliers' && (
               <div className="space-y-6">
-                {initialData?.machineSuppliers?.length ? (
-                  <div className="space-y-3">
-                    {initialData.machineSuppliers.map((supplier) => (
-                      <div key={supplier.id} className="border border-gray-200 p-4 flex justify-between items-start bg-gray-50 hover:bg-gray-100 transition-colors">
-                        <div>
-                          <p className="font-sans text-xs font-semibold text-black">{supplier.supplierName}</p>
-                          <div className="flex gap-4 mt-2">
-                            <p className="font-sans text-[10px] uppercase text-gray-500">Cost: <span className="font-mono text-black font-semibold">••••</span></p>
-                            <p className="font-sans text-[10px] uppercase text-gray-500">MOQ: <span className="font-mono text-black">{supplier.moq}</span></p>
-                            <p className="font-sans text-[10px] uppercase text-gray-500">Lead: <span className="font-mono text-black">{supplier.leadTimeDays || '-'} days</span></p>
-                          </div>
-                        </div>
-                        <button type="button" className="text-gray-400 hover:text-red-500 flex-shrink-0 ml-2 mt-0.5 transition-colors">
-                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                          </svg>
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-sm font-sans text-gray-400 italic">No suppliers linked yet.</p>
-                )}
-                
-                <button 
-                  type="button" 
-                  onClick={() => {
-                    if (onOpenAddSupplier) {
-                      onOpenAddSupplier(initialData || { id: 'new', name: name || 'New Machine' } as Machine)
-                    }
-                  }}
-                  className="font-sans text-[10px] font-semibold tracking-wide text-black uppercase hover:underline"
-                >
-                  + Link Supplier
-                </button>
+                <div className="space-y-2 border border-gray-200 bg-gray-50 p-4">
+                  <p className="font-sans text-[10px] uppercase tracking-[0.15em] text-gray-500">Review & Save</p>
+                  <p className="font-sans text-xs text-gray-600">Supplier and pricing are now configured in this machine form.</p>
+                  <p className="font-sans text-xs text-gray-600">Press Save Machine to submit and refresh the list.</p>
+                </div>
               </div>
             )}
           </div>
 
           <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between gap-3 bg-white">
             <div>
+              {(formError || submitError) && (
+                <p className="font-sans text-[11px] text-red-600">{formError || submitError}</p>
+              )}
               {step !== 'info' && (
                 <button
                   type="button"
                   onClick={() => setStep(step === 'suppliers' ? 'images' : 'info')}
+                  disabled={isSubmitting}
                   className="font-sans text-xs tracking-wide text-gray-500 hover:text-black transition-colors"
                 >
                   ← Back
@@ -260,6 +408,7 @@ export default function MachineDrawer({
               <button
                 type="button"
                 onClick={onClose}
+                disabled={isSubmitting}
                 className="font-sans text-xs tracking-wide text-gray-500 px-4 py-2 hover:text-black hover:bg-gray-50 transition-colors"
               >
                 Cancel
@@ -269,6 +418,7 @@ export default function MachineDrawer({
                 <button
                   type="button"
                   onClick={() => setStep(step === 'info' ? 'images' : 'suppliers')}
+                  disabled={isSubmitting}
                   className="bg-gray-100 text-black border border-gray-200 font-sans text-xs tracking-wide px-6 py-2 hover:bg-gray-200 transition-colors"
                 >
                   Next →
@@ -277,9 +427,16 @@ export default function MachineDrawer({
                 <button
                   type="button"
                   onClick={handleSave}
-                  className="bg-black text-white font-sans text-xs tracking-wide px-6 py-2 hover:bg-gray-800 transition-colors"
+                  disabled={isSubmitting}
+                  className="bg-black text-white font-sans text-xs tracking-wide px-6 py-2 hover:bg-gray-800 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
                 >
-                  Save Machine
+                  {isSubmitting && (
+                    <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+                      <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" className="opacity-90" />
+                    </svg>
+                  )}
+                  {isSubmitting ? 'Saving...' : 'Save Machine'}
                 </button>
               )}
             </div>

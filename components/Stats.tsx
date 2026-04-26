@@ -10,7 +10,7 @@ function renderStatIcon(icon: StatIcon) {
     strokeWidth: "1.5",
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
-    "aria-hidden": "true",
+    "aria-hidden": true,
   }
 
   switch (icon) {

@@ -2,12 +2,14 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import PortalHeader from '@/components/portal/PortalHeader'
 import AddMachineSupplierDrawer from '@/components/machines/AddMachineSupplierDrawer'
-import { mockMachines } from '@/data/mockMachines'
-import { useMachines } from '@/hooks/useMachines'
+import type { AddMachineSupplierSubmitData } from '@/components/machines/AddMachineSupplierDrawer'
+import { machinesApi } from '@/lib/api/machines.api'
+import { suppliersApi } from '@/lib/api/suppliers.api'
+import type { Machine, MachineImage, MachineSupplier } from '@/types/machine'
 
 // Using mocked activity feed for the side panel
 const feed = [
@@ -34,14 +36,179 @@ const feed = [
 ]
 
 export default function MachineDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const router = useRouter()
   const { id } = React.use(params)
-  const machine = mockMachines.find((item) => item.id === id)
+  const [machine, setMachine] = React.useState<Machine | null>(null)
+  const [isLoading, setIsLoading] = React.useState(true)
+  const [error, setError] = React.useState<string | null>(null)
 
-  const { isAddSupplierDrawerOpen, openAddSupplierDrawer, closeAddSupplierDrawer } = useMachines()
+  const [isAddSupplierDrawerOpen, setIsAddSupplierDrawerOpen] = React.useState(false)
+  const [machineForSupplier, setMachineForSupplier] = React.useState<Machine | null>(null)
+
+  const [supplierOptions, setSupplierOptions] = React.useState<Array<{ id: string; companyName: string }>>([])
+  const [isAddSupplierSubmitting, setIsAddSupplierSubmitting] = React.useState(false)
+  const [addSupplierSubmitError, setAddSupplierSubmitError] = React.useState<string | null>(null)
   const [showCostPrice, setShowCostPrice] = React.useState(false)
 
+  const mapMachineFromApi = React.useCallback((raw: any): Machine => {
+    const images: MachineImage[] = Array.isArray(raw.images)
+      ? raw.images.map((image: unknown, index: number) => {
+          if (typeof image === 'string') {
+            return {
+              id: `${raw.id}-img-${index}`,
+              machineId: raw.id,
+              url: image,
+              isPrimary: index === 0,
+              order: index,
+            }
+          }
+
+          const imageObj = image as Partial<MachineImage>
+          return {
+            id: imageObj.id ?? `${raw.id}-img-${index}`,
+            machineId: imageObj.machineId ?? raw.id,
+            url: imageObj.url ?? '',
+            isPrimary: Boolean(imageObj.isPrimary),
+            order: imageObj.order ?? index,
+          }
+        })
+      : []
+
+    const machineSuppliers: MachineSupplier[] = raw.supplierId
+      ? [
+          {
+            id: `${raw.id}-${raw.supplierId}`,
+            machineId: raw.id,
+            supplierId: raw.supplierId,
+            supplierName: raw.supplierName ?? 'Unknown Supplier',
+            costPrice: raw.costPrice ?? 0,
+            moq: raw.moq ?? 0,
+            leadTimeDays: raw.leadTimeDays,
+            modelNumber: raw.modelNumber,
+            qualityNotes: raw.notes,
+            createdAt: raw.createdAt,
+          },
+        ]
+      : []
+
+    return {
+      ...raw,
+      images,
+      machineSuppliers,
+    }
+  }, [])
+
+  const fetchMachine = React.useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const data = await machinesApi.getById<any>(id)
+      setMachine(mapMachineFromApi(data))
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to load machine'
+      setError(message)
+      setMachine(null)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [id, mapMachineFromApi])
+
+  React.useEffect(() => {
+    void fetchMachine()
+  }, [fetchMachine])
+
+  React.useEffect(() => {
+    const loadSuppliers = async () => {
+      try {
+        const suppliers = await suppliersApi.list<Array<{ id: string; companyName: string }>>()
+        setSupplierOptions(suppliers.map((supplier) => ({ id: supplier.id, companyName: supplier.companyName })))
+      } catch {
+        setSupplierOptions([])
+      }
+    }
+
+    void loadSuppliers()
+  }, [])
+
+  const handleAddSupplierSubmit = React.useCallback(async (payload: AddMachineSupplierSubmitData) => {
+    if (!machineForSupplier) {
+      return
+    }
+
+    setIsAddSupplierSubmitting(true)
+    setAddSupplierSubmitError(null)
+
+    try {
+      await machinesApi.update(machineForSupplier.id, {
+        supplierId: payload.supplierId,
+        costPrice: payload.costPrice,
+        moq: payload.moq,
+        leadTimeDays: payload.leadTimeDays,
+        modelNumber: payload.modelNumber,
+        notes: payload.qualityNotes,
+      })
+
+      setIsAddSupplierDrawerOpen(false)
+      setMachineForSupplier(null)
+      await fetchMachine()
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to link supplier'
+      setAddSupplierSubmitError(message)
+    } finally {
+      setIsAddSupplierSubmitting(false)
+    }
+  }, [machineForSupplier, fetchMachine])
+
+  const openAddSupplierDrawer = React.useCallback((selected: Machine) => {
+    setMachineForSupplier(selected)
+    setAddSupplierSubmitError(null)
+    setIsAddSupplierDrawerOpen(true)
+  }, [])
+
+  const closeAddSupplierDrawer = React.useCallback(() => {
+    setIsAddSupplierDrawerOpen(false)
+    setMachineForSupplier(null)
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="flex-1 flex flex-col min-h-screen">
+        <PortalHeader />
+        <div className="flex-1 p-8 bg-white flex items-center justify-center">
+          <p className="font-sans text-xs tracking-[0.12em] uppercase text-gray-400">Loading machine profile...</p>
+        </div>
+      </div>
+    )
+  }
+
   if (!machine) {
-    notFound()
+    return (
+      <div className="flex-1 flex flex-col min-h-screen">
+        <PortalHeader />
+        <div className="flex-1 p-8 bg-white max-w-3xl mx-auto w-full">
+          <div className="border border-red-200 bg-red-50 px-5 py-4">
+            <p className="font-sans text-xs text-red-700">{error ?? 'Machine was not found.'}</p>
+          </div>
+          <div className="mt-4 flex gap-3">
+            <button
+              type="button"
+              onClick={() => void fetchMachine()}
+              className="border border-gray-200 font-sans text-xs tracking-wide text-gray-600 px-4 py-2 hover:border-black hover:text-black transition-colors"
+            >
+              Retry
+            </button>
+            <button
+              type="button"
+              onClick={() => router.push('/portal/machines')}
+              className="bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors"
+            >
+              Back to Machines
+            </button>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   // Quick stats calculations
@@ -328,7 +495,11 @@ export default function MachineDetailPage({ params }: { params: Promise<{ id: st
 
       <AddMachineSupplierDrawer 
         isOpen={isAddSupplierDrawerOpen}
-        machine={machine}
+        machine={machineForSupplier}
+        suppliers={supplierOptions}
+        onSubmit={handleAddSupplierSubmit}
+        isSubmitting={isAddSupplierSubmitting}
+        submitError={addSupplierSubmitError}
         onClose={closeAddSupplierDrawer}
       />
     </div>

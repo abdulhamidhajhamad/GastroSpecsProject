@@ -1,11 +1,17 @@
 'use client'
 
 import * as React from 'react'
+import { categoriesApi } from '@/lib/api/categories.api'
 import type { Category, SubCategory } from '@/types/category'
 
 export type ModalMode = 'add-parent' | 'add-sub' | 'edit-parent' | 'edit-sub'
 
 export function useCategories() {
+  const [categories, setCategories] = React.useState<Category[]>([])
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
+  const [search, setSearch] = React.useState('')
+
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [modalMode, setModalMode] = React.useState<ModalMode>('add-parent')
   
@@ -17,6 +23,25 @@ export function useCategories() {
   const [categoryToDelete, setCategoryToDelete] = React.useState<Category | SubCategory | null>(null)
   
   const [isUploadingImage, setIsUploadingImage] = React.useState(false)
+
+  const fetchCategories = React.useCallback(async (nextSearch?: string) => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const data = await categoriesApi.list<Category[]>(nextSearch ?? search)
+      setCategories(data)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to fetch categories'
+      setError(message)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [search])
+
+  React.useEffect(() => {
+    void fetchCategories(search)
+  }, [fetchCategories, search])
 
   const openAddParentModal = () => {
     setModalMode('add-parent')
@@ -71,13 +96,31 @@ export function useCategories() {
     }, 200) // Reset state after animation
   }
 
-  const confirmDelete = () => {
-    console.log('Confirmed delete for:', categoryToDelete)
-    // Deletion logic hooks in here in the future
-    closeDeleteModal()
+  const confirmDelete = async () => {
+    if (!categoryToDelete) {
+      return
+    }
+
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      await categoriesApi.delete(categoryToDelete.id)
+      await fetchCategories(search)
+      closeDeleteModal()
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to delete category'
+      setError(message)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return {
+    categories,
+    isLoading,
+    error,
+    search,
     isModalOpen,
     modalMode,
     selectedCategory,
@@ -86,6 +129,8 @@ export function useCategories() {
     isDeleteModalOpen,
     categoryToDelete,
     isUploadingImage,
+    setSearch,
+    fetchCategories,
     
     setIsUploadingImage,
     openAddParentModal,

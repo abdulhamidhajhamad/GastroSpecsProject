@@ -14,7 +14,17 @@ type SupplierContactMethod = {
 type AddSupplierContactDrawerProps = {
   isOpen: boolean
   supplier: Supplier | null
+  onSubmit: (data: AddSupplierContactSubmitData) => Promise<void>
+  isSubmitting: boolean
+  submitError: string | null
   onClose: () => void
+}
+
+export type AddSupplierContactSubmitData = {
+  name: string
+  position?: string
+  notes?: string
+  contactMethods: Record<string, string>
 }
 
 type ContactFormState = {
@@ -30,7 +40,14 @@ const DEFAULT_METHODS: SupplierContactMethod[] = [
   { id: crypto.randomUUID(), type: 'email', value: '' },
 ]
 
-export default function AddSupplierContactDrawer({ isOpen, supplier, onClose }: AddSupplierContactDrawerProps) {
+export default function AddSupplierContactDrawer({
+  isOpen,
+  supplier,
+  onSubmit,
+  isSubmitting,
+  submitError,
+  onClose,
+}: AddSupplierContactDrawerProps) {
   const [formData, setFormData] = React.useState<ContactFormState>({
     name: '',
     position: '',
@@ -80,7 +97,7 @@ export default function AddSupplierContactDrawer({ isOpen, supplier, onClose }: 
     }))
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (!formData.name.trim()) {
@@ -89,9 +106,21 @@ export default function AddSupplierContactDrawer({ isOpen, supplier, onClose }: 
     }
 
     setNameError(null)
-    console.log('Supplier Contact submit for supplier:', supplier?.id, formData)
-    
-    // onClose()
+
+    const contactMethods = formData.methods.reduce<Record<string, string>>((acc, method) => {
+      const normalizedValue = method.value.trim()
+      if (normalizedValue) {
+        acc[method.type] = normalizedValue
+      }
+      return acc
+    }, {})
+
+    await onSubmit({
+      name: formData.name.trim(),
+      position: formData.position.trim() || undefined,
+      notes: formData.notes.trim() || undefined,
+      contactMethods,
+    })
   }
 
   const renderMethodSection = (type: 'wechat' | 'whatsapp' | 'email', title: string, placeholder: string) => {
@@ -179,6 +208,7 @@ export default function AddSupplierContactDrawer({ isOpen, supplier, onClose }: 
                     type="text"
                     value={formData.name}
                     onChange={(event) => handleChange('name', event.target.value)}
+                    disabled={isSubmitting}
                     placeholder="e.g. John Doe"
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
@@ -193,6 +223,7 @@ export default function AddSupplierContactDrawer({ isOpen, supplier, onClose }: 
                     type="text"
                     value={formData.position}
                     onChange={(event) => handleChange('position', event.target.value)}
+                    disabled={isSubmitting}
                     placeholder="e.g. Sales Manager"
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
@@ -204,6 +235,7 @@ export default function AddSupplierContactDrawer({ isOpen, supplier, onClose }: 
                     type="text"
                     value={formData.notes}
                     onChange={(event) => handleChange('notes', event.target.value)}
+                    disabled={isSubmitting}
                     placeholder="Additional context or notes..."
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
@@ -222,9 +254,13 @@ export default function AddSupplierContactDrawer({ isOpen, supplier, onClose }: 
           </div>
 
           <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-end gap-3 shrink-0 bg-gray-50 z-10 relative">
+            {submitError && (
+              <p className="mr-auto font-sans text-[11px] text-red-600">{submitError}</p>
+            )}
             <button
               type="button"
               onClick={onClose}
+              disabled={isSubmitting}
               className="border border-gray-200 bg-white font-sans text-[10px] tracking-[0.12em] uppercase text-gray-500 px-5 py-2.5 hover:border-black hover:text-black transition-colors"
             >
               Cancel
@@ -232,9 +268,16 @@ export default function AddSupplierContactDrawer({ isOpen, supplier, onClose }: 
             <button
               type="submit"
               form="supplier-contact-modal-form"
-              className="bg-black text-white font-sans text-[10px] tracking-[0.12em] uppercase px-5 py-2.5 hover:bg-gray-800 transition-colors"
+              disabled={isSubmitting}
+              className="bg-black text-white font-sans text-[10px] tracking-[0.12em] uppercase px-5 py-2.5 hover:bg-gray-800 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
             >
-              Save Contact
+              {isSubmitting && (
+                <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+                  <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" className="opacity-90" />
+                </svg>
+              )}
+              {isSubmitting ? 'Saving...' : 'Save Contact'}
             </button>
           </div>
         </div>

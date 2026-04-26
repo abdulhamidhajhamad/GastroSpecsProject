@@ -6,11 +6,15 @@ import { useRouter } from 'next/navigation'
 import PortalHeader from '@/components/portal/PortalHeader'
 import MachineDeleteModal from '@/components/machines/MachineDeleteModal'
 import MachineDrawer from '@/components/machines/MachineDrawer'
+import type { MachineDrawerSubmitData } from '@/components/machines/MachineDrawer'
 import MachineStatCards from '@/components/machines/MachineStatCards'
 import MachineTable from '@/components/machines/MachineTable'
 import AddMachineSupplierDrawer from '@/components/machines/AddMachineSupplierDrawer'
-import { mockMachines } from '@/data/mockMachines'
+import type { AddMachineSupplierSubmitData } from '@/components/machines/AddMachineSupplierDrawer'
 import { useMachines } from '@/hooks/useMachines'
+import { machinesApi } from '@/lib/api/machines.api'
+import { categoriesApi } from '@/lib/api/categories.api'
+import { suppliersApi } from '@/lib/api/suppliers.api'
 import type { Machine } from '@/types/machine'
 
 const feed = [
@@ -36,29 +40,25 @@ const feed = [
   },
 ]
 
-function buildMachineSearchValue(machine: Machine) {
-  const specs = Object.values(machine.specifications).join(' ')
-  const suppliers = machine.machineSuppliers.map(s => s.supplierName).join(' ')
-
-  return [
-    machine.id,
-    machine.name,
-    machine.categoryName,
-    machine.notes,
-    specs,
-    suppliers
-  ]
-    .filter(Boolean)
-    .join(' ')
-    .toLowerCase()
-}
-
 export default function MachinesPage() {
   const router = useRouter()
+  const [supplierOptions, setSupplierOptions] = React.useState<Array<{ id: string; companyName: string }>>([])
+  const [categoryOptions, setCategoryOptions] = React.useState<Array<{ id: string; name: string }>>([])
+  const [isDrawerSubmitting, setIsDrawerSubmitting] = React.useState(false)
+  const [drawerSubmitError, setDrawerSubmitError] = React.useState<string | null>(null)
+  const [isAddSupplierSubmitting, setIsAddSupplierSubmitting] = React.useState(false)
+  const [addSupplierSubmitError, setAddSupplierSubmitError] = React.useState<string | null>(null)
+
   const {
+    machines,
+    isLoading,
+    error,
+    search,
     isDrawerOpen,
     drawerStep,
     selectedMachine,
+    setSearch,
+    fetchMachines,
     isDeleteModalOpen,
     machineToDelete,
     isAddSupplierDrawerOpen,
@@ -74,35 +74,96 @@ export default function MachinesPage() {
     closeAddSupplierDrawer,
   } = useMachines()
 
-  const [searchQuery, setSearchQuery] = React.useState('')
-  const normalizedSearchQuery = searchQuery.trim().toLowerCase()
+  React.useEffect(() => {
+    const loadFormOptions = async () => {
+      try {
+        const [suppliers, categories] = await Promise.all([
+          suppliersApi.list<Array<{ id: string; companyName: string }>>(),
+          categoriesApi.list<Array<{ id: string; name: string; children?: Array<{ id: string; name: string }> }>>(),
+        ])
+
+        setSupplierOptions(suppliers.map((supplier) => ({ id: supplier.id, companyName: supplier.companyName })))
+        const allSubs = categories.flatMap((parent) =>
+          (parent.children ?? []).map((child) => ({
+            id: child.id,
+            name: `${parent.name} → ${child.name}`,
+          })),
+        )
+        setCategoryOptions(allSubs)
+      } catch {
+        setSupplierOptions([])
+        setCategoryOptions([])
+      }
+    }
+
+    void loadFormOptions()
+  }, [])
 
   const handleView = React.useCallback((machine: Machine) => {
     router.push(`/portal/machines/${machine.id}`)
   }, [router])
 
-  const filteredMachines = React.useMemo(() => {
-    if (!normalizedSearchQuery) {
-      return mockMachines
+  const handleMachineSubmit = React.useCallback(async (payload: MachineDrawerSubmitData) => {
+    setIsDrawerSubmitting(true)
+    setDrawerSubmitError(null)
+
+    try {
+      if (selectedMachine) {
+        await machinesApi.update(selectedMachine.id, payload)
+      } else {
+        await machinesApi.create(payload)
+      }
+
+      closeDrawer()
+      await fetchMachines(search)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to save machine'
+      setDrawerSubmitError(message)
+    } finally {
+      setIsDrawerSubmitting(false)
+    }
+  }, [selectedMachine, closeDrawer, fetchMachines, search])
+
+  const handleAddSupplierSubmit = React.useCallback(async (payload: AddMachineSupplierSubmitData) => {
+    if (!machineForSupplier) {
+      return
     }
 
-    return mockMachines.filter((machine) =>
-      buildMachineSearchValue(machine).includes(normalizedSearchQuery)
-    )
-  }, [normalizedSearchQuery])
+    setIsAddSupplierSubmitting(true)
+    setAddSupplierSubmitError(null)
 
-  const totalMachines = mockMachines.length
-  const uniqueCategories = new Set(mockMachines.map(m => m.categoryId)).size
-  const totalSuppliersLinked = mockMachines.reduce((sum, m) => sum + (m.machineSuppliers?.length || 0), 0)
+    try {
+      await machinesApi.update(machineForSupplier.id, {
+        supplierId: payload.supplierId,
+        costPrice: payload.costPrice,
+        moq: payload.moq,
+        leadTimeDays: payload.leadTimeDays,
+        modelNumber: payload.modelNumber,
+        notes: payload.qualityNotes,
+      })
+
+      closeAddSupplierDrawer()
+      await fetchMachines(search)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to link supplier'
+      setAddSupplierSubmitError(message)
+    } finally {
+      setIsAddSupplierSubmitting(false)
+    }
+  }, [machineForSupplier, closeAddSupplierDrawer, fetchMachines, search])
+
+  const totalMachines = machines.length
+  const uniqueCategories = new Set(machines.map(m => m.categoryId)).size
+  const totalSuppliersLinked = machines.filter((m: any) => Boolean(m?.supplierId || m?.supplierName)).length
   
   const now = new Date()
-  const newThisMonth = mockMachines.filter((machine) => {
+  const newThisMonth = machines.filter((machine) => {
     const created = new Date(machine.createdAt)
     return (
       created.getUTCFullYear() === now.getUTCFullYear() &&
       created.getUTCMonth() === now.getUTCMonth()
     )
-  }).length || 2 // Fallback to 2 to match mock feeling
+  }).length
 
   return (
     <div className="flex-1 flex flex-col min-h-screen">
@@ -160,20 +221,34 @@ export default function MachinesPage() {
                   </svg>
                   <input
                     type="search"
-                    value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
                     placeholder="Search machines, categories, specs..."
                     className="bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-full"
                   />
                 </div>
                 <p className="font-sans text-[10px] uppercase tracking-[0.15em] text-gray-400 whitespace-nowrap">
-                  {filteredMachines.length} Results
+                  {machines.length} Results
                 </p>
               </div>
             </div>
 
+            {error && (
+              <div className="mx-6 mt-4 border border-red-200 bg-red-50 px-4 py-3 flex items-center justify-between gap-4">
+                <p className="font-sans text-xs text-red-700">{error}</p>
+                <button
+                  type="button"
+                  onClick={() => void fetchMachines(search)}
+                  className="border border-red-300 bg-white font-sans text-[10px] tracking-[0.12em] uppercase text-red-700 px-3 py-1.5 hover:border-red-500 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            )}
+
             <MachineTable
-              machines={filteredMachines}
+              machines={machines}
+              isLoading={isLoading}
               onEdit={openEditDrawer}
               onDelete={openDeleteModal}
               onView={handleView}
@@ -220,13 +295,21 @@ export default function MachinesPage() {
         step={drawerStep}
         setStep={setDrawerStep}
         initialData={selectedMachine}
+        suppliers={supplierOptions}
+        categories={categoryOptions}
+        onSubmit={handleMachineSubmit}
+        isSubmitting={isDrawerSubmitting}
+        submitError={drawerSubmitError}
         onClose={closeDrawer}
-        onOpenAddSupplier={openAddSupplierDrawer}
       />
 
       <AddMachineSupplierDrawer
         isOpen={isAddSupplierDrawerOpen}
         machine={machineForSupplier}
+        suppliers={supplierOptions}
+        onSubmit={handleAddSupplierSubmit}
+        isSubmitting={isAddSupplierSubmitting}
+        submitError={addSupplierSubmitError}
         onClose={closeAddSupplierDrawer}
       />
 

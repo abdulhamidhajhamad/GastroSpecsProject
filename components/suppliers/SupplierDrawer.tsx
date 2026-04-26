@@ -14,7 +14,29 @@ type SupplierContactMethod = {
 type SupplierDrawerProps = {
   isOpen: boolean
   initialData: Supplier | null
+  onSubmit: (data: SupplierDrawerSubmitData) => Promise<void>
+  isSubmitting: boolean
+  submitError: string | null
   onClose: () => void
+}
+
+export type SupplierDrawerSubmitData = {
+  companyName: string
+  website?: string
+  notes?: string
+  isDdpPartner: boolean
+  location: {
+    province: string
+    city: string
+    district?: string
+    street?: string
+  }
+  email?: string
+  phone?: string
+  wechat?: string
+  primaryContactName?: string
+  primaryContactPosition?: string
+  primaryContactMethods: Record<string, string>
 }
 
 type SupplierFormState = {
@@ -80,7 +102,7 @@ function getInitialFormState(initialData: Supplier | null): SupplierFormState {
   }
 }
 
-export default function SupplierDrawer({ isOpen, initialData, onClose }: SupplierDrawerProps) {
+export default function SupplierDrawer({ isOpen, initialData, onSubmit, isSubmitting, submitError, onClose }: SupplierDrawerProps) {
   const isEditMode = Boolean(initialData)
   const [formData, setFormData] = React.useState<SupplierFormState>(() => getInitialFormState(initialData))
   const [companyNameError, setCompanyNameError] = React.useState<string | null>(null)
@@ -119,7 +141,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
     }))
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (!formData.companyName.trim()) {
@@ -128,7 +150,33 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
     }
 
     setCompanyNameError(null)
-    console.log('Supplier drawer submit:', formData)
+
+    const primaryContactMethods = formData.primaryContactMethods.reduce<Record<string, string>>((acc, method) => {
+      const normalizedValue = method.value.trim()
+      if (normalizedValue) {
+        acc[method.type] = normalizedValue
+      }
+      return acc
+    }, {})
+
+    await onSubmit({
+      companyName: formData.companyName.trim(),
+      website: formData.website.trim() || undefined,
+      notes: formData.notes.trim() || undefined,
+      isDdpPartner: formData.isDdpPartner,
+      location: {
+        province: formData.province.trim(),
+        city: formData.city.trim(),
+        district: formData.district.trim() || undefined,
+        street: formData.street.trim() || undefined,
+      },
+      email: formData.email.trim() || undefined,
+      phone: formData.phone.trim() || undefined,
+      wechat: formData.wechat.trim() || undefined,
+      primaryContactName: formData.primaryContactName.trim() || undefined,
+      primaryContactPosition: formData.primaryContactPosition.trim() || undefined,
+      primaryContactMethods,
+    })
   }
 
   const renderMethodSection = (type: 'wechat' | 'whatsapp' | 'email', title: string, placeholder: string) => {
@@ -214,6 +262,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="text"
                     value={formData.companyName}
                     onChange={(event) => handleChange('companyName', event.target.value)}
+                    disabled={isSubmitting}
                     placeholder="e.g. Foshan Titan Thermal Equipment"
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
@@ -228,6 +277,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="url"
                     value={formData.website}
                     onChange={(event) => handleChange('website', event.target.value)}
+                    disabled={isSubmitting}
                     placeholder="https://"
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
@@ -239,6 +289,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="checkbox"
                     checked={formData.isDdpPartner}
                     onChange={(event) => handleChange('isDdpPartner', event.target.checked)}
+                    disabled={isSubmitting}
                     className="h-4 w-4 border-gray-300"
                   />
                   <label htmlFor="drawer-ddp" className="font-sans text-xs text-gray-600">DDP Partner</label>
@@ -250,6 +301,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     rows={3}
                     value={formData.notes}
                     onChange={(event) => handleChange('notes', event.target.value)}
+                    disabled={isSubmitting}
                     placeholder="Internal procurement notes..."
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors resize-none"
                   />
@@ -266,6 +318,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="text"
                     value={formData.province}
                     onChange={(event) => handleChange('province', event.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -275,6 +328,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="text"
                     value={formData.city}
                     onChange={(event) => handleChange('city', event.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -284,6 +338,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="text"
                     value={formData.district}
                     onChange={(event) => handleChange('district', event.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -293,6 +348,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="text"
                     value={formData.street}
                     onChange={(event) => handleChange('street', event.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -308,6 +364,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="email"
                     value={formData.email}
                     onChange={(event) => handleChange('email', event.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -317,6 +374,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="text"
                     value={formData.phone}
                     onChange={(event) => handleChange('phone', event.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -326,6 +384,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="text"
                     value={formData.wechat}
                     onChange={(event) => handleChange('wechat', event.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -341,6 +400,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="text"
                     value={formData.primaryContactName}
                     onChange={(event) => handleChange('primaryContactName', event.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -350,6 +410,7 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
                     type="text"
                     value={formData.primaryContactPosition}
                     onChange={(event) => handleChange('primaryContactPosition', event.target.value)}
+                    disabled={isSubmitting}
                     className="w-full border border-gray-200 font-sans text-xs text-black px-3 py-2.5 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
@@ -365,9 +426,13 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
           </div>
 
           <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-end gap-3 shrink-0 bg-gray-50 z-10 relative">
+            {submitError && (
+              <p className="mr-auto font-sans text-[11px] text-red-600">{submitError}</p>
+            )}
             <button
               type="button"
               onClick={onClose}
+              disabled={isSubmitting}
               className="border border-gray-200 bg-white font-sans text-[10px] tracking-[0.12em] uppercase text-gray-500 px-5 py-2.5 hover:border-black hover:text-black transition-colors"
             >
               Cancel
@@ -375,9 +440,16 @@ export default function SupplierDrawer({ isOpen, initialData, onClose }: Supplie
             <button
               type="submit"
               form="supplier-drawer-form"
-              className="bg-black text-white font-sans text-[10px] tracking-[0.12em] uppercase px-5 py-2.5 hover:bg-gray-800 transition-colors"
+              disabled={isSubmitting}
+              className="bg-black text-white font-sans text-[10px] tracking-[0.12em] uppercase px-5 py-2.5 hover:bg-gray-800 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
             >
-              {isEditMode ? 'Update Supplier' : 'Save Supplier'}
+              {isSubmitting && (
+                <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+                  <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" className="opacity-90" />
+                </svg>
+              )}
+              {isSubmitting ? 'Saving...' : isEditMode ? 'Update Supplier' : 'Save Supplier'}
             </button>
           </div>
         </div>

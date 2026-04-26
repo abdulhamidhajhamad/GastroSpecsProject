@@ -1,66 +1,125 @@
+"use client"
+
+import * as React from 'react'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import PortalHeader from '@/components/portal/PortalHeader'
 import SupplierContactsCard from '@/components/suppliers/SupplierContactsCard'
 import SupplierDetailOverview from '@/components/suppliers/SupplierDetailOverview'
 import SupplierMachinesCard, { type SupplierMachineRow } from '@/components/suppliers/SupplierMachinesCard'
-import { mockSuppliers } from '@/data/mockSuppliers'
+import { suppliersApi } from '@/lib/api/suppliers.api'
+import { machinesApi } from '@/lib/api/machines.api'
+import type { Supplier } from '@/types/supplier'
 
 type Props = {
   params: Promise<{ id: string }>
 }
 
-const machinesBySupplierId: Record<string, SupplierMachineRow[]> = {
-  sup_8f1a2c4d: [
-    { id: 'MC-1101', machineName: 'Vertical Display Chiller', category: 'Refrigeration', qty: 12, costPrice: '$1,420', status: 'Active' },
-    { id: 'MC-1102', machineName: 'Island Freezer Line', category: 'Refrigeration', qty: 8, costPrice: '$1,980', status: 'Active' },
-    { id: 'MC-1103', machineName: 'Walk-In Condensing Unit', category: 'Cold Room', qty: 6, costPrice: '$2,650', status: 'Seasonal' },
-    { id: 'MC-1104', machineName: 'Blast Chiller Cabinet', category: 'Refrigeration', qty: 4, costPrice: '$3,120', status: 'Paused' },
-  ],
-  sup_3d9b7e21: [
-    { id: 'MC-2201', machineName: '6 Burner Heavy Range', category: 'Heavy Cooking', qty: 10, costPrice: '$1,150', status: 'Active' },
-    { id: 'MC-2202', machineName: 'Stock Pot Burner', category: 'Heavy Cooking', qty: 7, costPrice: '$740', status: 'Active' },
-    { id: 'MC-2203', machineName: 'Stainless Work Table', category: 'Fabrication', qty: 15, costPrice: '$280', status: 'Seasonal' },
-    { id: 'MC-2204', machineName: 'Grease Trap Sink Unit', category: 'Plumbing Line', qty: 5, costPrice: '$460', status: 'Active' },
-  ],
-  sup_b72c9f14: [
-    { id: 'MC-3301', machineName: 'Planetary Mixer 30L', category: 'Food Prep', qty: 6, costPrice: '$890', status: 'Active' },
-    { id: 'MC-3302', machineName: 'Dough Sheeter 520', category: 'Bakery Prep', qty: 3, costPrice: '$1,780', status: 'Active' },
-    { id: 'MC-3303', machineName: 'Vegetable Cutter Set', category: 'Food Prep', qty: 9, costPrice: '$420', status: 'Seasonal' },
-  ],
-  sup_c51e6a83: [
-    { id: 'MC-4401', machineName: 'Combi Oven 10 Tray', category: 'Thermal', qty: 9, costPrice: '$5,600', status: 'Active' },
-    { id: 'MC-4402', machineName: 'Proofing Cabinet', category: 'Bakery Thermal', qty: 6, costPrice: '$1,850', status: 'Active' },
-    { id: 'MC-4403', machineName: 'Convection Oven 5 Tray', category: 'Thermal', qty: 8, costPrice: '$2,100', status: 'Seasonal' },
-    { id: 'MC-4404', machineName: 'Holding Cabinet 20 GN', category: 'Hot Holding', qty: 5, costPrice: '$1,420', status: 'Paused' },
-  ],
-  sup_e04a7d56: [
-    { id: 'MC-5501', machineName: 'Curved Bakery Showcase', category: 'Display', qty: 11, costPrice: '$1,240', status: 'Active' },
-    { id: 'MC-5502', machineName: 'Gelato Display 12 Pan', category: 'Display', qty: 4, costPrice: '$2,360', status: 'Seasonal' },
-    { id: 'MC-5503', machineName: 'Hot Bain Marie Counter', category: 'Service Line', qty: 7, costPrice: '$980', status: 'Active' },
-  ],
-}
-
-function formatSupplierLocation(supplierId: string) {
-  const supplier = mockSuppliers.find((item) => item.id === supplierId)
-
-  if (!supplier) {
-    return ''
+function formatCostPrice(value?: number): string {
+  if (typeof value !== 'number' || Number.isNaN(value)) {
+    return '-'
   }
 
-  return [supplier.location.city, supplier.location.province].filter(Boolean).join(', ')
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(value)
 }
 
-export default async function SupplierDetailPage({ params }: Props) {
-  const { id } = await params
-  const supplier = mockSuppliers.find((item) => item.id === id)
+export default function SupplierDetailPage({ params }: Props) {
+  const router = useRouter()
+  const { id } = React.use(params)
+  const [supplier, setSupplier] = React.useState<Supplier | null>(null)
+  const [machines, setMachines] = React.useState<SupplierMachineRow[]>([])
+  const [isLoading, setIsLoading] = React.useState(true)
+  const [error, setError] = React.useState<string | null>(null)
 
-  if (!supplier) {
-    notFound()
+  const fetchSupplierProfile = React.useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const [supplierData, machinesData] = await Promise.all([
+        suppliersApi.getById<Supplier>(id),
+        machinesApi.list<Array<{
+          id: string
+          supplierId?: string
+          name: string
+          categoryName?: string
+          costPrice?: number
+        }>>(),
+      ])
+
+      const mappedMachines = machinesData
+        .filter((machine) => machine.supplierId === supplierData.id)
+        .map((machine) => ({
+          id: machine.id,
+          machineName: machine.name,
+          category: machine.categoryName ?? '-',
+          qty: 1,
+          costPrice: formatCostPrice(machine.costPrice),
+          status: 'Active' as const,
+        }))
+
+      setSupplier(supplierData)
+      setMachines(mappedMachines)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to load supplier profile'
+      setError(message)
+      setSupplier(null)
+      setMachines([])
+    } finally {
+      setIsLoading(false)
+    }
+  }, [id])
+
+  React.useEffect(() => {
+    void fetchSupplierProfile()
+  }, [fetchSupplierProfile])
+
+  if (isLoading) {
+    return (
+      <div className="flex-1 flex flex-col min-h-screen">
+        <PortalHeader />
+        <div className="flex-1 p-8 bg-white flex items-center justify-center">
+          <p className="font-sans text-xs tracking-[0.12em] uppercase text-gray-400">Loading supplier profile...</p>
+        </div>
+      </div>
+    )
   }
 
-  const machines = machinesBySupplierId[supplier.id] ?? []
+  if (!supplier) {
+    return (
+      <div className="flex-1 flex flex-col min-h-screen">
+        <PortalHeader />
+        <div className="flex-1 p-8 bg-white max-w-3xl mx-auto w-full">
+          <div className="border border-red-200 bg-red-50 px-5 py-4">
+            <p className="font-sans text-xs text-red-700">{error ?? 'Supplier was not found.'}</p>
+          </div>
+          <div className="mt-4 flex gap-3">
+            <button
+              type="button"
+              onClick={() => void fetchSupplierProfile()}
+              className="border border-gray-200 font-sans text-xs tracking-wide text-gray-600 px-4 py-2 hover:border-black hover:text-black transition-colors"
+            >
+              Retry
+            </button>
+            <button
+              type="button"
+              onClick={() => router.push('/portal/suppliers')}
+              className="bg-black text-white font-sans text-xs tracking-wide px-4 py-2 hover:bg-gray-800 transition-colors"
+            >
+              Back to Suppliers
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const locationText = [supplier.location.city, supplier.location.province].filter(Boolean).join(', ')
 
   return (
     <div className="flex-1 flex flex-col min-h-screen">
@@ -71,7 +130,7 @@ export default async function SupplierDetailPage({ params }: Props) {
           <div>
             <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-1">Supplier Profile</p>
             <h1 className="font-sans font-bold text-xl tracking-[0.04em] uppercase text-black">{supplier.companyName}</h1>
-            <p className="font-sans text-xs text-gray-400 mt-1">{formatSupplierLocation(supplier.id)}</p>
+            <p className="font-sans text-xs text-gray-400 mt-1">{locationText}</p>
           </div>
           <div className="flex items-center gap-3">
             <Link

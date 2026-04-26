@@ -7,8 +7,9 @@ import CustomerDeleteModal from '@/components/customers/CustomerDeleteModal'
 import CustomerModal from '@/components/customers/CustomerModal'
 import CustomerStatCards from '@/components/customers/CustomerStatCards'
 import CustomerTable from '@/components/customers/CustomerTable'
-import { mockCustomers } from '@/data/mockCustomers'
 import { useCustomers } from '@/hooks/useCustomers'
+import type { CustomerModalSubmitData } from '@/components/customers/CustomerModal'
+import { customersApi } from '@/lib/api/customers.api'
 import type { Customer } from '@/types/customer'
 
 const feed = [
@@ -34,41 +35,19 @@ const feed = [
   },
 ]
 
-function exportReport() {
-  console.log('Exporting customers report...')
-}
-
-function filterCustomers(query: string) {
-  if (!query.trim()) return mockCustomers
-
-  const q = query.toLowerCase()
-  return mockCustomers.filter((customer) => {
-    const textSearch = [
-      customer.id,
-      customer.name,
-      customer.companyName,
-      customer.country,
-      customer.city,
-      customer.customerType,
-      customer.contact?.email,
-      customer.contact?.whatsapp,
-      customer.contact?.wechat
-    ]
-      .filter(Boolean)
-      .join(' ')
-      .toLowerCase()
-    
-    return textSearch.includes(q)
-  })
-}
-
 export default function CustomersPage() {
   const {
+    customers,
+    isLoading,
+    error,
+    search,
     isModalOpen,
     modalMode,
     selectedCustomer,
     isDeleteModalOpen,
     customerToDelete,
+    setSearch,
+    fetchCustomers,
     openAddModal,
     openEditModal,
     closeModal,
@@ -77,14 +56,60 @@ export default function CustomersPage() {
     confirmDelete,
   } = useCustomers()
 
-  const [searchQuery, setSearchQuery] = React.useState('')
-  const filteredCustomers = React.useMemo(() => filterCustomers(searchQuery), [searchQuery])
+  const [isModalSubmitting, setIsModalSubmitting] = React.useState(false)
+  const [modalSubmitError, setModalSubmitError] = React.useState<string | null>(null)
 
-  // Dynamic stats
-  const totalCustomers = mockCustomers.length
-  const uniqueCountries = new Set(mockCustomers.map(c => c.country).filter(Boolean)).size
-  const activeCustomers = mockCustomers.filter(c => c.ordersCount > 0).length
-  const newThisMonth = 1
+  const handleModalSubmit = React.useCallback(async (payload: CustomerModalSubmitData) => {
+    setIsModalSubmitting(true)
+    setModalSubmitError(null)
+
+const contact = {
+  whatsapp: payload.contact?.whatsapp?.trim() || undefined,
+  wechat: payload.contact?.wechat?.trim() || undefined,
+  email: payload.contact?.email?.trim() || undefined,
+}
+
+    const apiPayload = {
+      name: payload.name.trim(),
+      companyName: payload.companyName.trim() || undefined,
+      country: payload.country.trim() || undefined,
+      city: payload.city.trim() || undefined,
+      customerType: payload.customerType.trim() || undefined,
+      contact,
+      notes: payload.notes.trim() || undefined,
+    }
+
+    try {
+      if (modalMode === 'add') {
+        await customersApi.create(apiPayload)
+      } else if (selectedCustomer) {
+        await customersApi.update(selectedCustomer.id, apiPayload)
+      }
+
+      closeModal()
+      await fetchCustomers(search)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to save customer'
+      setModalSubmitError(message)
+    } finally {
+      setIsModalSubmitting(false)
+    }
+  }, [modalMode, selectedCustomer, closeModal, fetchCustomers, search])
+
+  const totalCustomers = customers.length
+  const uniqueCountries = new Set(customers.map((customer) => customer.country).filter(Boolean)).size
+  const activeCustomers = customers.filter((customer) => customer.ordersCount > 0).length
+  const newThisMonth = customers.filter((customer) => {
+    const createdAt = new Date(customer.createdAt)
+    const now = new Date()
+    return createdAt.getUTCFullYear() === now.getUTCFullYear() && createdAt.getUTCMonth() === now.getUTCMonth()
+  }).length
+
+  React.useEffect(() => {
+    if (!isModalOpen) {
+      setModalSubmitError(null)
+    }
+  }, [isModalOpen])
 
   return (
     <main className="min-h-screen bg-gray-50 pb-20">
@@ -98,7 +123,7 @@ export default function CustomersPage() {
           </div>
           <div className="flex gap-3">
             <button
-              onClick={exportReport}
+              onClick={() => console.log('Exporting customers report...')}
               className="flex items-center gap-2 border border-gray-200 px-4 py-2 font-sans text-xs tracking-wide text-gray-600 hover:border-black hover:text-black transition-colors"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -137,21 +162,35 @@ export default function CustomersPage() {
                   </svg>
                   <input
                     type="search"
-                    value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
                     placeholder="Search name, company, city, contact..."
                     className="bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-full"
                   />
                 </div>
                 <p className="font-sans text-[10px] uppercase tracking-[0.15em] text-gray-400 whitespace-nowrap">
-                  {filteredCustomers.length} Results
+                  {customers.length} Results
                 </p>
               </div>
             </div>
 
+            {error && (
+              <div className="mx-4 mb-4 border border-red-200 bg-red-50 px-4 py-3 flex items-center justify-between gap-4">
+                <p className="font-sans text-xs text-red-700">{error}</p>
+                <button
+                  type="button"
+                  onClick={() => void fetchCustomers(search)}
+                  className="border border-red-300 bg-white font-sans text-[10px] tracking-[0.12em] uppercase text-red-700 px-3 py-1.5 hover:border-red-500 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            )}
+
             <div className="bg-white border border-gray-200 overflow-x-auto">
               <CustomerTable
-                customers={filteredCustomers}
+                customers={customers}
+                isLoading={isLoading}
                 onEdit={openEditModal}
                 onDelete={openDeleteModal}
                 onView={(c) => console.log('View customer details:', c.id)}
@@ -195,8 +234,11 @@ export default function CustomersPage() {
       <CustomerModal
         isOpen={isModalOpen}
         mode={modalMode}
-        initialData={modalMode === 'edit' ? selectedCustomer : null}
+          initialData={modalMode === 'edit' ? selectedCustomer : null}
         onClose={closeModal}
+          onSubmit={handleModalSubmit}
+          isSubmitting={isModalSubmitting}
+          submitError={modalSubmitError}
       />
 
       <CustomerDeleteModal

@@ -4,6 +4,7 @@ import type { Customer } from '@/types/customer'
 
 type CustomerTableProps = {
   customers: Customer[]
+  isLoading?: boolean
   onEdit: (customer: Customer) => void
   onDelete: (customer: Customer) => void
   onView: (customer: Customer) => void
@@ -17,7 +18,7 @@ function formatLocation(customer: Customer) {
   return [customer.city, customer.country].filter(Boolean).join(', ')
 }
 
-export default function CustomerTable({ customers, onEdit, onDelete, onView }: CustomerTableProps) {
+export default function CustomerTable({ customers, isLoading = false, onEdit, onDelete, onView }: CustomerTableProps) {
   return (
     <table className="w-full">
       <thead>
@@ -30,7 +31,25 @@ export default function CustomerTable({ customers, onEdit, onDelete, onView }: C
         </tr>
       </thead>
       <tbody>
-        {customers.length === 0 ? (
+        {isLoading ? (
+          Array.from({ length: 6 }).map((_, index) => (
+            <tr key={`customer-skeleton-${index}`} className="border-b border-gray-100 animate-pulse">
+              <td className="px-6 py-4"><div className="h-3 w-16 bg-gray-200" /></td>
+              <td className="px-6 py-4 space-y-2">
+                <div className="h-3 w-40 bg-gray-200" />
+                <div className="h-2.5 w-28 bg-gray-100" />
+              </td>
+              <td className="px-6 py-4"><div className="h-3 w-28 bg-gray-200" /></td>
+              <td className="px-6 py-4 space-y-2">
+                <div className="h-3 w-36 bg-gray-200" />
+                <div className="h-3 w-24 bg-gray-100" />
+              </td>
+              <td className="px-6 py-4"><div className="h-5 w-20 bg-gray-200" /></td>
+              <td className="px-6 py-4"><div className="h-5 w-8 bg-gray-200" /></td>
+              <td className="px-6 py-4"><div className="h-7 w-7 bg-gray-200" /></td>
+            </tr>
+          ))
+        ) : customers.length === 0 ? (
           <tr>
             <td colSpan={7} className="px-6 py-10 text-center">
               <p className="font-serif text-base text-black">No customers found</p>

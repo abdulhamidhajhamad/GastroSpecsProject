@@ -2,11 +2,68 @@
 
 import * as React from 'react'
 
-import type { Machine } from '@/types/machine'
+import { machinesApi } from '@/lib/api/machines.api'
+import type { Machine, MachineImage, MachineSupplier } from '@/types/machine'
 
 type DrawerStep = 'info' | 'images' | 'suppliers'
 
+type MachineApiResponse = Omit<Machine, 'images' | 'machineSuppliers'> & {
+  images?: string[] | MachineImage[]
+}
+
+function mapMachineFromApi(machine: MachineApiResponse): Machine {
+  const normalizedImages: MachineImage[] = Array.isArray(machine.images)
+    ? machine.images.map((image, index) => {
+        if (typeof image === 'string') {
+          return {
+            id: `${machine.id}-img-${index}`,
+            machineId: machine.id,
+            url: image,
+            isPrimary: index === 0,
+            order: index,
+          }
+        }
+
+        return {
+          id: image.id,
+          machineId: image.machineId,
+          url: image.url,
+          isPrimary: Boolean(image.isPrimary),
+          order: image.order ?? index,
+        }
+      })
+    : []
+
+  const normalizedSuppliers: MachineSupplier[] = machine.supplierId
+    ? [
+        {
+          id: `${machine.id}-${machine.supplierId}`,
+          machineId: machine.id,
+          supplierId: machine.supplierId,
+          supplierName: machine.supplierName ?? 'Unknown Supplier',
+          costPrice: machine.costPrice ?? 0,
+          moq: machine.moq ?? 0,
+          leadTimeDays: machine.leadTimeDays,
+          modelNumber: machine.modelNumber,
+          qualityNotes: machine.notes,
+          createdAt: machine.createdAt,
+        },
+      ]
+    : []
+
+  return {
+    ...machine,
+    images: normalizedImages,
+    machineSuppliers: normalizedSuppliers,
+  }
+}
+
 export function useMachines() {
+  const [machines, setMachines] = React.useState<Machine[]>([])
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
+  const [search, setSearch] = React.useState('')
+
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
   const [drawerStep, setDrawerStep] = React.useState<DrawerStep>('info')
   const [selectedMachine, setSelectedMachine] = React.useState<Machine | null>(null)
@@ -16,6 +73,25 @@ export function useMachines() {
 
   const [isAddSupplierDrawerOpen, setIsAddSupplierDrawerOpen] = React.useState(false)
   const [machineForSupplier, setMachineForSupplier] = React.useState<Machine | null>(null)
+
+  const fetchMachines = React.useCallback(async (nextSearch?: string) => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const data = await machinesApi.list<MachineApiResponse[]>(nextSearch ?? search)
+      setMachines(data.map(mapMachineFromApi))
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to fetch machines'
+      setError(message)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [search])
+
+  React.useEffect(() => {
+    void fetchMachines(search)
+  }, [fetchMachines, search])
 
   const openAddDrawer = React.useCallback(() => {
     setSelectedMachine(null)
@@ -45,18 +121,25 @@ export function useMachines() {
     setMachineToDelete(null)
   }, [])
 
-  const confirmDelete = React.useCallback(() => {
-    if (machineToDelete) {
-      console.log('Delete machine:', {
-        id: machineToDelete.id,
-        name: machineToDelete.name,
-      })
-    } else {
-      console.log('Delete machine: no machine selected')
+  const confirmDelete = React.useCallback(async () => {
+    if (!machineToDelete) {
+      return
     }
 
-    closeDeleteModal()
-  }, [machineToDelete, closeDeleteModal])
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      await machinesApi.delete(machineToDelete.id)
+      await fetchMachines(search)
+      closeDeleteModal()
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to delete machine'
+      setError(message)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [machineToDelete, closeDeleteModal, fetchMachines, search])
 
   const openAddSupplierDrawer = React.useCallback((machine: Machine) => {
     setMachineForSupplier(machine)
@@ -69,6 +152,10 @@ export function useMachines() {
   }, [])
 
   return {
+    machines,
+    isLoading,
+    error,
+    search,
     isDrawerOpen,
     drawerStep,
     selectedMachine,
@@ -76,6 +163,8 @@ export function useMachines() {
     machineToDelete,
     isAddSupplierDrawerOpen,
     machineForSupplier,
+    setSearch,
+    fetchMachines,
     openAddDrawer,
     openEditDrawer,
     setDrawerStep,

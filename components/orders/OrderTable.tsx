@@ -4,6 +4,7 @@ import type { Order, OrderStatus } from '@/types/order'
 
 type OrderTableProps = {
   orders: Order[]
+  isLoading?: boolean
   onView: (order: Order) => void
   onDelete: (order: Order) => void
 }
@@ -114,7 +115,7 @@ function OrderActionsMenu({ order, onView, onDelete }: { order: Order; onView: (
   )
 }
 
-export default function OrderTable({ orders, onView, onDelete }: OrderTableProps) {
+export default function OrderTable({ orders, isLoading = false, onView, onDelete }: OrderTableProps) {
   return (
     <table className="w-full">
       <thead>
@@ -127,7 +128,25 @@ export default function OrderTable({ orders, onView, onDelete }: OrderTableProps
         </tr>
       </thead>
       <tbody>
-        {orders.length === 0 ? (
+        {isLoading ? (
+          Array.from({ length: 6 }).map((_, index) => (
+            <tr key={`order-skeleton-${index}`} className="border-b border-gray-100 animate-pulse">
+              <td className="px-6 py-4"><div className="h-3 w-16 bg-gray-200" /></td>
+              <td className="px-6 py-4 space-y-2">
+                <div className="h-3 w-40 bg-gray-200" />
+                <div className="h-2.5 w-28 bg-gray-100" />
+              </td>
+              <td className="px-6 py-4 space-y-2">
+                <div className="h-3 w-28 bg-gray-200" />
+                <div className="h-2.5 w-32 bg-gray-100" />
+              </td>
+              <td className="px-6 py-4"><div className="h-3 w-24 bg-gray-200" /></td>
+              <td className="px-6 py-4"><div className="h-5 w-20 bg-gray-200" /></td>
+              <td className="px-6 py-4"><div className="h-3 w-20 bg-gray-200" /></td>
+              <td className="px-6 py-4"><div className="h-7 w-7 bg-gray-200" /></td>
+            </tr>
+          ))
+        ) : orders.length === 0 ? (
           <tr>
             <td colSpan={7} className="px-6 py-10 text-center">
               <p className="font-serif text-base text-black">No orders found</p>

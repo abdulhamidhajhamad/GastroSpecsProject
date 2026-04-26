@@ -3,6 +3,7 @@ import MachineActionsMenu from '@/components/machines/MachineActionsMenu'
 
 type MachineTableProps = {
   machines: Machine[]
+  isLoading?: boolean
   onEdit: (machine: Machine) => void
   onDelete: (machine: Machine) => void
   onView?: (machine: Machine) => void
@@ -13,7 +14,7 @@ function formatShortId(id: string) {
   return id.replace(/^mach_/, '').slice(0, 8)
 }
 
-export default function MachineTable({ machines, onEdit, onDelete, onView }: MachineTableProps) {
+export default function MachineTable({ machines, isLoading = false, onEdit, onDelete, onView }: MachineTableProps) {
   return (
     <table className="w-full">
       <thead>
@@ -26,7 +27,23 @@ export default function MachineTable({ machines, onEdit, onDelete, onView }: Mac
         </tr>
       </thead>
       <tbody>
-        {machines.length === 0 ? (
+        {isLoading ? (
+          Array.from({ length: 6 }).map((_, index) => (
+            <tr key={`machine-skeleton-${index}`} className="border-b border-gray-100 animate-pulse">
+              <td className="px-6 py-4"><div className="h-3 w-16 bg-gray-200" /></td>
+              <td className="px-6 py-4 space-y-2">
+                <div className="h-3 w-44 bg-gray-200" />
+                <div className="h-2.5 w-28 bg-gray-100" />
+              </td>
+              <td className="px-6 py-4"><div className="h-5 w-8 bg-gray-200" /></td>
+              <td className="px-6 py-4 flex gap-2">
+                <div className="h-5 w-20 bg-gray-200" />
+                <div className="h-5 w-16 bg-gray-100" />
+              </td>
+              <td className="px-6 py-4"><div className="h-7 w-7 bg-gray-200" /></td>
+            </tr>
+          ))
+        ) : machines.length === 0 ? (
           <tr>
             <td colSpan={5} className="px-6 py-10 text-center">
               <p className="font-serif text-base text-black">No machines found</p>
@@ -38,6 +55,13 @@ export default function MachineTable({ machines, onEdit, onDelete, onView }: Mac
         ) : (
           machines.map((machine) => {
             const specEntries = Object.entries(machine.specifications).slice(0, 2)
+            const supplierCount = (() => {
+              const machineAny = machine as any
+              if (Array.isArray(machineAny.machineSuppliers) && machineAny.machineSuppliers.length > 0) {
+                return machineAny.machineSuppliers.length
+              }
+              return machineAny.supplierId ? 1 : 0
+            })()
             
             return (
               <tr
@@ -61,7 +85,7 @@ export default function MachineTable({ machines, onEdit, onDelete, onView }: Mac
 
                 <td className="px-6 py-4">
                   <span className="inline-flex items-center justify-center border border-gray-200 bg-gray-50 text-gray-700 px-2.5 py-0.5 font-sans text-[10px] font-medium min-w-[24px]">
-                    {machine.machineSuppliers?.length || 0}
+                    {supplierCount}
                   </span>
                 </td>
 

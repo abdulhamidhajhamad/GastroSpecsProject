@@ -3,6 +3,7 @@ import type { Supplier } from '@/types/supplier'
 
 type SupplierTableProps = {
   suppliers: Supplier[]
+  isLoading?: boolean
   onEdit: (supplier: Supplier) => void
   onDelete: (supplier: Supplier) => void
   onView: (supplier: Supplier) => void
@@ -19,7 +20,7 @@ function formatLocation(supplier: Supplier) {
     .join(', ')
 }
 
-export default function SupplierTable({ suppliers, onEdit, onDelete, onView, onAddContact }: SupplierTableProps) {
+export default function SupplierTable({ suppliers, isLoading = false, onEdit, onDelete, onView, onAddContact }: SupplierTableProps) {
   return (
     <table className="w-full">
       <thead>
@@ -32,7 +33,24 @@ export default function SupplierTable({ suppliers, onEdit, onDelete, onView, onA
         </tr>
       </thead>
       <tbody>
-        {suppliers.length === 0 ? (
+        {isLoading ? (
+          Array.from({ length: 6 }).map((_, index) => (
+            <tr key={`supplier-skeleton-${index}`} className="border-b border-gray-100 animate-pulse">
+              <td className="px-6 py-4"><div className="h-3 w-16 bg-gray-200" /></td>
+              <td className="px-6 py-4 space-y-2">
+                <div className="h-3 w-40 bg-gray-200" />
+                <div className="h-2.5 w-28 bg-gray-100" />
+              </td>
+              <td className="px-6 py-4 space-y-2">
+                <div className="h-3 w-24 bg-gray-200" />
+                <div className="h-2.5 w-20 bg-gray-100" />
+              </td>
+              <td className="px-6 py-4"><div className="h-5 w-14 bg-gray-200" /></td>
+              <td className="px-6 py-4"><div className="h-3 w-8 bg-gray-200" /></td>
+              <td className="px-6 py-4"><div className="h-7 w-7 bg-gray-200" /></td>
+            </tr>
+          ))
+        ) : suppliers.length === 0 ? (
           <tr>
             <td colSpan={6} className="px-6 py-10 text-center">
               <p className="font-serif text-base text-black">No suppliers found</p>

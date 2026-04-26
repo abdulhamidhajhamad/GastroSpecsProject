@@ -10,7 +10,15 @@ type ParsedContactMethods = {
   wechat?: string
 }
 
-function parseContactMethods(input: string): ParsedContactMethods {
+function parseContactMethods(input: Record<string, string> | string): ParsedContactMethods {
+  if (typeof input === 'object' && input !== null) {
+    return {
+      phone: input.phone,
+      email: input.email,
+      wechat: input.wechat,
+    }
+  }
+
   try {
     const parsed = JSON.parse(input)
     if (parsed && typeof parsed === 'object') {

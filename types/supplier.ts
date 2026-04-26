@@ -10,7 +10,7 @@ export interface SupplierContact {
   supplierId: string
   name: string
   position?: string
-  contactMethods: string
+  contactMethods: Record<string, string>
   notes?: string
   createdAt: string
 }

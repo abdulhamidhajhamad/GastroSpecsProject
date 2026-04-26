@@ -7,10 +7,9 @@ import CategoryStatCards from '@/components/categories/CategoryStatCards'
 import CategoryGrid from '@/components/categories/CategoryGrid'
 import CategoryModal from '@/components/categories/CategoryModal'
 import CategoryDeleteModal from '@/components/categories/CategoryDeleteModal'
-
-import { mockCategories } from '@/data/mockCategories'
 import { useCategories } from '@/hooks/useCategories'
-import type { Category } from '@/types/category'
+import type { CategoryModalSubmitData } from '@/components/categories/CategoryModal'
+import { categoriesApi } from '@/lib/api/categories.api'
 
 const feed = [
   {
@@ -35,28 +34,21 @@ const feed = [
   },
 ]
 
-function buildCategorySearchValue(category: Category) {
-  const subNames = category.children.map(sub => sub.name).join(' ')
-  return [
-    category.name,
-    category.description,
-    subNames
-  ]
-    .filter(Boolean)
-    .join(' ')
-    .toLowerCase()
-}
-
 export default function CategoriesPage() {
   const {
+    categories,
+    isLoading,
+    error,
+    search,
     isModalOpen,
     modalMode,
     selectedCategory,
     selectedSubCategory,
     parentForNewSub,
-    isDeleteModalOpen,
     categoryToDelete,
     isUploadingImage,
+    setSearch,
+    fetchCategories,
     setIsUploadingImage,
     openAddParentModal,
     openAddSubModal,
@@ -68,41 +60,68 @@ export default function CategoriesPage() {
     confirmDelete,
   } = useCategories()
 
-  const [searchQuery, setSearchQuery] = React.useState('')
-  const normalizedSearchQuery = searchQuery.trim().toLowerCase()
+  const [isModalSubmitting, setIsModalSubmitting] = React.useState(false)
+  const [modalSubmitError, setModalSubmitError] = React.useState<string | null>(null)
 
-  const filteredCategories = React.useMemo(() => {
-    if (!normalizedSearchQuery) {
-      return mockCategories
+  React.useEffect(() => {
+    if (!isModalOpen) {
+      setModalSubmitError(null)
     }
+  }, [isModalOpen])
 
-    return mockCategories.filter((category) =>
-      buildCategorySearchValue(category).includes(normalizedSearchQuery)
-    )
-  }, [normalizedSearchQuery])
+  const handleModalSubmit = React.useCallback(async (payload: CategoryModalSubmitData) => {
+    setIsModalSubmitting(true)
+    setModalSubmitError(null)
 
-  const totalCategories = mockCategories.length
-  
-  let totalSubCategories = 0
-  let totalMachinesLinked = 0
-  let totalSuppliersLinked = 0 // In real app, calculate from unique suppliers across all categories
-  
-  mockCategories.forEach(cat => {
-    totalSubCategories += cat.children.length
-    cat.children.forEach(sub => {
-      totalMachinesLinked += (sub.machineCount || 0)
-    })
-  })
-  
-  // Fake number based on machines to match mock realistic stats
-  totalSuppliersLinked = Math.round(totalMachinesLinked * 0.8)
+    try {
+      if (modalMode === 'add-parent') {
+        await categoriesApi.create({
+          name: payload.name,
+          description: payload.description,
+          imageUrl: payload.imageUrl,
+        })
+      } else if (modalMode === 'edit-parent' && selectedCategory) {
+        await categoriesApi.update(selectedCategory.id, {
+          name: payload.name,
+          description: payload.description,
+          imageUrl: payload.imageUrl,
+        })
+      } else if (modalMode === 'add-sub' && parentForNewSub) {
+        await categoriesApi.create({
+          name: payload.name,
+          parentId: parentForNewSub.id,
+          imageUrl: payload.imageUrl,
+        })
+      } else if (modalMode === 'edit-sub' && selectedSubCategory) {
+        await categoriesApi.update(selectedSubCategory.id, {
+          name: payload.name,
+          parentId: payload.parentId ?? parentForNewSub?.id,
+          imageUrl: payload.imageUrl,
+        })
+      }
+
+      closeModal()
+      await fetchCategories(search)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to save category'
+      setModalSubmitError(message)
+    } finally {
+      setIsModalSubmitting(false)
+    }
+  }, [modalMode, selectedCategory, selectedSubCategory, parentForNewSub, closeModal, fetchCategories, search])
+
+  const totalCategories = categories.length
+  const totalSubCategories = categories.reduce((sum, category) => sum + category.children.length, 0)
+  const totalMachinesLinked = categories.reduce(
+    (sum, category) => sum + category.children.reduce((childSum, child) => childSum + (child.machineCount || 0), 0),
+    0,
+  )
+  const totalSuppliersLinked = Math.round(totalMachinesLinked * 0.8)
 
   return (
     <div className="flex-1 flex flex-col min-h-screen">
       <PortalHeader />
       <div className="flex-1 p-8 bg-white">
-        
-        {/* HEADER SECTION */}
         <div className="flex items-start justify-between mb-6">
           <div>
             <h1 className="font-sans font-bold text-xl tracking-[0.08em] uppercase text-black">CATEGORIES</h1>
@@ -155,21 +174,35 @@ export default function CategoriesPage() {
                   </svg>
                   <input
                     type="search"
-                    value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
                     placeholder="Search categories, sub-categories..."
                     className="bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-full"
                   />
                 </div>
                 <p className="font-sans text-[10px] uppercase tracking-[0.15em] text-gray-400 whitespace-nowrap">
-                  {filteredCategories.length} Results
+                  {categories.length} Results
                 </p>
               </div>
             </div>
 
+            {error && (
+              <div className="mx-6 mt-4 border border-red-200 bg-red-50 px-4 py-3 flex items-center justify-between gap-4">
+                <p className="font-sans text-xs text-red-700">{error}</p>
+                <button
+                  type="button"
+                  onClick={() => void fetchCategories(search)}
+                  className="border border-red-300 bg-white font-sans text-[10px] tracking-[0.12em] uppercase text-red-700 px-3 py-1.5 hover:border-red-500 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            )}
+
             <div className="p-6">
-              <CategoryGrid 
-                categories={filteredCategories}
+              <CategoryGrid
+                categories={categories}
+                isLoading={isLoading}
                 onEditParent={openEditParentModal}
                 onDeleteParent={openDeleteModal}
                 onAddSub={openAddSubModal}
@@ -200,9 +233,7 @@ export default function CategoriesPage() {
                       <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-black">{item.name}</span>
                       <span className="font-sans text-[8px] tracking-[0.1em] text-gray-400">{item.time}</span>
                     </div>
-                    <p className="font-sans text-xs text-gray-600 mt-1 line-clamp-2">
-                      {item.message}
-                    </p>
+                    <p className="font-sans text-xs text-gray-600 mt-1 line-clamp-2">{item.message}</p>
                   </div>
                 </div>
               ))}
@@ -210,7 +241,6 @@ export default function CategoriesPage() {
           </div>
         </div>
 
-        {/* MODALS */}
         <CategoryModal
           isOpen={isModalOpen}
           mode={modalMode}
@@ -220,14 +250,16 @@ export default function CategoriesPage() {
           parentForNewSub={parentForNewSub}
           isUploadingImage={isUploadingImage}
           setIsUploadingImage={setIsUploadingImage}
+          onSubmit={handleModalSubmit}
+          isSubmitting={isModalSubmitting}
+          submitError={modalSubmitError}
         />
-        
+
         <CategoryDeleteModal
           item={categoryToDelete}
           onConfirm={confirmDelete}
           onCancel={closeDeleteModal}
         />
-        
       </div>
     </div>
   )

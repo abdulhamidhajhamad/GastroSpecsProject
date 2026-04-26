@@ -12,7 +12,7 @@ export interface Category {
   name: string
   description?: string
   imageUrl?: string        
-  parentId: null
+  parentId: string | null
   children: SubCategory[]
   createdAt: string
 }

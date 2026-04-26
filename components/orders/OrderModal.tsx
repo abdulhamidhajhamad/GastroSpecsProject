@@ -3,19 +3,26 @@
 import * as React from 'react'
 
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
-import { mockCustomers } from '@/data/mockCustomers'
-import { mockMachines } from '@/data/mockMachines'
+import type { Customer } from '@/types/customer'
+import type { Machine } from '@/types/machine'
 import type { Order, OrderFormData } from '@/types/order'
 
 type OrderModalProps = {
   isOpen: boolean
   order: Order | null
+  customers: Customer[]
+  machines: Machine[]
   onClose: () => void
+  onSubmit: (data: OrderModalSubmitData) => Promise<void>
+  isSubmitting: boolean
+  submitError: string | null
 }
 
+export type OrderModalSubmitData = OrderFormData
+
 type FormItem = OrderFormData['items'][number]
-type CustomerOption = (typeof mockCustomers)[number]
-type MachineOption = (typeof mockMachines)[number]
+type CustomerOption = Customer
+type MachineOption = Machine
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat('en-US', {
@@ -40,7 +47,8 @@ function createBlankItem(): FormItem {
 }
 
 function getMachineImageUrl(machine: MachineOption) {
-  return machine.images.find((image) => image.isPrimary)?.url ?? machine.images[0]?.url ?? 'https://placehold.co/600x400'
+  const images = machine.images as unknown as Array<{ url?: string; isPrimary?: boolean }>
+  return images.find((image) => image.isPrimary)?.url ?? images[0]?.url ?? 'https://placehold.co/600x400'
 }
 
 function useOutsideClick<T extends HTMLElement>(onClose: () => void) {
@@ -245,9 +253,6 @@ function MachinePickerModal({
                   <div className="space-y-1 px-3 py-3">
                     <p className="truncate font-sans text-xs font-semibold text-black">{machine.name}</p>
                     <p className="font-sans text-[10px] text-gray-400">{machine.categoryName}</p>
-                    <span className="inline-flex items-center border border-gray-200 bg-white px-2 py-0.5 font-sans text-[9px] uppercase tracking-[0.15em] text-gray-500">
-                      {machine.machineSuppliers.length} Suppliers
-                    </span>
                   </div>
                 </button>
               ))}
@@ -259,15 +264,17 @@ function MachinePickerModal({
   )
 }
 
-export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) {
+export default function OrderModal({ isOpen, order, customers, machines, onClose, onSubmit, isSubmitting, submitError }: OrderModalProps) {
   const [orderDate, setOrderDate] = React.useState('')
   const [notes, setNotes] = React.useState('')
   const [customerSearch, setCustomerSearch] = React.useState('')
   const [selectedCustomer, setSelectedCustomer] = React.useState<CustomerOption | null>(null)
+  const [salesPersonId, setSalesPersonId] = React.useState('')
   const [items, setItems] = React.useState<FormItem[]>([createBlankItem()])
   const [machinePickerOpen, setMachinePickerOpen] = React.useState(false)
   const [machinePickerRowIndex, setMachinePickerRowIndex] = React.useState<number | null>(null)
   const [machinePickerSearch, setMachinePickerSearch] = React.useState('')
+  const [formError, setFormError] = React.useState<string | null>(null)
 
   const closeMachinePicker = React.useCallback(() => {
     setMachinePickerOpen(false)
@@ -282,9 +289,10 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
     }
 
     if (order) {
-      setSelectedCustomer(mockCustomers.find((customer) => customer.id === order.customerId) ?? null)
+      setSelectedCustomer(customers.find((customer) => customer.id === order.customerId) ?? null)
       setOrderDate(formatDateInput(new Date(order.createdAt)))
       setNotes(order.notes ?? '')
+      setSalesPersonId(order.salesPersonId)
       setItems(
         order.items.map((item) => ({
           machineId: item.machineId,
@@ -298,17 +306,19 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
       setOrderDate(formatDateInput(new Date()))
       setNotes('')
       setSelectedCustomer(null)
+      setSalesPersonId('')
       setCustomerSearch('')
       setItems([createBlankItem()])
+      setFormError(null)
     }
-  }, [closeMachinePicker, isOpen, order])
+  }, [closeMachinePicker, customers, isOpen, order])
 
   const customerOptions = React.useMemo(() => {
     const normalized = customerSearch.trim().toLowerCase()
-    if (!normalized) return mockCustomers
+    if (!normalized) return customers
 
-    return mockCustomers.filter((customer) => [customer.name, customer.companyName].filter(Boolean).join(' ').toLowerCase().includes(normalized))
-  }, [customerSearch])
+    return customers.filter((customer) => [customer.name, customer.companyName].filter(Boolean).join(' ').toLowerCase().includes(normalized))
+  }, [customers, customerSearch])
 
   const total = items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0)
 
@@ -335,15 +345,12 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
   }
 
   const handleMachineSelect = (index: number, machine: MachineOption) => {
-    const defaultSupplier = machine.machineSuppliers[0]
-
     setItems((previous) => {
       const next = [...previous]
       next[index] = {
         ...next[index],
         machineId: machine.id,
-        supplierId: defaultSupplier?.supplierId ?? '',
-        unitPrice: defaultSupplier?.costPrice ?? 0,
+        supplierId: machine.supplierId ?? '',
       }
       return next
     })
@@ -366,16 +373,11 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
   }
 
   const handleSupplierChange = (index: number, supplierId: string) => {
-    const item = items[index]
-    const machine = mockMachines.find((entry) => entry.id === item.machineId)
-    const supplier = machine?.machineSuppliers.find((entry) => entry.supplierId === supplierId)
-
     setItems((previous) => {
       const next = [...previous]
       next[index] = {
         ...next[index],
         supplierId,
-        unitPrice: supplier?.costPrice ?? next[index].unitPrice,
       }
       return next
     })
@@ -385,11 +387,26 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
     event.preventDefault()
 
     if (!selectedCustomer) {
+      setFormError('Customer is required.')
       return
     }
 
-    const formData: OrderFormData & { orderDate: string } = {
+    if (!salesPersonId.trim()) {
+      setFormError('Sales person ID is required.')
+      return
+    }
+
+    const invalidItem = items.find((item) => !item.machineId || !item.supplierId || item.quantity <= 0 || item.unitPrice <= 0)
+    if (invalidItem) {
+      setFormError('Each order item needs a machine, supplier, quantity, and unit price.')
+      return
+    }
+
+    setFormError(null)
+
+    const formData: OrderFormData = {
       customerId: selectedCustomer.id,
+      salesPersonId: salesPersonId.trim(),
       notes,
       items: items.map((item) => ({
         machineId: item.machineId,
@@ -398,11 +415,89 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
         unitPrice: item.unitPrice,
         notes: item.notes,
       })),
-      orderDate,
     }
 
-    console.log(formData)
-    onClose()
+    void onSubmit(formData)
+  }
+
+  if (order) {
+    return (
+      <Dialog open={isOpen} onOpenChange={(open) => (!open ? onClose() : null)}>
+        <DialogContent showCloseButton={false} className="w-[min(1120px,calc(100%-2rem))] max-w-none gap-0 rounded-none border border-gray-200 bg-white p-0">
+          <DialogTitle className="sr-only">Order Details</DialogTitle>
+
+          <div className="flex h-full max-h-[90vh] flex-col overflow-hidden">
+            <div className="flex shrink-0 items-start justify-between gap-4 border-b border-gray-200 px-6 py-5">
+              <div>
+                <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.2em] text-gray-400">Orders</p>
+                <h2 className="font-sans text-sm font-semibold uppercase tracking-[0.12em] text-black">ORDER DETAILS</h2>
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="border border-gray-200 p-4">
+                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-2">Customer</p>
+                  <p className="font-sans text-sm font-semibold text-black">{order.customerName}</p>
+                  <p className="font-sans text-[10px] text-gray-400 mt-0.5">{order.customerCompany || '-'}</p>
+                </div>
+                <div className="border border-gray-200 p-4">
+                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-2">Sales Person</p>
+                  <p className="font-sans text-sm font-semibold text-black">{order.salesPersonName}</p>
+                  <p className="font-sans text-[10px] text-gray-400 mt-0.5">{order.salesPersonId}</p>
+                </div>
+              </div>
+
+              <div className="border border-gray-200 p-4">
+                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-3">Notes</p>
+                <p className="font-sans text-sm text-gray-600 whitespace-pre-wrap">{order.notes || 'No notes provided.'}</p>
+              </div>
+
+              <div className="border border-gray-200 overflow-hidden">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-gray-100 bg-gray-50">
+                      {['Machine', 'Supplier', 'Qty', 'Unit Price', 'Total', 'Notes'].map((column) => (
+                        <th key={column} className="px-4 py-3 text-left font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 font-normal">{column}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {order.items.map((item) => (
+                      <tr key={item.id} className="border-b border-gray-100 last:border-b-0">
+                        <td className="px-4 py-3">
+                          <p className="font-sans text-xs font-semibold text-black">{item.machineName}</p>
+                        </td>
+                        <td className="px-4 py-3 font-sans text-xs text-gray-600">{item.supplierName}</td>
+                        <td className="px-4 py-3 font-sans text-xs text-gray-600">{item.quantity}</td>
+                        <td className="px-4 py-3 font-sans text-xs text-gray-600">{formatCurrency(item.unitPrice)}</td>
+                        <td className="px-4 py-3 font-sans text-xs text-black font-medium">{formatCurrency(item.totalPrice)}</td>
+                        <td className="px-4 py-3 font-sans text-xs text-gray-600">{item.notes || '-'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="flex items-center justify-between border border-gray-200 bg-gray-50 p-4">
+                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-gray-400">Total</p>
+                <p className="font-serif text-2xl font-bold text-black">{formatCurrency(order.totalPrice)}</p>
+              </div>
+            </div>
+
+            <div className="flex shrink-0 items-center justify-end gap-3 border-t border-gray-200 bg-gray-50 px-6 py-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="border border-gray-200 bg-white px-4 py-2 font-sans text-xs tracking-wide text-gray-500 transition-colors hover:border-black hover:text-black"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    )
   }
 
   return (
@@ -420,6 +515,18 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
             </div>
 
             <form id="order-modal-form" onSubmit={handleSubmit} className="flex-1 space-y-8 overflow-y-auto p-6">
+              {submitError && (
+                <div className="border border-red-200 bg-red-50 px-4 py-3">
+                  <p className="font-sans text-xs text-red-700">{submitError}</p>
+                </div>
+              )}
+
+              {formError && (
+                <div className="border border-red-200 bg-red-50 px-4 py-3">
+                  <p className="font-sans text-xs text-red-700">{formError}</p>
+                </div>
+              )}
+
               <section>
                 <p className="mb-4 font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">Order Info</p>
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-[0.85fr_1.15fr]">
@@ -439,6 +546,7 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
                       value={notes}
                       onChange={(event) => setNotes(event.target.value)}
                       placeholder="Optional notes..."
+                      disabled={isSubmitting}
                       className="w-full resize-none border border-gray-200 px-3 py-2.5 font-sans text-xs text-black transition-colors focus:border-black focus:outline-none"
                     />
                   </div>
@@ -479,6 +587,21 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
               </section>
 
               <section>
+                <p className="mb-4 font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">Sales Person</p>
+                <div>
+                  <label className="mb-2 block font-sans text-[9px] uppercase tracking-[0.15em] text-gray-400">Sales Person ID *</label>
+                  <input
+                    type="text"
+                    value={salesPersonId}
+                    onChange={(event) => setSalesPersonId(event.target.value)}
+                    placeholder="e.g. sp_001"
+                    disabled={isSubmitting}
+                    className="w-full border border-gray-200 px-3 py-2.5 font-sans text-xs text-black transition-colors focus:border-black focus:outline-none"
+                  />
+                </div>
+              </section>
+
+              <section>
                 <div className="mb-4 flex items-center justify-between">
                   <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">Order Items</p>
                   <button
@@ -492,8 +615,7 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
 
                 <div className="space-y-4">
                   {items.map((item, index) => {
-                    const machine = mockMachines.find((entry) => entry.id === item.machineId)
-                    const supplierOptions = machine?.machineSuppliers || []
+                    const machine = machines.find((entry) => entry.id === item.machineId)
                     const rowTotal = item.quantity * item.unitPrice
 
                     return (
@@ -548,12 +670,7 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
                                 onChange={(event) => handleSupplierChange(index, event.target.value)}
                                 className="w-full border border-gray-200 px-3 py-2.5 font-sans text-xs text-black transition-colors focus:border-black focus:outline-none"
                               >
-                                <option value="">Select supplier</option>
-                                {supplierOptions.map((supplier) => (
-                                  <option key={supplier.id} value={supplier.supplierId}>
-                                    {supplier.supplierName}
-                                  </option>
-                                ))}
+                                <option value={machine.supplierId ?? ''}>{machine.supplierName ?? 'Unknown Supplier'}</option>
                               </select>
                             ) : (
                               <div className="border border-gray-200 bg-white px-3 py-2.5 font-sans text-xs text-gray-400">Select a machine first</div>
@@ -612,6 +729,7 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
                             value={item.notes}
                             onChange={(event) => handleItemChange(index, 'notes', event.target.value)}
                             placeholder="Item notes..."
+                              disabled={isSubmitting}
                             className="w-full border border-gray-200 px-3 py-2.5 font-sans text-xs text-black transition-colors focus:border-black focus:outline-none"
                           />
                         </div>
@@ -631,6 +749,7 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
               <button
                 type="button"
                 onClick={onClose}
+                disabled={isSubmitting}
                 className="border border-gray-200 bg-white px-4 py-2 font-sans text-xs tracking-wide text-gray-500 transition-colors hover:border-black hover:text-black"
               >
                 Cancel
@@ -638,17 +757,23 @@ export default function OrderModal({ isOpen, order, onClose }: OrderModalProps) 
               <button
                 type="submit"
                 form="order-modal-form"
-                disabled={!selectedCustomer}
-                className="bg-black px-4 py-2 font-sans text-xs tracking-wide text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+                disabled={isSubmitting}
+                className="bg-black px-4 py-2 font-sans text-xs tracking-wide text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 flex items-center gap-2"
               >
-                Create Order
+                {isSubmitting && (
+                  <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+                    <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" className="opacity-90" />
+                  </svg>
+                )}
+                {isSubmitting ? 'Saving...' : 'Create Order'}
               </button>
             </div>
           </div>
 
           <MachinePickerModal
             isOpen={machinePickerOpen}
-            machines={mockMachines}
+            machines={machines}
             searchValue={machinePickerSearch}
             setSearchValue={setMachinePickerSearch}
             onClose={closeMachinePicker}

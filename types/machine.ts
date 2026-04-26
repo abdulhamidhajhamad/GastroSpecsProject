@@ -25,8 +25,14 @@ export interface MachineImage {
 export interface Machine {
   id: string
   categoryId: string
-  categoryName: string   // joined from Category
+  categoryName: string
   name: string
+  modelNumber?: string
+  costPrice?: number
+  moq?: number
+  leadTimeDays?: number
+  supplierId?: string
+  supplierName?: string
   specifications: Record<string, string>
   notes?: string
   images: MachineImage[]

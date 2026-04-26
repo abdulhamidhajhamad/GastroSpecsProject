@@ -6,12 +6,14 @@ import PortalHeader from '@/components/portal/PortalHeader'
 import AddSupplierContactDrawer from '@/components/suppliers/AddSupplierContactDrawer'
 import SupplierDeleteModal from '@/components/suppliers/SupplierDeleteModal'
 import SupplierDrawer from '@/components/suppliers/SupplierDrawer'
+import type { SupplierDrawerSubmitData } from '@/components/suppliers/SupplierDrawer'
 import SupplierQuickViewModal from '@/components/suppliers/SupplierQuickViewModal'
 import SupplierStatCards from '@/components/suppliers/SupplierStatCards'
 import SupplierTable from '@/components/suppliers/SupplierTable'
-import { mockSuppliers } from '@/data/mockSuppliers'
 import { useSuppliers } from '@/hooks/useSuppliers'
+import { suppliersApi } from '@/lib/api/suppliers.api'
 import type { Supplier } from '@/types/supplier'
+import type { AddSupplierContactSubmitData } from '@/components/suppliers/AddSupplierContactDrawer'
 
 const feed = [
   {
@@ -36,53 +38,30 @@ const feed = [
   },
 ]
 
-function buildSupplierSearchValue(supplier: Supplier) {
-  const location = [
-    supplier.location.street,
-    supplier.location.district,
-    supplier.location.city,
-    supplier.location.province,
-  ]
-    .filter(Boolean)
-    .join(' ')
-
-  const contacts = supplier.contacts
-    .map((contact) =>
-      [contact.name, contact.position, contact.contactMethods, contact.notes]
-        .filter(Boolean)
-        .join(' ')
-    )
-    .join(' ')
-
-  return [
-    supplier.id,
-    supplier.companyName,
-    location,
-    supplier.website,
-    supplier.wechat,
-    supplier.email,
-    supplier.phone,
-    supplier.notes,
-    contacts,
-  ]
-    .filter(Boolean)
-    .join(' ')
-    .toLowerCase()
-}
-
 export default function SuppliersPage() {
   const [isAddContactDrawerOpen, setIsAddContactDrawerOpen] = React.useState(false)
   const [supplierForContact, setSupplierForContact] = React.useState<Supplier | null>(null)
+  const [isSupplierSubmitting, setIsSupplierSubmitting] = React.useState(false)
+  const [supplierSubmitError, setSupplierSubmitError] = React.useState<string | null>(null)
+  const [isContactSubmitting, setIsContactSubmitting] = React.useState(false)
+  const [contactSubmitError, setContactSubmitError] = React.useState<string | null>(null)
 
   const handleOpenAddContactDrawer = (supplier: Supplier) => {
+    setContactSubmitError(null)
     setSupplierForContact(supplier)
     setIsAddContactDrawerOpen(true)
   }
 
   const {
+    suppliers,
+    isLoading,
+    error,
+    search,
     isDrawerOpen,
     drawerMode,
     selectedSupplier,
+    setSearch,
+    fetchSuppliers,
     isDeleteModalOpen,
     supplierToDelete,
     openAddDrawer,
@@ -93,9 +72,7 @@ export default function SuppliersPage() {
     confirmDelete,
   } = useSuppliers()
 
-  const [searchQuery, setSearchQuery] = React.useState('')
   const [quickViewSupplier, setQuickViewSupplier] = React.useState<Supplier | null>(null)
-  const normalizedSearchQuery = searchQuery.trim().toLowerCase()
 
   const closeQuickView = React.useCallback(() => {
     setQuickViewSupplier(null)
@@ -110,21 +87,83 @@ export default function SuppliersPage() {
     openEditDrawer(supplier)
   }, [openEditDrawer])
 
-  const filteredSuppliers = React.useMemo(() => {
-    if (!normalizedSearchQuery) {
-      return mockSuppliers
+  const handleSupplierSubmit = React.useCallback(async (data: SupplierDrawerSubmitData) => {
+    setIsSupplierSubmitting(true)
+    setSupplierSubmitError(null)
+
+    try {
+      const supplierPayload = {
+        companyName: data.companyName,
+        location: data.location,
+        website: data.website,
+        wechat: data.wechat,
+        email: data.email,
+        phone: data.phone,
+        isDdpPartner: data.isDdpPartner,
+        notes: data.notes,
+      }
+
+      let savedSupplier: Supplier
+
+      if (drawerMode === 'edit' && selectedSupplier) {
+        savedSupplier = await suppliersApi.update<Supplier>(selectedSupplier.id, supplierPayload)
+      } else {
+        savedSupplier = await suppliersApi.create<Supplier>(supplierPayload)
+      }
+
+      if (data.primaryContactName) {
+        const contactPayload = {
+          name: data.primaryContactName,
+          position: data.primaryContactPosition,
+          contactMethods: data.primaryContactMethods,
+          notes: data.notes,
+        }
+
+        const existingContactId = selectedSupplier?.contacts?.[0]?.id
+
+        if (drawerMode === 'edit' && existingContactId) {
+          await suppliersApi.updateContact(savedSupplier.id, existingContactId, contactPayload)
+        } else {
+          await suppliersApi.createContact(savedSupplier.id, contactPayload)
+        }
+      }
+
+      closeDrawer()
+      await fetchSuppliers(search)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to save supplier'
+      setSupplierSubmitError(message)
+    } finally {
+      setIsSupplierSubmitting(false)
+    }
+  }, [drawerMode, selectedSupplier, closeDrawer, fetchSuppliers, search])
+
+  const handleContactSubmit = React.useCallback(async (data: AddSupplierContactSubmitData) => {
+    if (!supplierForContact) {
+      return
     }
 
-    return mockSuppliers.filter((supplier) =>
-      buildSupplierSearchValue(supplier).includes(normalizedSearchQuery)
-    )
-  }, [normalizedSearchQuery])
+    setIsContactSubmitting(true)
+    setContactSubmitError(null)
 
-  const totalSuppliers = mockSuppliers.length
-  const ddpPartners = mockSuppliers.filter((supplier) => supplier.isDdpPartner).length
-  const activeMachines = mockSuppliers.reduce((sum, supplier) => sum + supplier.machineCount, 0)
+    try {
+      await suppliersApi.createContact(supplierForContact.id, data)
+      setIsAddContactDrawerOpen(false)
+      setSupplierForContact(null)
+      await fetchSuppliers(search)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to save contact'
+      setContactSubmitError(message)
+    } finally {
+      setIsContactSubmitting(false)
+    }
+  }, [supplierForContact, fetchSuppliers, search])
+
+  const totalSuppliers = suppliers.length
+  const ddpPartners = suppliers.filter((supplier) => supplier.isDdpPartner).length
+  const activeMachines = suppliers.reduce((sum, supplier) => sum + supplier.machineCount, 0)
   const now = new Date()
-  const newThisMonth = mockSuppliers.filter((supplier) => {
+  const newThisMonth = suppliers.filter((supplier) => {
     const created = new Date(supplier.createdAt)
     return (
       created.getUTCFullYear() === now.getUTCFullYear() &&
@@ -188,20 +227,34 @@ export default function SuppliersPage() {
                   </svg>
                   <input
                     type="search"
-                    value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
                     placeholder="Search supplier, city, phone..."
                     className="bg-transparent font-sans text-[10px] text-black placeholder-gray-400 focus:outline-none w-full"
                   />
                 </div>
                 <p className="font-sans text-[10px] uppercase tracking-[0.15em] text-gray-400 whitespace-nowrap">
-                  {filteredSuppliers.length} Results
+                  {suppliers.length} Results
                 </p>
               </div>
             </div>
 
+            {error && (
+              <div className="mx-6 mt-4 border border-red-200 bg-red-50 px-4 py-3 flex items-center justify-between gap-4">
+                <p className="font-sans text-xs text-red-700">{error}</p>
+                <button
+                  type="button"
+                  onClick={() => void fetchSuppliers(search)}
+                  className="border border-red-300 bg-white font-sans text-[10px] tracking-[0.12em] uppercase text-red-700 px-3 py-1.5 hover:border-red-500 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            )}
+
             <SupplierTable
-              suppliers={filteredSuppliers}
+              suppliers={suppliers}
+              isLoading={isLoading}
               onEdit={openEditDrawer}
               onDelete={openDeleteModal}
               onView={openQuickView}
@@ -247,13 +300,23 @@ export default function SuppliersPage() {
       <SupplierDrawer
         isOpen={isDrawerOpen}
         initialData={drawerMode === 'edit' ? selectedSupplier : null}
+        onSubmit={handleSupplierSubmit}
+        isSubmitting={isSupplierSubmitting}
+        submitError={supplierSubmitError}
         onClose={closeDrawer}
       />
 
       <AddSupplierContactDrawer
         isOpen={isAddContactDrawerOpen}
         supplier={supplierForContact}
-        onClose={() => setIsAddContactDrawerOpen(false)}
+        onSubmit={handleContactSubmit}
+        isSubmitting={isContactSubmitting}
+        submitError={contactSubmitError}
+        onClose={() => {
+          setIsAddContactDrawerOpen(false)
+          setSupplierForContact(null)
+          setContactSubmitError(null)
+        }}
       />
 
       <SupplierDeleteModal
