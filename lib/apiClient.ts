@@ -1,6 +1,9 @@
+import { PORTAL_ACCESS_TOKEN_COOKIE, PORTAL_LOGIN_PATH } from '@/lib/constants';
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const API_PREFIX = '/api/v1';
 const ACCESS_TOKEN_KEY = 'access_token';
+let isHandlingUnauthorized = false;
 
 type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -9,16 +12,51 @@ function getToken(): string | null {
     return null;
   }
 
-  return window.localStorage.getItem(ACCESS_TOKEN_KEY);
+  const localStorageToken = window.localStorage.getItem(ACCESS_TOKEN_KEY);
+
+  if (localStorageToken) {
+    return localStorageToken;
+  }
+
+  const cookiePrefix = `${PORTAL_ACCESS_TOKEN_COOKIE}=`;
+  const tokenCookie = document.cookie
+    .split('; ')
+    .find((entry) => entry.startsWith(cookiePrefix));
+
+  if (!tokenCookie) {
+    return null;
+  }
+
+  const token = tokenCookie.slice(cookiePrefix.length);
+  return token ? decodeURIComponent(token) : null;
 }
 
-function clearTokenAndRedirectToLogin(): void {
-  if (typeof window === 'undefined') {
+async function clearTokenAndRedirectToLogin(): Promise<void> {
+  if (typeof window === 'undefined' || isHandlingUnauthorized) {
     return;
   }
 
+  isHandlingUnauthorized = true;
+
   window.localStorage.removeItem(ACCESS_TOKEN_KEY);
-  window.location.href = '/login';
+
+  try {
+    await fetch('/api/portal/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
+  } catch {
+    // Best effort logout; redirecting to login is still required.
+  }
+
+  const nextPath = `${window.location.pathname}${window.location.search}`;
+  const loginUrl = new URL(PORTAL_LOGIN_PATH, window.location.origin);
+
+  if (nextPath.startsWith('/portal/') && nextPath !== PORTAL_LOGIN_PATH) {
+    loginUrl.searchParams.set('next', nextPath);
+  }
+
+  window.location.href = loginUrl.toString();
 }
 
 function buildUrl(path: string): string {
@@ -80,7 +118,7 @@ async function request<TResponse, TBody = unknown>(
   });
 
   if (response.status === 401) {
-    clearTokenAndRedirectToLogin();
+    await clearTokenAndRedirectToLogin();
     throw new Error('Unauthorized');
   }
 
