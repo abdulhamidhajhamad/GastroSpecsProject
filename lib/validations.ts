@@ -1,10 +1,9 @@
 import { z } from 'zod'
 
 export const contactCategoryValues = [
-  'Fine Dining',
-  'Quick Service',
-  'Hospitality',
-  'Central Kitchen',
+  'Bulk Procurement',
+  'Single Equipment',
+  'Full Kitchen Fit-Out',
 ] as const
 
 const contactCategorySchema = z.enum(contactCategoryValues)

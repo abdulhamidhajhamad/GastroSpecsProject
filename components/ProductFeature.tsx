@@ -40,17 +40,19 @@ export default function ProductFeature() {
               ))}
             </div>
 
-            <Link
-              href={featuredProduct.href}
-              className="inline-flex items-center gap-2 font-sans text-sm font-medium text-black group"
-            >
-              <span className="border-b border-black pb-px group-hover:border-gray-500 group-hover:text-gray-500 transition-colors">
-                {featuredProduct.ctaLabel}
-              </span>
-              <span className="text-base leading-none group-hover:translate-x-0.5 transition-transform">
-                &rarr;
-              </span>
-            </Link>
+            {featuredProduct.ctaLabel ? (
+              <Link
+                href={featuredProduct.href}
+                className="inline-flex items-center gap-2 font-sans text-sm font-medium text-black group"
+              >
+                <span className="border-b border-black pb-px group-hover:border-gray-500 group-hover:text-gray-500 transition-colors">
+                  {featuredProduct.ctaLabel}
+                </span>
+                <span className="text-base leading-none group-hover:translate-x-0.5 transition-transform">
+                  &rarr;
+                </span>
+              </Link>
+            ) : null}
           </div>
 
         </div>

@@ -5,16 +5,11 @@ import { usePathname } from 'next/navigation'
 
 const navItems = [
   { label: 'Dashboard', href: '/portal/dashboard', icon: DashboardIcon },
-  { label: 'Leads / CRM', href: '/portal/leads', icon: LeadsIcon },
-  { label: 'Projects', href: '/portal/projects', icon: ProjectsIcon },
-  { label: 'Procurement', href: '/portal/procurement', icon: ProcurementIcon },
   { label: 'Suppliers', href: '/portal/suppliers', icon: SuppliersIcon },
   { label: 'Machines', href: '/portal/machines', icon: SuppliersIcon },
   { label: 'Categories', href: '/portal/categories', icon: CategoriesIcon },
   { label: 'Customers', href: '/portal/customers', icon: CustomersIcon },
   { label: 'Orders', href: '/portal/orders', icon: OrdersIcon },
-  { label: 'Invoices', href: '/portal/invoices', icon: InvoicesIcon },
-  { label: 'Support', href: '/portal/support', icon: SupportIcon },
   { label: 'Settings', href: '/portal/settings', icon: SettingsIcon },
 ]
 
@@ -28,29 +23,11 @@ function DashboardIcon() {
     </svg>
   )
 }
-function LeadsIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="9" cy="7" r="4" />
-      <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      <path d="M21 21v-2a4 4 0 0 0-3-3.87" />
-    </svg>
-  )
-}
 function ProjectsIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
       <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
       <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-    </svg>
-  )
-}
-function ProcurementIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
     </svg>
   )
 }
@@ -89,23 +66,6 @@ function OrdersIcon() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
       <circle cx="12" cy="10" r="3" />
-    </svg>
-  )
-}
-function InvoicesIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-      <polyline points="14 2 14 8 20 8" />
-      <line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
-      <polyline points="10 9 9 9 8 9" />
-    </svg>
-  )
-}
-function SupportIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     </svg>
   )
 }
@@ -155,21 +115,7 @@ export default function PortalSidebar() {
         })}
       </nav>
 
-      <div className="px-5 py-4 border-t border-gray-200">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="w-6 h-6 rounded-full bg-black flex items-center justify-center">
-            <span className="text-white font-sans text-[10px] font-bold">JV</span>
-          </div>
-          <div>
-            <p className="font-sans text-xs font-medium text-black">Julian Voss</p>
-            <p className="font-sans text-[10px] text-gray-400">Administrator</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-          <span className="font-sans text-[10px] text-gray-500 uppercase tracking-wide">System Operational</span>
-        </div>
-      </div>
+      {/* Admin quick-info removed per request */}
     </aside>
   )
 }

@@ -1,28 +1,10 @@
 import PortalHeader from '@/components/portal/PortalHeader'
 
-const stats = [
-  { label: 'OPEN LEADS', value: '42', trend: '+8%', trendUp: true },
-  { label: 'ACTIVE PROJECTS', value: '18', trend: '+2', trendUp: true },
-  { label: 'PENDING RFQS', value: '09', trend: '-4%', trendUp: false },
-  { label: 'SHIPMENTS', value: '12', trend: '+15%', trendUp: true },
-  { label: 'OVERDUE INV', value: '03', trend: '-12%', trendUp: false },
-  { label: 'OPEN TICKETS', value: '21', trend: '+4', trendUp: true },
-]
+const stats: { label: string; value: string; trend: string; trendUp: boolean }[] = []
 
-const projects = [
-  { id: 'GS-992', client: 'Azure Grand Resort', scope: 'Main Kitchen Layout', status: 'Design', budget: '$145,000' },
-  { id: 'GS-988', client: 'Skyline Catering', scope: 'Refrigeration Overhaul', status: 'Logistics', budget: '$62,400' },
-  { id: 'GS-985', client: 'Urban Bistro Hub', scope: 'Compact Cookline', status: 'Installation', budget: '$28,500' },
-  { id: 'GS-982', client: 'The Marina Grill', scope: 'Custom Hood Extraction', status: 'Sourcing', budget: '$54,200' },
-  { id: 'GS-979', client: 'Global Tech Canteen', scope: 'Full Turnkey Project', status: 'Logistics', budget: '$210,000' },
-]
+const projects: { id: string; client: string; scope: string; status: string; budget: string }[] = []
 
-const feed = [
-  { name: 'Marcus Chen', time: '12M AGO', message: 'Approved supplier quote for Project GS-982 (RATIONAL Combi Oven suite).' },
-  { name: 'Elena Rodriguez', time: '45M AGO', message: 'Updated logistics timeline for Skyline Catering. ETA changed to Nov 12.' },
-  { name: 'James Wilson', time: '2H AGO', message: 'Closed support ticket #4492 - Dishwasher motor replacement complete.' },
-  { name: 'System Automator', time: '5H AGO', message: 'Generated monthly procurement summary for the Board of Directors.' },
-]
+const feed: { name: string; time: string; message: string }[] = []
 
 const statusColor: Record<string, string> = {
   Design: 'text-blue-600',

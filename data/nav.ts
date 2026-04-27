@@ -113,13 +113,13 @@ export const HOME_SOLUTIONS = [
 
 export const HOME_FEATURED_PRODUCT = {
   category: 'Heavy Cooking',
-  title: 'Vulcan Master Series',
+  title: 'Master Series',
   tags: ['Dual Burner', 'Modular Design', 'Cast Iron'],
-  href: '/catalog/vulcan-master-series',
-  ctaLabel: 'View Specifications',
+  href: '',
+  ctaLabel: '',
   image: {
     src: '/images/vulcan_master_series.png',
-    alt: 'Vulcan Master Series modular stainless steel commercial kitchen equipment suite',
+    alt: 'Master Series modular stainless steel commercial kitchen equipment suite',
     width: 680,
     height: 420,
   },

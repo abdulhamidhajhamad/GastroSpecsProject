@@ -3,31 +3,13 @@
 import { useState } from 'react'
 import PortalHeader from '@/components/portal/PortalHeader'
 
-const projectList = [
-  { id: 'GS-2024-008', name: 'BURJ AL ARAB MAIN KITCHEN', client: 'JUMEIRAH GROUP', status: 'IN PROGRESS' },
-  { id: 'GS-2024-009', name: 'RIYADH METRO HUB F&B', client: 'ARRIYADH DEVELOPMENT', status: 'DESIGN PHASE' },
-  { id: 'GS-2024-010', name: 'CLOUDKITCHEN HUB DXB', client: 'DELIVEROO GLOBAL', status: 'APPROVAL PENDING' },
-  { id: 'GS-2024-011', name: 'AL AIN PALACE RENOVATION', client: 'PRIVATE ESTATE', status: 'IN PROGRESS' },
-  { id: 'GS-2024-012', name: 'OCEAN REEF RESORT', client: 'MARRIOTT INT.', status: 'DESIGN PHASE' },
-]
+const projectList: { id: string; name: string; client: string; status: string }[] = []
 
-const timeline = [
-  { label: 'DISCOVERY & SPECS', date: 'Completed: Jan 12, 2024', done: true },
-  { label: 'INITIAL DRAFT (CAD)', date: 'Completed: Jan 28, 2024', done: true },
-  { label: 'HVAC/MEP ALIGNMENT', date: 'Current Phase', done: false, current: true },
-  { label: 'FINAL CLIENT SIGN-OFF', date: 'Est. Feb 18, 2024', done: false },
-]
+const timeline: { label: string; date: string; done: boolean; current?: boolean }[] = []
 
-const team = [
-  { initials: 'MV', name: 'MARCUS VANE', title: 'Lead MEP Engineer' },
-  { initials: 'SJ', name: 'SARAH JENKINS', title: 'Kitchen Designer' },
-  { initials: 'OF', name: 'OMAR AL-FARSI', title: 'CAD Technician' },
-]
+const team: { initials: string; name: string; title: string }[] = []
 
-const notes = [
-  { author: 'Sarah Jenkins', time: '2 hours ago', text: 'Reduced clearance on the prep-station zone B. Need to verify with the MEP team if the drain pipes are already laid.' },
-  { author: 'Marcus Vane', time: 'Yesterday, 4:45 PM', text: 'Gas lines confirmed at 35mm. Revised the heavy cooking island manifold layout. Updated drawing uploaded to \'GS-2024-008-REV2.dwg\'.' },
-]
+const notes: { author: string; time: string; text: string }[] = []
 
 const statusStyle: Record<string, string> = {
   'IN PROGRESS': 'bg-green-50 text-green-700 border-green-200',
@@ -36,7 +18,7 @@ const statusStyle: Record<string, string> = {
 }
 
 export default function PortalProjectsPage() {
-  const [active, setActive] = useState(projectList[0])
+  const [active, setActive] = useState(projectList[0] ?? null)
 
   return (
     <div className="flex-1 flex flex-col min-h-screen">
@@ -64,7 +46,7 @@ export default function PortalProjectsPage() {
               <div
                 key={proj.id}
                 onClick={() => setActive(proj)}
-                className={`px-4 py-4 border-b border-gray-100 cursor-pointer transition-colors ${active.id === proj.id ? 'bg-gray-50 border-l-2 border-l-black' : 'hover:bg-gray-50'}`}
+                className={`px-4 py-4 border-b border-gray-100 cursor-pointer transition-colors ${active?.id === proj.id ? 'bg-gray-50 border-l-2 border-l-black' : 'hover:bg-gray-50'}`}
               >
                 <div className="flex items-start justify-between gap-2 mb-1">
                   <p className="font-sans text-[9px] text-gray-400">{proj.id}</p>
@@ -79,14 +61,15 @@ export default function PortalProjectsPage() {
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-8">
-          <div className="flex items-center gap-2 font-sans text-[10px] text-gray-400 uppercase tracking-wide mb-4">
-            <span>Projects</span><span>›</span><span>Kitchen Layouts</span><span>›</span>
-            <span className="text-black font-semibold">{active.id}</span>
-          </div>
+        {active && (
+          <div className="flex-1 overflow-y-auto p-8">
+            <div className="flex items-center gap-2 font-sans text-[10px] text-gray-400 uppercase tracking-wide mb-4">
+              <span>Projects</span><span>›</span><span>Kitchen Layouts</span><span>›</span>
+              <span className="text-black font-semibold">{active.id}</span>
+            </div>
 
-          <div className="flex items-start justify-between mb-6">
-            <h1 className="font-sans font-bold text-2xl text-black tracking-tight leading-tight">{active.name}</h1>
+            <div className="flex items-start justify-between mb-6">
+              <h1 className="font-sans font-bold text-2xl text-black tracking-tight leading-tight">{active.name}</h1>
             <div className="flex items-center gap-3 shrink-0">
               <button className="border border-gray-200 font-sans text-[10px] tracking-[0.15em] uppercase text-gray-500 px-4 py-2 hover:border-black hover:text-black transition-colors flex items-center gap-2">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -237,6 +220,7 @@ export default function PortalProjectsPage() {
             </div>
           </div>
         </div>
+        )}
       </div>
 
       <div className="px-8 py-3 border-t border-gray-200 flex items-center">

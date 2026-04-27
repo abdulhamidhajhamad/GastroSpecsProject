@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Request a Detailed Quote | GastroSpecs',
   description:
-    'Submit your project specifications and our engineering consultants will craft a tailored procurement strategy for your commercial kitchen.',
+    'Submit your project or service brief and our engineering consultants will craft a tailored procurement strategy for your commercial kitchen.',
 }
 
 export default function ContactPage() {
@@ -16,12 +16,12 @@ export default function ContactPage() {
       <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-[280px_1fr] gap-16">
           <div>
-            <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-5">CONTACT PROCUREMENT</p>
+            <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-5">PROJECT PROCUREMENT</p>
             <h1 className="font-serif text-4xl md:text-5xl text-black italic leading-tight mb-6">
               Request a<br />Detailed<br />Quote
             </h1>
             <p className="font-sans text-xs text-gray-500 leading-relaxed mb-10">
-              Submit your project specifications and our engineering consultants will craft a tailored procurement strategy for your commercial kitchen.
+              Submit the project or service you need, and our engineering consultants will craft a tailored procurement strategy for your commercial kitchen.
             </p>
 
             <div className="space-y-5 mb-10">
@@ -45,7 +45,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-sans text-[10px] tracking-[0.15em] uppercase font-semibold text-black mb-0.5">Consultation Required</p>
-                  <p className="font-sans text-[10px] text-gray-500 leading-relaxed">Complex projects may require a follow-up site survey or design call.</p>
+                  <p className="font-sans text-[10px] text-gray-500 leading-relaxed">Complex project requests may require a follow-up site survey or design call.</p>
                 </div>
               </div>
             </div>
@@ -110,13 +110,13 @@ export default function ContactPage() {
 
             <div>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-sans font-semibold text-sm tracking-[0.1em] uppercase text-black">Project Specifications</h2>
+                <h2 className="font-sans font-semibold text-sm tracking-[0.1em] uppercase text-black">Project / Service Details</h2>
                 <span className="font-sans text-[10px] tracking-[0.15em] uppercase text-gray-300">Section 02</span>
               </div>
               <div className="mb-5">
-                <label className="block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-3">Project Category</label>
+                <label className="block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-3">Service Type</label>
                 <div className="flex flex-wrap gap-4">
-                  {['Fine Dining', 'Quick Service', 'Hospitality', 'Central Kitchen'].map((cat) => (
+                  {['Bulk Procurement', 'Single Equipment', 'Full Kitchen Fit-Out'].map((cat) => (
                     <label key={cat} className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" name="category" value={cat} className="accent-black w-3 h-3" />
                       <span className="font-sans text-[10px] tracking-[0.1em] uppercase text-gray-600">{cat}</span>
@@ -125,11 +125,11 @@ export default function ContactPage() {
                 </div>
               </div>
               <div>
-                <label className="block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2">Project Scope & Equipment Needs</label>
+                <label className="block font-sans text-[9px] tracking-[0.2em] uppercase text-gray-400 mb-2">Project Scope & Service Needs</label>
                 <textarea
                   name="scope"
                   rows={5}
-                  placeholder="Describe your kitchen requirements, specific brand preferences, or design constraints..."
+                  placeholder="Describe the project, service type, equipment requirements, brand preferences, or design constraints..."
                   className="w-full border border-gray-200 font-sans text-xs text-black placeholder-gray-300 px-4 py-3 focus:outline-none focus:border-black transition-colors resize-none"
                 />
               </div>
@@ -175,6 +175,9 @@ export default function ContactPage() {
                   <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                 </svg>
               </button>
+              <p className="mt-3 font-sans text-[10px] text-gray-400 leading-relaxed">
+                Submissions are emailed to the address configured in `QUOTE_REQUEST_TO_EMAIL` on the server.
+              </p>
             </div>
           </form>
         </div>

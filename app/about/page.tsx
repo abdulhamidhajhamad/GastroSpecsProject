@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'About GastroSpecs | Global Kitchen Procurement Agency',
   description:
-    'GastroSpecs is a global specialist procurement agency for commercial kitchen and butchery equipment. Based in Palestine, serving clients worldwide with DDP delivery.',
+    'GastroSpecs is a global specialist procurement agency for commercial kitchen and butchery equipment. Serving clients worldwide with DDP delivery.',
 }
 
 const values = [
@@ -32,7 +32,7 @@ const values = [
     number: '04',
     title: 'Global Reach, Local Knowledge',
     description:
-      'Based in Palestine, operating across the GCC, Africa, and Europe. Our network of after-sales technicians in target markets ensures post-delivery support.',
+      'Operating across the GCC, Africa, Europe, and beyond. Our network of after-sales technicians in target markets ensures post-delivery support.',
   },
 ]
 
@@ -51,8 +51,8 @@ export default function AboutPage() {
               </h1>
               <p className="font-sans text-sm text-gray-500 leading-relaxed max-w-md">
                 GastroSpecs is a global specialist procurement agency for commercial kitchen and butchery equipment.
-                Based in Palestine and serving clients worldwide, we source directly from certified Chinese factories
-                and deliver DDP to your door — anywhere in the world.
+                Serving clients worldwide from every region, we source directly from certified Chinese factories and
+                deliver DDP to your door — anywhere in the world.
               </p>
             </div>
             <div className="bg-[#f5f5f5] aspect-video flex items-center justify-center">
